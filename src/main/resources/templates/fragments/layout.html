@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Definitions Catalogue</title>
+
+    <div th:fragment="meta" th:remove="tag">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    </div>
+
+
+    <div th:fragment="favicon" th:remove="tag">
+        <link rel="icon" type="image/png" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/favicon-196x196.png" sizes="196x196" />
+        <link rel="icon" type="image/png" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" type="image/png" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/favicon-128.png" sizes="128x128" />
+    </div>
+
+    <div th:fragment="fonts" th:remove="tag">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"/>
+    </div>
+
+    <div th:fragment="css" th:remove="tag">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/css/main.css" />
+        <link rel="stylesheet" href="/css/custom.css" />
+    </div>
+
+</head>
+
+<body class="uikit-body uikit-grid">
+
+
+<div th:fragment="landing_head" th:remove="tag">
+    <section th:fragment="dss_stage_note" class="phase-banner">
+        <div class="wrapper uikit-grid container container-fluid">
+            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/dxa/service-catalogue/issues/new" class="dss_stage_link">let us know</a>
+        </div>
+    </section>
+    <a href="/">
+        <header class="uikit-header hero_header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="uikit-header-heading landing_heroline">
+                            <img class="hero_logo" src="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/hero_logo.png" alt="Digital Exchange Australia logo"/>
+                            Services Catalogue
+                            <span class="badge">ALPHA</span>
+                        </h1>
+                        <span class="uikit-header-subline">Building government services into your product.</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </a>
+</div>
+
+
+<div th:fragment="main_head" th:remove="tag">
+  <section th:replace="fragments/layout :: dss_stage_note"/>
+    <a href="/">
+      <header class="uikit-header main_header">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <h1 class="uikit-header-heading heroline">
+                  Services Catalogue
+                <span class="badge">ALPHA</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+    </a>
+</div>
+
+
+<div th:fragment="footer" th:remove="tag">
+    <footer class="uikit-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <img class="uikit-responsive-media-img" src="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/coat-of-arms.png" alt="Commonwealth Coat of Arms crest logo" />
+                </div>
+                <div class="col-sm-2">
+                    <img class="uikit-responsive-media-img sbr_footer_logo" src="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/sbr.png" alt="Standard Business Reporting logo" />
+                </div>
+                <div class="col-sm-8 footer-phrase">This site is part of the Standard Business Reporting program.<br />Visit <a style="font-weight: bold;" href="https://sbr.gov.au/">sbr.gov.au</a> to find out more.</div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
