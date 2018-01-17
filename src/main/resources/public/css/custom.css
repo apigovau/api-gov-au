@@ -30,6 +30,10 @@
 {
 	border-right: 1px solid lightgray;
 }
+.api_data H2
+{
+	margin-bottom: 0px;
+}
 BLOCKQUOTE
 {
 	background-color: lightgray;
