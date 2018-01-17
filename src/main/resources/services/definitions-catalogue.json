@@ -1,0 +1,108 @@
+{
+  "name":"Definitions Catalogue",
+  "id":"definitions-catalogue",
+  "subpages":[
+    {
+      "title":"Overview",
+      "markdown":
+"
+The Definitions Catalogue REST API allows you to search and browse the metadata for data definitions used by the Australian Government.
+
+",
+        "subpages":[
+            {
+              "title": "Base URL",
+              "markdown": "
+All URLs referenced in the documentation have the following base:
+
+>https://definitions.ausdx.tk/api/
+
+The Definitions Catalogue API is served over both HTTP and HTTPS.
+"
+            },
+            {
+                "title":"OpenAPI specification",
+                "markdown":"[https://app.swaggerhub.com/apis/dxa2/definitions-catalogue/1.0.0](https://app.swaggerhub.com/apis/dxa2/definitions-catalogue/1.0.0)"
+            },
+            {
+                "title":"The web version",
+                "markdown":"
+                
+There is [web version of the catalogue](https://definitions.ausdx.tk) that mirrors the functionality of this API.
+
+In general, the API uri's follow the same pattern as the web ones but with the '/api/' path segment removed.
+
+For example:
+
+- http://definitions.ausdx.tk/definition/other/de55
+- http://definitions.ausdx.tk/api/definition/other/de55
+
+So to get an easy head start on what you can do wit the API, head over to the web version and take a look.
+"
+            },
+            {
+                "title":"HATEOS",
+                "markdown":"
+Most of the resources returned the API follow the HATEOS approach: they will tell you what else you can do to them.
+HATEOS in this API follows this general pattern
+
+```json
+{
+    \"content\": { ... the resource data ...},
+    \"links\": [
+        {
+            \"rel\": \"a_description_of_what_happens_at_this_uri\",
+           \"href\": \"the_herf_that_gives_the_above_resource\"
+         },
+         ... more rels/hrefs ...
+    ]
+}
+```
+                "
+            },
+            {
+                "title":"Authentication",
+                "markdown":"
+This API is 100% public.
+
+There is no Authentication
+                "
+            },
+            {
+                "title":"Rate Limiting",
+                "markdown":"
+At the moment there is no imposed rate limiting.
+
+We'll monitor the service and impose limiting if the service is having trouble keeping up.
+                "
+            }
+        ]
+    },
+    {
+      "title":"Search",
+      "markdown": "
+Searching stuff"
+    },
+    {
+      "title":"Browse",
+      "markdown": "
+Searching stuff"
+    },
+    {
+      "title":"Details",
+      "markdown": "
+You can get the details of any definition with this uri
+>https://definitions.ausdx.tk/api/definition/{domain}/{id}
+E.g : https://definitions.ausdx.tk/api/definiton/fs/de1016
+"
+    "subpages":[
+    {
+      "title":"Syntax",
+      "markdown": "
+Searching stuff"
+    }
+    ]
+    },
+    
+  ]
+}

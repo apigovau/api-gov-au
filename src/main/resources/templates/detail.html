@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>Service Catalogue</title>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+  <div th:replace="fragments/layout :: highlight"/>
+</head>
+<body class="uikit-body uikit-grid">
+
+<div th:replace="fragments/layout :: landing_head"/>
+
+<main class="container row">
+    <div class="col-sm-4 api_nav">
+        <div th:each="page : ${model.subpages}" th:remove="tag">
+        <p><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
+            <ul th:each="subpage : ${page.subpages}" class="uikit-link-list">
+                <li><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${subpage.title}" th:text="${subpage.title}"/></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-8 api_data" th:utext="${content}">
+
+    </div>
+</main>
+
+
+<div th:replace="fragments/layout :: footer"/>
+<div th:replace="fragments/layout :: start_highlight"/>
+</body>
+</html>

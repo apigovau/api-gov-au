@@ -12,11 +12,31 @@
 
 
 <main class="container">
-    Service Catalogue
+    <table>
+        <thead>
+        <tr>
+            <th class="table_name">Name</th>
+            <th class="table_definition">Definition</th>
+            <th class="table_domain">Category</th>
+            <th class="table_status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td class="table_name"><strong><a href="/service/definitions-catalogue">Definitions Catalogue</a></strong></td>
+            <td class="table_definition">A searchable collection of data definitions used by Government for digital exchanges of data</td>
+            <td class="table_domain">Metadata</td>
+            <td class="table_status">Published</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
 </main>
 
 
 <div th:replace="fragments/layout :: footer"/>
-
 </body>
 </html>

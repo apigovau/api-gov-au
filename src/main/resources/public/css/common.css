@@ -1,0 +1,240 @@
+.footerlogo {
+    height: 80px;
+}
+
+.used_synonyms p {
+    margin-bottom: 0;
+}
+
+.used_synonyms {
+    padding-bottom: 20px;
+}
+
+.search_help {
+    width: 140px;
+}
+
+dl dl {
+    margin-left: 30px;
+}
+
+.logo {
+    height: 80px;
+    top: 30px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.hero_logo {
+    float: right;
+}
+
+.heroline {
+    padding-bottom: 0px;
+    color: white;
+    font-size: 1.625rem;
+}
+
+.main_header {
+    padding-bottom: 57px;
+    padding-top: 20px;
+    background-color: #25655A;
+}
+
+.hero_header {
+    background-color: #25655A;
+}
+
+.badge {
+    background-color: white;
+    border-radius: 12px;
+    padding: 0.4em 0.8em;
+    margin-left: -2px;
+    position: relative;
+    top: -13px;
+    letter-spacing: 1px;
+    color: black;
+    font-size: 0.4rem;
+}
+
+nav.uikit-breadcrumbs {
+    margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    .badge {
+        font-size: 0.8rem;
+    }
+    
+    .table_definition {
+        width: 50%;
+    }
+    
+    .main_search_bar {
+        max-width: 85%;
+        width: 100%;
+    }
+    
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+        margin-left: -5px;
+    }
+    
+    .search_help {
+        padding-top: 100px;
+        padding-bottom: 25px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .table_definition {
+        display: none;
+    }
+    
+    .main_search_bar {
+        max-width: 95%;
+        width: 100%;
+    }
+    
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+    }
+    
+    .uikit-responsive-media-img {
+        width: 100px;
+        float: left;
+        padding-bottom: 20px;
+    }
+    
+    .sbr_footer_logo {
+        width: 60px;
+        padding-left: 15px;
+    }
+    
+    .footer-phrase {
+        clear: both;
+    }
+    
+    .search_help {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.phase-banner {
+    background-color: #313131;
+    color: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+}
+
+a.new_issue_link {
+    color: white;
+}
+
+.error-page {
+    padding-left: 10vw;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0px 0px;
+    margin: 0px 0px 30px;
+    text-align: left;
+    font-size: smaller;
+}
+
+tr {
+    height: 70px;
+    vertical-align: middle;
+}
+
+td {
+    box-sizing: border-box;
+    vertical-align: top;
+    width: 57px;
+    border-top: 1px solid rgb(221, 221, 221);
+    padding: 15px 15px 15px 0px;
+}
+
+dt {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.detail_name {
+    margin-top: -30px;
+    margin-bottom: 0px;
+}
+
+.pagination_controls {
+    text-align: center;
+    margin-left: -45px;
+}
+
+.current_page {
+    background-color: #F0F3F5;
+}
+
+ul.pagination_controls li a {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li a.next_page {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li {
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.more_pages {
+    width: 25px;
+}
+
+.next_page {
+    display: inline-block;
+    height: 27px;
+    width: 75px;
+    padding: 8.5px;
+    /*margin-left: 4px;*/
+    margin-right: -4px;
+}
+
+.page_number {
+    text-align: center;
+    padding-bottom: 17.5px;
+}
+
+.dss_stage_link {
+    color: white !important;
+}
+
+.quick_domain_list {
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
+.quick_domain_list li {
+    display: inline;
+    white-space: nowrap;
+    margin-right: 0;
+    padding-right: 15px;
+}

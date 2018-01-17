@@ -24,6 +24,16 @@
     <div th:fragment="css" th:remove="tag">
         <link rel="stylesheet" href="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/css/main.css" />
         <link rel="stylesheet" href="/css/custom.css" />
+        <link rel="stylesheet" href="/css/common.css" />
+    </div>
+
+    <div th:fragment="highlight" th:remove="tag">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    </div>
+
+    <div th:fragment="start_highlight" th:remove="tag">
+        <script>hljs.initHighlightingOnLoad();</script>
     </div>
 
 </head>
