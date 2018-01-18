@@ -33,7 +33,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
         for(serviceJson in parsedObjects){
             var name = serviceJson.string("name")
-            var id = serviceJson.string("id")
+            var id = name!!.toLowerCase().replace(" ","-")
 
             var pagesList = getSubPages(serviceJson)
             var service = ServiceDescription(name!!,id!!,pagesList.toList())
