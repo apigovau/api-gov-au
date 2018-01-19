@@ -40,3 +40,11 @@ BLOCKQUOTE
 	width: 100%;
 	margin: 0px;
 }
+CODE
+{
+	background: lightgray;
+	font-style: italic;
+	color: darkred;
+	padding: 4px;
+	padding-right: 8px;
+}
