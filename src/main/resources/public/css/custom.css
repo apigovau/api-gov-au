@@ -29,6 +29,7 @@
 .api_nav
 {
 	border-right: 1px solid lightgray;
+	width: 200px;
 }
 .api_data H2
 {
@@ -57,6 +58,7 @@ CODE
 	.ie_footer_hook
 	{
 		background-color: #DDD;
+		height: 130px;
 		border-top: 6px solid #555;
 		padding-top: 20px;
 	}
