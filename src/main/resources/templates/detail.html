@@ -12,7 +12,7 @@
 <div th:replace="fragments/layout :: main_head"/>
 
 <main class="container row">
-    <div class="col-sm-4 api_nav">
+    <div class="col-sm-3 api_nav">
         <div th:each="page : ${model.subpages}" th:remove="tag">
         <p><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
             <ul th:each="subpage : ${page.subpages}" class="uikit-link-list">
