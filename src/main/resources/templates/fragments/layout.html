@@ -28,12 +28,21 @@
     </div>
 
     <div th:fragment="highlight" th:remove="tag">
+
+        <!--[if IE 9]>
         <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-light.css" />
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <![endif]-->
+        <!--[if !IE]><!-->
+        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-light.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <!--<![endif]-->
+
     </div>
 
     <div th:fragment="start_highlight" th:remove="tag">
-        <script>hljs.initHighlightingOnLoad();</script>
+        <!--[if IE 9]><script>hljs.initHighlightingOnLoad();</script><![endif]-->
+        <!--[if !IE]><!--><script>hljs.initHighlightingOnLoad();</script><!--<![endif]-->
     </div>
 
 </head>
@@ -88,7 +97,7 @@
 <div th:fragment="footer" th:remove="tag">
     <footer class="uikit-footer">
         <div class="container">
-            <div class="row">
+            <div class="row ie_footer_hook">
                 <div class="col-sm-2">
                     <img class="uikit-responsive-media-img" src="https://cdn.rawgit.com/dxa/service-catalogue/0c694de/src/main/resources/public/img/coat-of-arms.png" alt="Commonwealth Coat of Arms crest logo" />
                 </div>

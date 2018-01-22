@@ -48,3 +48,16 @@ CODE
 	padding: 4px;
 	padding-right: 8px;
 }
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+{
+	.uikit-footer
+	{
+		border-top: 0px !important;
+	}
+	.ie_footer_hook
+	{
+		background-color: #DDD;
+		border-top: 6px solid #555;
+		padding-top: 20px;
+	}
+}
