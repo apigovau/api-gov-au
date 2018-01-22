@@ -184,7 +184,7 @@ dt {
     margin-left: -45px;
 }
 
-.current_page {
+.pagination_controls .current_page {
     background-color: #F0F3F5;
 }
 

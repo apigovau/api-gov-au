@@ -10,10 +10,11 @@
 {
 	border-bottom: 1px solid lightgray;
 	padding-bottom: 5px;
+	padding-top: 5px;
 	font-size: large;
 	font-weight: bold;
-	padding-top: 20px;
 	margin-bottom: 0px;
+	margin-top: 20px;
 }
 .api_nav LI
 {
@@ -61,4 +62,47 @@ CODE
 		border-top: 6px solid #555;
 		padding-top: 20px;
 	}
+}
+@media screen and (min-width: 768px)
+{
+	.detail_pagination
+	{
+		padding-top: 10px;
+		padding-bottom: 40px;
+		margin-bottom: 20px;
+		background-color: #EEE;
+	}
+	.detail_pagination .prev_detail_page
+	{
+		float: left;
+		padding-left: 20px;
+	}
+	.detail_pagination .next_detail_page
+	{
+		float: right;
+		padding-right: 20px;
+	}
+}
+@media screen and (max-width: 768px)
+{
+	.detail_pagination .prev_detail_page
+	{
+		clear: both;
+	}
+	.detail_pagination
+	{
+		padding-bottom: 5px;
+		margin-bottom: 10px;
+		padding-left: 10px;
+		background: #EEE;
+	}
+}
+.api_nav .current_page
+{
+	background: #25655A;
+	padding-left: 10px;
+}
+.api_nav .current_page A
+{
+	color: white;
 }

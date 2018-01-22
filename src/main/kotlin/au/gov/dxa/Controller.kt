@@ -43,8 +43,24 @@ class Controller {
             }
         }
 
-        val rawContent = getPageData( page, 1)
+        model.put("currentPage",page.title)
 
+        val lastPage = page == serviceDescription.subpages.last()
+        val firstPage = page == serviceDescription.subpages.first()
+
+        if(!lastPage){
+            val nextPageIndex = serviceDescription.subpages.indexOf(page) + 1
+            val nextPageName = serviceDescription.subpages.get(nextPageIndex).title
+            model.put("nextPage", nextPageName)
+        }
+
+        if(!firstPage){
+            val prevPageIndex = serviceDescription.subpages.indexOf(page) - 1
+            val prevPageName = serviceDescription.subpages.get(prevPageIndex).title
+            model.put("prevPage",prevPageName)
+        }
+
+        val rawContent = getPageData( page, 1)
         val content = getMarkdown(rawContent)
 
         model.put("model", serviceDescription)

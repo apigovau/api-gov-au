@@ -14,14 +14,25 @@
 <main class="container row">
     <div class="col-sm-3 api_nav">
         <div th:each="page : ${model.subpages}" th:remove="tag">
-        <p><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
+        <p th:if="${currentPage} == ${page.title}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
+        <p th:if="${currentPage} != ${page.title}"><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
             <ul th:each="subpage : ${page.subpages}" class="uikit-link-list">
                 <li><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${subpage.title}" th:text="${subpage.title}"/></li>
             </ul>
         </div>
     </div>
-    <div class="col-sm-8 api_data" th:utext="${content}">
+    <div class="col-sm-8 api_data">
 
+        <div th:remove="tag" th:utext="${content}" />
+
+        <div th:if="${nextPage} or ${prevPage}" class="detail_pagination">
+        <div th:if="${nextPage}" class="next_detail_page">
+            Next page: <a th:attr="href='/service/' + ${model.id} + '/' + ${nextPage}" th:text="${nextPage}"/>
+        </div>
+        <div th:if="${prevPage}" class="prev_detail_page">
+            Previous page: <a th:attr="href='/service/' + ${model.id} + '/' + ${prevPage}" th:text="${prevPage}"/>
+        </div>
+        </div>
     </div>
 </main>
 
