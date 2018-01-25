@@ -2,6 +2,10 @@
 {
 	margin-bottom: 0px !important;
 }
+.api_data IMG
+{
+	width: 100%;
+}
 :target
 {
 	outline: 0px !important;
