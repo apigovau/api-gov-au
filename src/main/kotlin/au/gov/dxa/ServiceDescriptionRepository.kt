@@ -19,7 +19,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         var parsedObjects = mutableListOf<JsonObject>()
 
         if(mock == null) {
-            for (serviceName in listOf("definitions-catalogue")) {
+            for (serviceName in listOf("definitions-catalogue","superannuation-dashboard")) {
                 var serviceJson: JsonObject = parse("/services/${serviceName}.json") as JsonObject
                 parsedObjects.add(serviceJson)
             }
