@@ -1,5 +1,6 @@
 package au.gov.dxa
 
+import com.vladsch.flexmark.ext.gfm.tables.TablesExtension
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.options.MutableDataSet
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import java.util.*
 
 
 @Controller
@@ -86,6 +88,7 @@ class Controller {
 
     private fun getMarkdown(md:String):String{
         val options = MutableDataSet()
+        options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
         val parser = Parser.builder(options).build()
         val renderer = HtmlRenderer.builder(options).build()
 
