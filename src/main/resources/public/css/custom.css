@@ -4,7 +4,7 @@
 }
 .api_data IMG
 {
-	width: 100%;
+	max-width: 100%;
 }
 :target
 {
