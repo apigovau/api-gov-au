@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 
 data class ServiceDescriptionPage(val title:String, val content:String, val subpages: List<ServiceDescriptionPage>?)
 data class ServiceDescription(val name:String, val id:String, val subpages: List<ServiceDescriptionPage>)
+data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
 class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
@@ -74,6 +75,18 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
     fun get(id:String):ServiceDescription?{
         if(id in serviceDescriptions) return serviceDescriptions[id]
         return null
+    }
+
+    fun services_list(): List<ServiceListVM>{
+
+        var list = mutableListOf<ServiceListVM>()
+        for(service in serviceDescriptions.values ){
+            var description = service.subpages.first()?.content ?: ""
+            if(description.length > 200) description = description.substring(0, 200)+ " ..."
+            list.add(ServiceListVM(service.name, description, "Metadata", "Published",service.name.replace(" ", "-").toLowerCase()))
+        }
+        return list.toList()
+
     }
 
 }

@@ -20,6 +20,7 @@ class Controller {
 
     @RequestMapping("/")
     fun searchSubmit(model:MutableMap<String, Any?>): String{
+        model.put("services", serviceDescriptionService.list())
         return "search"
 
     }

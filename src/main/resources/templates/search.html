@@ -23,11 +23,11 @@
         </thead>
         <tbody>
 
-        <tr>
-            <td class="table_name"><strong><a href="/service/definitions-catalogue">Definitions Catalogue</a></strong></td>
-            <td class="table_definition">A searchable collection of data definitions used by Government for digital exchanges of data</td>
-            <td class="table_domain">Metadata</td>
-            <td class="table_status">Published</td>
+        <tr th:each="service : ${services}">
+            <td class="table_name"><strong><a th:attr="href='/service/' + ${service.path}" th:text="${service.name}"/></strong></td>
+            <td class="table_definition" th:text="${service.definition}"/>
+            <td class="table_domain" th:text="${service.domain}"/>
+            <td class="table_status" th:text="${service.status}"/>
         </tr>
 
 
