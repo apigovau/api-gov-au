@@ -1,0 +1,76 @@
+swagger: "2.0"
+info:
+  description: "The Superannuation Dashboard API will let you find out information about the status of the Superannuation supporting services."
+  version: "1.0.0"
+  title: "Superannuation Dashboard"
+host: "sses.status.ato.gov.au"
+basePath: "/api_get/"
+schemes:
+- "http"
+paths:
+  /plannedOutage:
+    get:
+      operationId: "plannedOutages"
+      tags:
+      - "status"
+      summary: "The current planned outages"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema : {
+              $ref : "#/definitions/Result"
+            }
+
+  /announcement:
+   get:
+      operationId: "announcements"
+      tags:
+      - "status"
+      summary: "The current announcements"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema : {
+              $ref : "#/definitions/Result"
+            }
+  /currentStatus:
+   get:
+      operationId: "currentStatus"
+      tags:
+      - "status"
+      summary: "The current service status"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema : {
+              $ref : "#/definitions/Result"
+            }
+
+definitions :
+  Result :
+    type : "object"
+    properties :
+      preview :
+        type : "boolean"
+      init_offset:
+        type: "integer"
+      post_process_count:
+        type: "integer"
+      messages:
+        type: "array"
+        items:
+          type: "string"
+      fields:
+        type: "array"
+        items:
+          type: "string"
+      rows:
+        type: "array"
+        items:
+          type: "string"
