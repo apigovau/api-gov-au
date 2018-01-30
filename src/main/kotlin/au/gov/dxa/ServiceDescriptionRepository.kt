@@ -21,8 +21,9 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         var parsedObjects = mutableListOf<JsonObject>()
 
         if(mock == null) {
-            val servicesFolder = ServiceDescriptionRepository::class.java.getResource("/services")
-            File(servicesFolder.toURI()).list().forEach{
+            val servicesFolder = ServiceDescriptionRepository::class.java.getResource("/services/")
+            //File(servicesFolder.toURI()).list().forEach{
+            for (it in listOf("superannuation-dashboard.json", "definitions-catalogue.json")) {
                 var serviceJson: JsonObject = parse("/services/${it}") as JsonObject
                 parsedObjects.add(serviceJson)
             }
