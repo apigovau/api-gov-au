@@ -5,10 +5,11 @@ import com.beust.klaxon.Parser
 import com.beust.klaxon.array
 import com.beust.klaxon.string
 import org.springframework.stereotype.Component
+import java.io.File
 
 
 data class ServiceDescriptionPage(val title:String, val content:String, val subpages: List<ServiceDescriptionPage>?)
-data class ServiceDescription(val name:String, val id:String, val subpages: List<ServiceDescriptionPage>)
+data class ServiceDescription(val name:String, val id:String, val subpages: List<ServiceDescriptionPage>, val config:Map<String,String> = mapOf())
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
@@ -20,8 +21,9 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         var parsedObjects = mutableListOf<JsonObject>()
 
         if(mock == null) {
-            for (serviceName in listOf("definitions-catalogue","superannuation-dashboard")) {
-                var serviceJson: JsonObject = parse("/services/${serviceName}.json") as JsonObject
+            val servicesFolder = ServiceDescriptionRepository::class.java.getResource("/services")
+            File(servicesFolder.toURI()).list().forEach{
+                var serviceJson: JsonObject = parse("/services/${it}") as JsonObject
                 parsedObjects.add(serviceJson)
             }
         }
@@ -35,9 +37,11 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         for(serviceJson in parsedObjects){
             var name = serviceJson.string("name")
             var id = name!!.toLowerCase().replace(" ","-")
-
             var pagesList = getSubPages(serviceJson)
-            var service = ServiceDescription(name!!,id!!,pagesList.toList())
+            var configString = serviceJson.string("configuration")?:"{}"
+            if(configString == "") configString = "{}"
+            var configMap = Parser().parse(StringBuilder().append(configString)) as Map<String, String>
+            var service = ServiceDescription(name!!,id!!,pagesList.toList(), configMap)
             serviceDescriptions.put(id, service)
         }
     }
@@ -81,7 +85,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
         var list = mutableListOf<ServiceListVM>()
         for(service in serviceDescriptions.values ){
-            var description = service.subpages.first()?.content ?: ""
+            var description = service.config["description"]?: ""
             if(description.length > 200) description = description.substring(0, 200)+ " ..."
             list.add(ServiceListVM(service.name, description, "Metadata", "Published",service.name.replace(" ", "-").toLowerCase()))
         }
