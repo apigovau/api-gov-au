@@ -11,7 +11,8 @@
 
 <div th:replace="fragments/layout :: main_head"/>
 
-<main class="container row">
+<main class="container">
+
     <div class="col-sm-3 api_nav">
         <div th:each="page : ${model.subpages}" th:remove="tag">
         <p th:if="${currentPage} == ${page.title}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
