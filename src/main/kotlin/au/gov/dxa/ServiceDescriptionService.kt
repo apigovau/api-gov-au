@@ -14,5 +14,5 @@ class ServiceDescriptionService {
         return service.get(id)
     }
 
-    fun list(): List<ServiceListVM> = service.services_list()
+    fun list(): List<ServiceListVM> = service.list()
 }
