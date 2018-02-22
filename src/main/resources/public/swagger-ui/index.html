@@ -6,6 +6,7 @@
   <title>Swagger UI</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
+  <link rel="stylesheet" type="text/css" href="./codegen.css" >
   <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
   <style>
@@ -69,6 +70,10 @@
 
 <script src="./swagger-ui-bundle.js"> </script>
 <script src="./swagger-ui-standalone-preset.js"> </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+
+
 <script>
 window.onload = function() {
   
@@ -84,10 +89,85 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+
   })
 
   window.ui = ui
+}
+
+var checkExist = setInterval(function() {
+   if ($('.scheme-container').length) {
+      createDownloads();
+      clearInterval(checkExist);
+   }
+}, 100); // check every 100ms
+
+
+
+function gup( name, url ) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+}
+
+function createDownloads(){
+    $('\
+    <div class="codegen">\
+      <h3>Generate code for this API</h3>\
+      <p>Because this API was described using swagger, you can download automatically generated client code.</a>\
+      <p>This code, and generation service, are provided by swagger.</p>\
+      <p>For more information, or to run the generation yourself with more options, visit <a href="https://github.com/swagger-api/swagger-codegen">the swagger codegen github repository</a></p>\
+      <select id="language-dropdown" name="language"></select>\
+      <a href="#" onClick="callCodeGen()">Download client code</a>\
+    </div>\
+   ').insertBefore( ".scheme-container" );
+
+    let dropdown = $('#language-dropdown');
+
+    dropdown.empty();
+
+    dropdown.append('<option selected="true" disabled>Choose Language</option>');
+    dropdown.prop('selectedIndex', 0);
+
+    const url = 'https://generator.swagger.io/api/gen/clients'
+    //gup('url', window.location);
+
+    // Populate dropdown with list of provinces
+    $.getJSON(url, function (data) {
+      $.each(data, function (key, entry) {
+        dropdown.append($('<option></option>').attr('value', entry).text(entry));
+      })
+    });
+}
+
+function callCodeGen(){
+  let dropdown = $('#language-dropdown');
+  var language = dropdown.find(":selected").text();
+  const url = "https://generator.swagger.io/api/gen/clients/" + language
+
+
+  $.ajax({
+  url: url,
+  headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+  },
+  type: 'POST',
+  data: JSON.stringify({ "swaggerUrl": gup('url', window.location)}),
+  success: function( data ) {
+    doDownload(data)
+  },
+  dataType: "json"
+});
+
+}
+
+function doDownload(data){
+top.location.href = data.link
 }
 </script>
 </body>

@@ -1,0 +1,33 @@
+.codegen
+{
+	padding-left: 21px;
+	padding-bottom: 56px;
+	background: #EEE;
+	padding-top: 16px;
+}
+.codegen A
+{
+	font-size: 14px;
+	display: block;
+	padding-top: 15px;
+	-webkit-transition: all .4s;
+	transition: all 0.4s;
+	font-family: Open Sans, sans-serif;
+	color: #4990E2;
+}
+.codegen SELECT
+{
+	margin-top: 35px;
+}
+.codegen SELECT ~ A
+{
+	margin-left: 8px;
+}
+DIV.topbar INPUT
+{
+	display: none;
+}
+DIV.topbar BUTTON
+{
+	display: none;
+}
