@@ -18,7 +18,7 @@ open class Application {
         fun corsConfigurer(): WebMvcConfigurer {
             return object : WebMvcConfigurerAdapter() {
                 override fun addCorsMappings(registry: CorsRegistry?) {
-                    registry!!.addMapping("/swagger/*").allowedOrigins("*")
+                    registry!!.addMapping("/swagger/**").allowedOrigins("*")
                 }
             }
         }
