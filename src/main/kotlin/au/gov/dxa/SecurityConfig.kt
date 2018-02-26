@@ -11,6 +11,6 @@ open class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        //http.requiresChannel().anyRequest().requiresSecure()
+        http.requiresChannel().anyRequest().requiresSecure()
     }
 }
