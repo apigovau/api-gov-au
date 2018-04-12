@@ -18,6 +18,12 @@ class Controller {
     @Autowired
     lateinit var serviceDescriptionService:ServiceDescriptionService
 
+    @RequestMapping("/mvp")
+    fun mvp(model:MutableMap<String, Any?>): String{
+        return "mvp"
+
+    }
+
     @RequestMapping("/")
     fun searchSubmit(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
