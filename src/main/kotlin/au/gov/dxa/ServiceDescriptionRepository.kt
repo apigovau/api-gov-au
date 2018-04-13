@@ -20,7 +20,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         val parsedObjects = mutableListOf<JsonObject>()
 
         if(mock == null) {
-            listOf("superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add( parse("/services/$it") as JsonObject) }
+            listOf("ato_iitr_2018.json","superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add( parse("/services/$it") as JsonObject) }
 
         }
         else{
