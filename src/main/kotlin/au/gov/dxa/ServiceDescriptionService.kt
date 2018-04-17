@@ -14,5 +14,9 @@ class ServiceDescriptionService {
         return service.get(id)
     }
 
+    fun getFaq(id:String): String? {
+        return service.getFaq(id)
+    }
+
     fun list(): List<ServiceListVM> = service.list()
 }

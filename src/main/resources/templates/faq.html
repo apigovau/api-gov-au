@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>Service Catalogue</title>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+  <div th:replace="fragments/layout :: highlight"/>
+</head>
+<body class="uikit-body uikit-grid">
+
+<div th:replace="fragments/layout :: main_head"/>
+
+<main class="container">
+
+    <div th:utext="${content}" th:remove="tag"/>
+</main>
+
+
+<div th:replace="fragments/layout :: footer"/>
+<div th:replace="fragments/layout :: start_highlight"/>
+</body>
+</html>

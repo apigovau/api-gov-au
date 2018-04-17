@@ -36,44 +36,55 @@ class Controller {
         return detailPage(id, "", model)
     }
 
-
-
     @RequestMapping("/service/{id}/{title}")
     fun detailPage(@PathVariable id:String,@PathVariable title:String, model:MutableMap<String, Any?>): String{
         val serviceDescription = serviceDescriptionService.get(id)
-        if(serviceDescription == null) return "detail"
+        return _detailPage(serviceDescription, title, model)
+    }
 
-        var page:ServiceDescriptionPage = serviceDescription.subpages[0]
+    @RequestMapping("/faq/{id}")
+    fun detailFaq(@PathVariable id:String, model:MutableMap<String,Any?>): String{
 
-        if(title != "") for(loopPage in serviceDescription.subpages) {
-            if(title == loopPage.title) {
+        var faq = serviceDescriptionService.getFaq(id)!!
+        val content = getMarkdown(faq)
+        model.put("content", content)
+        return "faq"
+    }
+
+    private fun _detailPage(serviceDescription:ServiceDescription?, title: String, model: MutableMap<String, Any?>): String {
+        if (serviceDescription == null) return "detail"
+
+        var page: ServiceDescriptionPage = serviceDescription.subpages[0]
+
+        if (title != "") for (loopPage in serviceDescription.subpages) {
+            if (title == loopPage.title) {
                 page = loopPage
                 break
             }
         }
 
-        model.put("currentPage",page.title)
+        model.put("currentPage", page.title)
 
         val lastPage = page == serviceDescription.subpages.last()
         val firstPage = page == serviceDescription.subpages.first()
 
-        if(!lastPage){
+        if (!lastPage) {
             val nextPageIndex = serviceDescription.subpages.indexOf(page) + 1
             val nextPageName = serviceDescription.subpages.get(nextPageIndex).title
             model.put("nextPage", nextPageName)
         }
 
-        if(!firstPage){
+        if (!firstPage) {
             val prevPageIndex = serviceDescription.subpages.indexOf(page) - 1
             val prevPageName = serviceDescription.subpages.get(prevPageIndex).title
-            model.put("prevPage",prevPageName)
+            model.put("prevPage", prevPageName)
         }
 
-        val rawContent = getPageData( page, 1)
+        val rawContent = getPageData(page, 1)
         val content = getMarkdown(rawContent)
 
         model.put("model", serviceDescription)
-        model.put("content",content)
+        model.put("content", content)
         return "detail"
     }
 

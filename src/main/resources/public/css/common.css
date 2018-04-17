@@ -165,7 +165,7 @@ tr {
 td {
     box-sizing: border-box;
     vertical-align: top;
-    width: 57px;
+    /*width: 57px;*/
     border-top: 1px solid rgb(221, 221, 221);
     padding: 15px 15px 15px 0px;
 }

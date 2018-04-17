@@ -5,6 +5,7 @@ import com.beust.klaxon.Parser
 import com.beust.klaxon.array
 import com.beust.klaxon.string
 import org.springframework.stereotype.Component
+import java.io.File
 
 
 data class ServiceDescriptionPage(val title:String, val content:String, val subpages: List<ServiceDescriptionPage>?)
@@ -15,28 +16,42 @@ data class ServiceListVM(val name:String, val definition:String, val domain:Stri
 class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
     private var serviceDescriptions = mutableMapOf<String,ServiceDescription>()
+    private var faqs = mutableMapOf<String,String>()
 
     init {
         val parsedObjects = mutableListOf<JsonObject>()
 
-        if(mock == null) {
-            listOf("ato_iitr_2018.json","superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add( parse("/services/$it") as JsonObject) }
+        addServices(mock, parsedObjects)
+        addFaqs()
+    }
 
-        }
-        else{
-            mock.forEach{ it -> parsedObjects.add(Parser().parse(StringBuilder().append(it)) as JsonObject)}
+    private fun addServices(mock: MutableList<String>?, parsedObjects: MutableList<JsonObject>) {
+        if (mock == null) {
+            listOf("ato_cm_2018.json", "superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add(parse("/services/$it") as JsonObject) }
+
+        } else {
+            mock.forEach { it -> parsedObjects.add(Parser().parse(StringBuilder().append(it)) as JsonObject) }
         }
 
-        for(serviceJson in parsedObjects){
-            val name = serviceJson.string("name")?:""
-            val id = name.toLowerCase().replace(" ","-")
-            val pagesList = getSubPages(serviceJson)
-            var configString = serviceJson.string("configuration")?:"{}"
-            if(configString == "") configString = "{}"
-            val configMap = Parser().parse(StringBuilder().append(configString)) as Map<String, String>
-            val service = ServiceDescription(name,id,pagesList.toList(), configMap)
+        for (serviceJson in parsedObjects) {
+            val (id, service) = parseService(serviceJson)
             serviceDescriptions[id] = service
         }
+    }
+
+    private fun addFaqs() {
+        listOf("ato_sbr_declarations", "matching_ato_records").forEach { it -> faqs.put(it, read("/faqs/$it.md")) }
+    }
+
+    private fun parseService(serviceJson: JsonObject): Pair<String, ServiceDescription> {
+        val name = serviceJson.string("name") ?: ""
+        val id = name.toLowerCase().replace(" ", "-")
+        val pagesList = getSubPages(serviceJson)
+        var configString = serviceJson.string("configuration") ?: "{}"
+        if (configString == "") configString = "{}"
+        val configMap = Parser().parse(StringBuilder().append(configString)) as Map<String, String>
+        val service = ServiceDescription(name, id, pagesList.toList(), configMap)
+        return Pair(id, service)
     }
 
     private fun getSubPages(thingWithPages: JsonObject): List<ServiceDescriptionPage> {
@@ -55,6 +70,13 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         return pagesList.toList()
     }
 
+    private fun read(name:String):String{
+        val cls = Parser::class.java
+        val input = cls.getResourceAsStream(name)
+        val inputAsString = input.bufferedReader().use { it.readText() }
+        return inputAsString
+    }
+
     private fun parse(name: String): Any? {
         val cls = Parser::class.java
         return cls.getResourceAsStream(name)?.let { inputStream ->
@@ -71,6 +93,13 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
     fun get(id:String):ServiceDescription?{
         if(id in serviceDescriptions) return serviceDescriptions[id]
+        return null
+    }
+
+
+
+    fun getFaq(id:String):String?{
+        if(id in faqs) return faqs[id]
         return null
     }
 
