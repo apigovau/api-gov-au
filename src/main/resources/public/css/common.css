@@ -238,3 +238,28 @@ ul.pagination_controls li {
     margin-right: 0;
     padding-right: 15px;
 }
+
+.feedback {
+    width: 200px;
+    display: block;
+    margin: auto;
+    padding: 37px;
+    text-align: center;
+    font-size: smaller;
+}
+
+.feedback img {
+    width: 32px;
+    height: 32px;
+}
+
+.feedback a {
+    border-bottom: 0px;
+    opacity: 0.4;
+}
+
+.feedback a:hover {
+    background: white;
+    cursor: pointer;
+    opacity: 1;
+}
