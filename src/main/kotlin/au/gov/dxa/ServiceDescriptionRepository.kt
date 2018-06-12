@@ -27,7 +27,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
     private fun addServices(mock: MutableList<String>?, parsedObjects: MutableList<JsonObject>) {
         if (mock == null) {
-            listOf("dbc-capability-publisher.json","abs-anzsic-coder.json", "superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add(parse("/services/$it") as JsonObject) }
+            listOf("afsa-npii.json","dbc-capability-publisher.json","abs-anzsic-coder.json", "superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add(parse("/services/$it") as JsonObject) }
 
         } else {
             mock.forEach { it -> parsedObjects.add(Parser().parse(StringBuilder().append(it)) as JsonObject) }
