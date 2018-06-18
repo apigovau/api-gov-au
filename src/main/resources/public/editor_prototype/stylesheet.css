@@ -33,7 +33,7 @@ BODY {
   position: fixed !important;
   top: 50px;
   left: 250px;
-  max-width: 350px;
+  width: calc(100% - 250px - 51%) !important;
   right: 0;
   bottom: 0;
   height: auto;

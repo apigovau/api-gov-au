@@ -29,9 +29,8 @@
 <body>
   <div id="page-selection">
   </div>
-  <div id="editor-preview">
-    <div id="editor">
-      <textarea id="demo1">
+  <div id="editor">
+    <textarea id="demo1">
 # Getting Started
 
 The Definitions Catalogue REST API allows you to search and browse for data definitions used by the Australian Government.
@@ -44,11 +43,6 @@ All URLs referenced inthe documentation have the following base:
 
 > https://definitions.ausdx.io/api/
 </textarea>
-    </div>
-
-    <div id="preview">
-      <h1>Getting Started</h1>
-    </div>
   </div>
 
 
@@ -61,9 +55,11 @@ All URLs referenced inthe documentation have the following base:
   	var simplemde = new SimpleMDE({
   		element: document.getElementById("demo1"),
   		spellChecker: true,
-      toolbar: ["side-by-side", "bold", "italic", "|", "heading-1", "heading-2", "heading-3", "|", "code","quote","|","unordered-list","ordered-list","|","link","image"],
+      toolbar: ["side-by-side","bold", "italic", "|", "heading-1", "heading-2", "heading-3", "|", "code","quote","|","unordered-list","ordered-list","|","link","image"],
       status: false
   	});
+    simplemde.toggleSideBySide()
+    simplemde.toggleSideBySide()
 
     /*simplemde.codemirror.on("change", function(){
       document.getElementById("preview").innerHTML = simplemde.markdown(simplemde.value())
