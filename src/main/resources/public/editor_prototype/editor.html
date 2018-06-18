@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Markdown Editor - SimpleMDE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="canonical" href="https://simplemde.com/" />
+
+<style>
+	.editor-preview h1,
+	.editor-preview h2,
+	.editor-preview h3,
+	.editor-preview h4,
+	.editor-preview h5{
+		margin-bottom:10px;
+	}
+
+	.editor-preview h1{
+		border-bottom:1px solid #ddd;
+	}
+
+	.editor-preview h1{
+		border-bottom:1px solid #eee;
+	}
+	</style>
+</head>
+<body>
+  <div id="page-selection">
+  </div>
+  <div id="editor-preview">
+    <div id="editor">
+      <textarea id="demo1">
+# Getting Started
+
+The Definitions Catalogue REST API allows you to search and browse for data definitions used by the Australian Government.
+
+## Key Information
+
+### Base URL
+
+All URLs referenced inthe documentation have the following base:
+
+> https://definitions.ausdx.io/api/
+</textarea>
+    </div>
+
+    <div id="preview">
+      <h1>Getting Started</h1>
+    </div>
+  </div>
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.css">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/1.11.2/simplemde.min.js"></script>
+  <script>
+  	var simplemde = new SimpleMDE({
+  		element: document.getElementById("demo1"),
+  		spellChecker: true,
+      toolbar: ["side-by-side", "bold", "italic", "|", "heading-1", "heading-2", "heading-3", "|", "code","quote","|","unordered-list","ordered-list","|","link","image"],
+      status: false
+  	});
+
+    /*simplemde.codemirror.on("change", function(){
+      document.getElementById("preview").innerHTML = simplemde.markdown(simplemde.value())
+    	//console.log(simplemde.markdown(simplemde.value()))
+    });
+    */
+	</script>
+</body>
+</html>

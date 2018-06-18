@@ -1,0 +1,58 @@
+#editor {
+  display: inline-block;
+  width: 40%;
+  height: 10vh !important;
+}
+#editor .CodeMirror {
+  height: calc(100vh - 50px - 25px);
+}
+#editor .editor-toolbar {
+  height: 50px;
+}
+#page-selection {
+  width: 250px;
+  display: inline-block;
+  height: 100vh;
+  vertical-align: top;
+  background: #1E6BCF;
+}
+#editor-preview {
+  display: inline-block;
+  width: calc(100vw - 250px - 10px);
+}
+#preview {
+  display: inline-block;
+  width: 55%;
+  vertical-align: top;
+}
+BODY {
+  margin: 0px;
+}
+.CodeMirror-fullscreen {
+  background: #FFF;
+  position: fixed !important;
+  top: 50px;
+  left: 250px;
+  max-width: 350px;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  z-index: 9;
+}
+.editor-toolbar.fullscreen {
+  width: 100%;
+  height: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  background: #FFF;
+  border: 0;
+  position: fixed;
+  top: 0px;
+  left: 250px;
+  opacity: 1;
+  z-index: 9;
+}
