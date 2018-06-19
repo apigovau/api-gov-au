@@ -81,12 +81,17 @@
     setTimeout(function() { document.getElementsByClassName("editor-preview-side editor-preview-active-side")[0].classList.add("uikit-body"); }, 100);
 
 
+    function selectFirstPage(){
+      $($("#pages li")[0]).click()
+    }
+
     var list = document.getElementById("pages")
     var sortedList = Sortable.create(list, {
         animation: 10,
     		filter: '.js-remove',
     		onFilter: function (evt) {
     			evt.item.parentNode.removeChild(evt.item);
+          selectFirstPage()
     		}
       }
     )
@@ -103,27 +108,48 @@
 
     function getPageTitle(content){
       var lines = content.match(/[^\n]+/g);
-      if(lines == null || lines.length < 1) return "Untitled page";
+      if(lines == null || lines.length < 1) return "<h3>Untitled page</h3>";
+
+
+      var nav = ""
+      var title = ""
+      var foundH1 = false
 
       for (var i = 0; i < lines.length; i++) {
+
         var line = lines[i];
-        if(whatHlevel(line) == 1){
-          var title = getHText(line)
-          if(title.trim() == "") return "Untitled page"
-          return title
+        if(whatHlevel(line) == 1 && !foundH1){
+          foundH1 = true
+          title = getHText(line)
+          if(title.trim() == "") title = "Untitled page"
         }
+
+        if(whatHlevel(line) == 2){
+          var head = getHText(line)
+          if(title.trim() != ""){
+            nav = nav + "<li>" + head + "</li>"
+          }
+        }
+
       }
 
-      return "Untitled page"
+      if(!foundH1) title = "Untitled page"
+      return "<h3>" + title + "</h3><ul class='nav'>" + nav + "</ul>"
+
+
 
     }
 
     var currentPage
 
+    function getPageNav(content){
+      return "<div class='nav_wrapper'>" + getPageTitle(content) + '</div><p class="js-remove">✖</p>'
+    }
+
     function addPage(title, content){
       var li = $('<li>')
       li.data("content", content)
-      li.html(title + '<i class="js-remove">✖</i>')
+      li.html(getPageNav(content))
       li.click(function() {
         if(typeof(currentPage) != "undefined") currentPage.removeClass("current-page")
         currentPage = li
@@ -144,10 +170,20 @@
     simplemde.codemirror.on("change", function() {
       var content = simplemde.value()
       currentPage.data("content", content)
-      currentPage.html(getPageTitle(content) + '<i class="js-remove">✖</i>')
+      //currentPage.html(getPageTitle(content) + '<i class="js-remove">✖</i>')
+      currentPage.html(getPageNav(content))
     });
 
-    $($("#pages li")[0]).click()
+
+
+    // disable's pressing esc to exit full screen
+    setTimeout(function() {
+        simplemde.__proto__.toggleFullScreen = function(){}
+        simplemde.codemirror.options["fullScreen"]=false
+    }, 100);
+
+
+    selectFirstPage()
 
 	</script>
 </body>

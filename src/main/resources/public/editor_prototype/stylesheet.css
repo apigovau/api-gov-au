@@ -73,16 +73,16 @@ BODY {
 .editor-preview-side IMG {
   width: 100%;
 }
-/*.cm-spell-error
-{
-	background: maroon !important;
-}*/
 #page-selection LI {
   list-style: none;
   border: 1px solid #DDD;
   padding: 5px;
   cursor: move;
   margin: 0px !important;
+}
+#page-selection .nav_wrapper {
+  width: calc(100% - 22px);
+  display: inline-block;
 }
 #page-selection LI.current-page {
   background: #25655A;
@@ -92,14 +92,43 @@ BODY {
   padding: 0px !important;
   list-style-type: none !important;
   max-height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+}
+#page-selection UL .nav {
+  margin: 0px;
+}
+#page-selection .nav LI {
+  border: 0px;
+  font-size: smaller;
+  padding: 0px;
+}
+#page-selection .nav LI:before {
+  content: '- ';
 }
 #pages {
   position: relative;
   top: 50px;
+  height: calc(100vh - 50px);
+  border-right: 1px solid #DDD;
+}
+#pages H3 {
+  margin: 0px;
+}
+#pages H4 {
+  margin: 0px;
+}
+.current-page .js-remove {
+  cursor: pointer;
+  color: white;
+  background: red;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  display: inline-block;
+  /*float: right;*/
+  vertical-align: top !important;
+  margin: 0px;
 }
 .js-remove {
-  cursor: pointer;
-  color: red;
-  float: right;
+  display: none;
 }
