@@ -66,7 +66,7 @@
   	var simplemde = new SimpleMDE({
   		element: document.getElementById("demo1"),
   		spellChecker: true,
-      toolbar: ["bold", "italic", "|", "heading-1", "heading-2", "heading-3", "|", "code","quote","|","unordered-list","ordered-list","|","link","image","table","|","|","side-by-side","fullscreen"],
+      toolbar: ["bold", "italic", "|", "heading-1", "heading-2", "heading-3", "|", "code","quote","|","unordered-list","ordered-list","|","link","image","table","side-by-side","fullscreen"],
       status: false,
       renderingConfig: {
         singleLineBreaks: false,
@@ -176,10 +176,15 @@
 
 
 
-    // disable's pressing esc to exit full screen
+
     setTimeout(function() {
+        // disable's pressing esc to exit full screen
         simplemde.__proto__.toggleFullScreen = function(){}
         simplemde.codemirror.options["fullScreen"]=false
+
+        // hide buttons
+        simplemde.toolbarElements.fullscreen.style.display = "none"
+        simplemde.toolbarElements["side-by-side"].style.display = "none"
     }, 100);
 
 

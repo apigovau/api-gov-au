@@ -12,24 +12,27 @@
 #editor .CodeMirror {
   height: calc(100vh - 50px - 25px);
 }
-#editor .editor-toolbar {
-  height: 50px;
-}
+/*#editor .editor-toolbar
+{
+	height: 50px;
+}*/
 #page-selection {
-  width: 249px;
+  width: 150px;
   display: inline-block;
   height: 100vh;
   vertical-align: top;
 }
-#editor-preview {
-  display: inline-block;
-  width: calc(100vw - 250px - 10px);
-}
-#preview {
-  display: inline-block;
-  width: 55%;
-  vertical-align: top;
-}
+/*#editor-preview
+{
+	display: inline-block;
+	width: calc(100vw - 150px - 10px);
+}*/
+/*#preview
+{
+	(*display: inline-block;*)
+	(*width: 64%;*)
+	(*vertical-align: top;*)
+}*/
 BODY {
   margin: 0px;
 }
@@ -37,8 +40,8 @@ BODY {
   /*background: #2F2F41 !important;*/
   position: fixed !important;
   top: 100px;
-  left: 250px;
-  width: calc(100% - 250px - 51% - 10px) !important;
+  left: 150px;
+  width: calc(100% - 150px - 51% - 10px) !important;
   right: 0;
   bottom: 0;
   height: auto;
@@ -61,7 +64,7 @@ BODY {
   border: 0;
   position: fixed;
   top: 50px;
-  left: 250px;
+  left: 150px;
   opacity: 1;
   z-index: 9;
   border-top: 1px solid #DDD;
@@ -96,11 +99,15 @@ BODY {
 }
 #page-selection UL .nav {
   margin: 0px;
+  overflow: hidden;
 }
 #page-selection .nav LI {
   border: 0px;
   font-size: smaller;
   padding: 0px;
+  text-indent: -10px;
+  position: relative;
+  left: 15px;
 }
 #page-selection .nav LI:before {
   content: '- ';
