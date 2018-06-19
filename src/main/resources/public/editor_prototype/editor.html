@@ -93,7 +93,7 @@
 
 
     function getHText(line){
-      if(!line.startsWith("#")) return 0
+      if(!line.indexOf("#") == 0) return ""
       return line.replace(new RegExp('[#]', 'g'), "").trim();
     }
 
