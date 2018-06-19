@@ -47,7 +47,7 @@ BLOCKQUOTE
 }
 CODE
 {
-	background: lightgray;
+	/*background: lightgray;*/
 	font-style: italic;
 	color: darkred;
 	padding: 4px;

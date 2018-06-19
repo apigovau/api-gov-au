@@ -1,7 +1,13 @@
 #editor {
   display: inline-block;
-  width: 40%;
-  height: 10vh !important;
+  width: calc(100% - 270px);
+  height: 50px;
+}
+#authoring {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  left: 0px;
 }
 #editor .CodeMirror {
   height: calc(100vh - 50px - 25px);
@@ -10,11 +16,10 @@
   height: 50px;
 }
 #page-selection {
-  width: 250px;
+  width: 249px;
   display: inline-block;
   height: 100vh;
   vertical-align: top;
-  background: #1E6BCF;
 }
 #editor-preview {
   display: inline-block;
@@ -29,15 +34,19 @@ BODY {
   margin: 0px;
 }
 .CodeMirror-fullscreen {
-  background: #FFF;
+  /*background: #2F2F41 !important;*/
   position: fixed !important;
-  top: 50px;
+  top: 100px;
   left: 250px;
-  width: calc(100% - 250px - 51%) !important;
+  width: calc(100% - 250px - 51% - 10px) !important;
   right: 0;
   bottom: 0;
   height: auto;
   z-index: 9;
+  border-left: 0;
+  border-right: 0;
+  font-family: 'open sans';
+  font-size: smaller;
 }
 .editor-toolbar.fullscreen {
   width: 100%;
@@ -51,8 +60,46 @@ BODY {
   background: #FFF;
   border: 0;
   position: fixed;
-  top: 0px;
+  top: 50px;
   left: 250px;
   opacity: 1;
   z-index: 9;
+  border-top: 1px solid #DDD;
+  border-left: 1px solid #DDD;
+}
+.editor-preview-side {
+  background: white;
+}
+.editor-preview-side IMG {
+  width: 100%;
+}
+/*.cm-spell-error
+{
+	background: maroon !important;
+}*/
+#page-selection LI {
+  list-style: none;
+  border: 1px solid #DDD;
+  padding: 5px;
+  cursor: move;
+  margin: 0px !important;
+}
+#page-selection LI.current-page {
+  background: #25655A;
+  color: white;
+}
+#page-selection UL {
+  padding: 0px !important;
+  list-style-type: none !important;
+  max-height: 100%;
+  overflow: scroll;
+}
+#pages {
+  position: relative;
+  top: 50px;
+}
+.js-remove {
+  cursor: pointer;
+  color: red;
+  float: right;
 }
