@@ -17,7 +17,7 @@
 	height: 50px;
 }*/
 #page-selection {
-  width: 150px;
+  width: 200px;
   display: inline-block;
   height: 100vh;
   vertical-align: top;
@@ -40,8 +40,8 @@ BODY {
   /*background: #2F2F41 !important;*/
   position: fixed !important;
   top: 100px;
-  left: 150px;
-  width: calc(100% - 150px - 51% - 10px) !important;
+  left: 200px;
+  width: calc(100% - 200px - 51% - 10px) !important;
   right: 0;
   bottom: 0;
   height: auto;
@@ -64,7 +64,7 @@ BODY {
   border: 0;
   position: fixed;
   top: 50px;
-  left: 150px;
+  left: 200px;
   opacity: 1;
   z-index: 9;
   border-top: 1px solid #DDD;
