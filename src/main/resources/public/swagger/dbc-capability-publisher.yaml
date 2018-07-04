@@ -1,0 +1,128 @@
+swagger: '2.0'
+info:
+  title: DCL participants
+  description: |
+    Capability publishers have the ability to manage their registered participants. This API provides the functionality
+    to:
+    *  create a participant &harr; capability publisher relationship.
+    *  delete a participant &harr; capability publisher relationship.
+  version: 1.0.0
+host: uatapi.intechdcl.com
+basePath: /api/v1
+schemes:
+  - https
+paths:
+  /capabilityPublishers/{capabilityPublisherID}/participants/{participantIdentifier}:
+    post:
+      tags:
+        - manageParticipants
+      operationId: "createParticipant"
+      summary: Create a new DCP <-> Participant relationship
+      description: A new participant record is created and published to the DCL and made available in DNS.
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - in: path
+          name: capabilityPublisherID
+          required: true
+          type: string
+          description: |
+            The unique ID of the capability publisher as registered in the DCL
+            service provider database. Please contact the DCL administrator to
+            receive the capability publisher ID.
+        - in: path
+          name: participantIdentifier
+          required: true
+          type: string
+          description: |
+            The unique identifier for the business that is to be associated
+            with the given capability publisher. The identifier must be unique
+            within the identifier scheme (see participantIdentifierScheme attribute)
+        - in: body
+          name: participant
+          description: Participant to associate with this DCP
+          required: true
+          schema:
+            $ref: '#/definitions/Participant'
+      responses:
+        '201':
+          description: Created
+    delete:
+      tags:
+        - manageParticipants
+      operationId: "deleteParticipant"
+      summary: Remove a relationship between a capability publisher and participant
+      description: This API deletes a participant record for the specified capability publisher
+      produces:
+        - application/json
+        - application/xml
+      consumes:
+        - application/json
+        - application/xml
+      parameters:
+        - in: path
+          name: capabilityPublisherID
+          required: true
+          type: string
+          description: |
+            The unique ID of the capability publisher as registered in the DCL
+            service provider database. Please contact the DCL administrator to
+            receive the capability publisher ID.
+        - in: path
+          name: participantIdentifier
+          required: true
+          type: string
+          description: |
+            The unique identifier for the business that is to be associated
+            with the given capability publisher. The identifier must be unique
+            within the identifier scheme (see participantIdentifierScheme attribute)
+      responses:
+        '204':
+          description: No Content
+definitions:
+  Participant:
+    type: object
+    xml:
+      name: RegisterCapabilityAddressForParticipant
+      namespace: http://busdox.org/serviceMetadata/locator/1.0/
+    required:
+      - participantIdentifier
+      - participantIdentifierScheme
+      - capabilityPublisherID
+    properties:
+      participantIdentifier:
+        description: |
+          The unique identifier for the business that is to be associated
+          with the given capability publisher. The identifier must be unique
+          within the identifier scheme (see participantIdentifierScheme attribute)
+        type: string
+        xml:
+          namespace: http://swagger.io/schema/sample
+          prefix: ids
+      participantIdentifierScheme:
+        description: |
+          The scheme that qualifies the type of business identifier used for the request.
+
+          For:
+
+          **ABN use literal**: `urn:oasis:names:tc:ebcore:partyid-type:iso6523:0151`
+
+          **GLN use literal**: `urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088`
+
+          **DUNS user literal**:`urn:oasis:names:tc:ebcore:partyid-type:iso6523:0060`
+
+        type: string
+        enum:
+          - urn:oasis:names:tc:ebcore:partyid-type:iso6523:0151
+          - urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088
+          - urn:oasis:names:tc:ebcore:partyid-type:iso6523:0060
+      capabilityPublisherID:
+        description: |
+          The unique ID of the capability publisher as registered in the DCL
+          service provider database. Please contact the DCL administrator to
+          receive the capability publisher ID.
+        type: string

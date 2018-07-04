@@ -165,7 +165,7 @@ tr {
 td {
     box-sizing: border-box;
     vertical-align: top;
-    width: 57px;
+    /*width: 57px;*/
     border-top: 1px solid rgb(221, 221, 221);
     padding: 15px 15px 15px 0px;
 }
@@ -237,4 +237,29 @@ ul.pagination_controls li {
     white-space: nowrap;
     margin-right: 0;
     padding-right: 15px;
+}
+
+.feedback {
+    width: 400px;
+    display: block;
+    margin: auto;
+    padding: 37px;
+    text-align: center;
+    font-size: smaller;
+}
+
+.feedback img {
+    width: 32px;
+    height: 32px;
+}
+
+.feedback a {
+    border-bottom: 0px;
+    opacity: 0.4;
+}
+
+.feedback a:hover {
+    background: white;
+    cursor: pointer;
+    opacity: 1;
 }

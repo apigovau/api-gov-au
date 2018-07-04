@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.31'
     ext.spring_boot_version = '1.5.3.RELEASE'
     repositories {
         jcenter()
@@ -48,5 +48,9 @@ dependencies {
 
     compile 'com.vladsch.flexmark:flexmark-all:0.28.32'
     compile 'com.vladsch.flexmark:flexmark-ext-gfm-tables:'
+
+
+    compile 'org.postgresql:postgresql:9.4.1212'
+    compile 'com.zaxxer:HikariCP:2.6.0'
 
 }
