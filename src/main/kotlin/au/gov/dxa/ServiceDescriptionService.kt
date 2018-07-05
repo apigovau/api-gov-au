@@ -10,7 +10,7 @@ class ServiceDescriptionService {
     lateinit var service: ServiceDescriptionRepository
 
 
-    fun get(id:String): ServiceDescription? {
+    fun get(id:String): ServiceDTO? {
         return service.get(id)
     }
 

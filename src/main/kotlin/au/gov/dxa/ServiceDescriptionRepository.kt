@@ -1,73 +1,35 @@
 package au.gov.dxa
 
-import com.beust.klaxon.JsonObject
-import com.beust.klaxon.Parser
-import com.beust.klaxon.array
-import com.beust.klaxon.string
+import com.beust.klaxon.*
 import org.springframework.stereotype.Component
+import javax.servlet.http.HttpServletRequest
+import java.net.URL
 import java.io.File
 
 
 data class ServiceDescriptionPage(val title:String, val content:String, val subpages: List<ServiceDescriptionPage>?)
-data class ServiceDescription(val name:String, val id:String, val subpages: List<ServiceDescriptionPage>, val config:Map<String,String> = mapOf())
+data class ServiceDTO(val id:String = "", val name:String = "", val description:String = "", val pages:List<String> = listOf(""))
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
 class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
-    private var serviceDescriptions = mutableMapOf<String,ServiceDescription>()
     private var faqs = mutableMapOf<String,String>()
 
     init {
-        val parsedObjects = mutableListOf<JsonObject>()
-
-        addServices(mock, parsedObjects)
         addFaqs()
     }
 
-    private fun addServices(mock: MutableList<String>?, parsedObjects: MutableList<JsonObject>) {
-        if (mock == null) {
-            listOf("afsa-da.json","afsa-npii.json","dbc-capability-publisher.json","abs-anzsic-coder.json", "superannuation-dashboard.json", "definitions-catalogue.json").forEach { it -> parsedObjects.add(parse("/services/$it") as JsonObject) }
-
-        } else {
-            mock.forEach { it -> parsedObjects.add(Parser().parse(StringBuilder().append(it)) as JsonObject) }
-        }
-
-        for (serviceJson in parsedObjects) {
-            val (id, service) = parseService(serviceJson)
-            serviceDescriptions[id] = service
-        }
-    }
 
     private fun addFaqs() {
         listOf("ato_sbr_declarations", "matching_ato_records").forEach { it -> faqs.put(it, read("/faqs/$it.md")) }
     }
 
-    private fun parseService(serviceJson: JsonObject): Pair<String, ServiceDescription> {
-        val name = serviceJson.string("name") ?: ""
-        val id = name.toLowerCase().replace(" ", "-")
-        val pagesList = getSubPages(serviceJson)
-        var configString = serviceJson.string("configuration") ?: "{}"
-        if (configString == "") configString = "{}"
-        val configMap = Parser().parse(StringBuilder().append(configString)) as Map<String, String>
-        val service = ServiceDescription(name, id, pagesList.toList(), configMap)
-        return Pair(id, service)
-    }
-
-    private fun getSubPages(thingWithPages: JsonObject): List<ServiceDescriptionPage> {
-        val pages = thingWithPages.array<JsonObject>("subpages")
-        val pagesList = mutableListOf<ServiceDescriptionPage>()
-        for (page in pages!!) {
-            val title = page.string("title")
-            val markdown = page.string("markdown")
-            if(page.containsKey("subpages")) {
-                pagesList.add(ServiceDescriptionPage(title!!, markdown!!, getSubPages(page)))
-            }else
-            {
-                pagesList.add(ServiceDescriptionPage(title!!, markdown!!, null))
-            }
-        }
-        return pagesList.toList()
+    private fun getService(id:String) : ServiceDTO?
+    {
+        var returnString: String = getRESTReturnString("service",id)
+        val serviceDTO = Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
+        return serviceDTO
     }
 
     private fun read(name:String):String{
@@ -91,9 +53,8 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         }
     }
 
-    fun get(id:String):ServiceDescription?{
-        if(id in serviceDescriptions) return serviceDescriptions[id]
-        return null
+    fun get(id:String):ServiceDTO?{
+        return getService(id)
     }
 
 
@@ -106,13 +67,30 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
     fun list(): List<ServiceListVM>{
 
         val list = mutableListOf<ServiceListVM>()
-        for(service in serviceDescriptions.values ){
-            var description = service.config["description"]?: ""
-            if(description.length > 200) description = description.substring(0, 200)+ " ..."
-            list.add(ServiceListVM(service.name, description, "Metadata", "Published",service.name.replace(" ", "-").toLowerCase()))
+        var returnString: String = getRESTReturnString()
+
+        val splitdata = returnString.replace("[\"","").replace("\"]","").split("\",\"")
+
+        for(serviceData in splitdata)
+        {
+            list.add(ServiceListVM(serviceData.split("/").last(), "blah ","Metadata", "Published", serviceData.split("/").last()))
         }
+
         return list.toList()
 
+    }
+
+    private fun getRESTReturnString(endpoint : String = "index", endPointID:String = "") : String {
+        var returnString: String = ""
+        val url = System.getenv("BaseRepoURI") + endpoint + if (endpoint.last() == '/') endPointID else "/$endPointID"
+        try {
+            val con = URL(url).openConnection()
+            con.readTimeout = 1000
+            returnString = con.inputStream.bufferedReader().readText()
+        } catch (e:Exception) {
+
+        }
+        return returnString
     }
 
 }

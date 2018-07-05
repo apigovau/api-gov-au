@@ -51,40 +51,49 @@ class Controller {
         return "faq"
     }
 
-    private fun _detailPage(serviceDescription:ServiceDescription?, title: String, model: MutableMap<String, Any?>): String {
+    private fun _detailPage(serviceDescription:ServiceDTO?, title: String, model: MutableMap<String, Any?>): String {
         if (serviceDescription == null) return "detail"
-
-        var page: ServiceDescriptionPage = serviceDescription.subpages[0]
-
-        if (title != "") for (loopPage in serviceDescription.subpages) {
-            if (title == loopPage.title) {
-                page = loopPage
-                break
-            }
+        var content:String = ""
+        var pageTitle:String = title
+        var pages: LinkedHashMap<String, String> = LinkedHashMap()
+        for (page in serviceDescription.pages)
+        {
+            var pageMarkdown = getMarkdown(page)
+            var pageTitle = getPageTitleFromMarkdown(page)
+            pages.put(pageTitle, pageMarkdown)
         }
 
-        model.put("currentPage", page.title)
+        for (page in pages)
+        {
+            page.value
+        }
 
-        val lastPage = page == serviceDescription.subpages.last()
-        val firstPage = page == serviceDescription.subpages.first()
+        if (pageTitle=="")
+        {
+            pageTitle = pages.keys.first()
+        }
+
+        content = pages.getValue(pageTitle)
+
+        val lastPage = pageTitle == pages.keys.last()
+        val firstPage = pageTitle == pages.keys.first()
+        val currPageInded = pages.keys.indexOf(pageTitle)
 
         if (!lastPage) {
-            val nextPageIndex = serviceDescription.subpages.indexOf(page) + 1
-            val nextPageName = serviceDescription.subpages.get(nextPageIndex).title
-            model.put("nextPage", nextPageName)
+            model.put("nextPage", pages.keys.elementAt(currPageInded+1))
         }
 
         if (!firstPage) {
-            val prevPageIndex = serviceDescription.subpages.indexOf(page) - 1
-            val prevPageName = serviceDescription.subpages.get(prevPageIndex).title
-            model.put("prevPage", prevPageName)
+            model.put("prevPage", pages.keys.elementAt(currPageInded-1))
         }
 
-        val rawContent = getPageData(page, 1)
-        val content = getMarkdown(rawContent)
 
+
+        model.put("currentPage", pageTitle)
         model.put("model", serviceDescription)
+        model.put("pageList", pages)
         model.put("content", content)
+
         return "detail"
     }
 
@@ -103,7 +112,6 @@ class Controller {
         return output
     }
 
-
     private fun getMarkdown(md:String):String{
         val options = MutableDataSet()
         options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
@@ -114,6 +122,13 @@ class Controller {
         val document = parser.parse(md.trimMargin())
         val html = renderer.render(document)  // "<p>This is <em>Sparta</em></p>\n"
         return html
+    }
+
+    private fun getPageTitleFromMarkdown(md:String):String
+    {
+        var splitLines = md.lines()
+        var title = splitLines.find { it.startsWith("# ",true) }
+        return title!!.replace("# ","") ?: "No title defined"
     }
 
 

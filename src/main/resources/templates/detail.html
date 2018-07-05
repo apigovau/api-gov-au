@@ -16,12 +16,9 @@
     <h3 th:text="${model.name}"></h3>
 
     <div class="col-sm-3 api_nav">
-        <div th:each="page : ${model.subpages}" th:remove="tag">
-        <p th:if="${currentPage} == ${page.title}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
-        <p th:if="${currentPage} != ${page.title}"><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${page.title} " th:text="${page.title}" /></p>
-            <ul th:each="subpage : ${page.subpages}" class="uikit-link-list">
-                <li><a th:attr="href='/service/' + ${model.id} + '/' + ${page.title} + '#' + ${subpage.title}" th:text="${subpage.title}"/></li>
-            </ul>
+        <div th:each="page : ${pageList}" th:remove="tag">
+            <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
+            <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
         </div>
     </div>
     <div class="col-sm-8 api_data">
