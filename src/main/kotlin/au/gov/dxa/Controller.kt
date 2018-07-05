@@ -56,19 +56,25 @@ class Controller {
         var content:String = ""
         var pageTitle:String = title
         var pages: LinkedHashMap<String, String> = LinkedHashMap()
+        var subPages: LinkedHashMap<String, MutableList<String>> = LinkedHashMap()
+
         for (page in serviceDescription.pages)
         {
             var pageMarkdown = getMarkdown(page)
             var pageTitle = getPageTitleFromMarkdown(page)
+            var subPagesList = getPageSubHeadings(page)
             pages.put(pageTitle, pageMarkdown)
+            subPages.put(pageTitle, subPagesList)
         }
+
+
 
         for (page in pages)
         {
             page.value
         }
 
-        if (pageTitle=="")
+        if (pageTitle=="" || !pages.keys.contains(pageTitle))
         {
             pageTitle = pages.keys.first()
         }
@@ -92,24 +98,10 @@ class Controller {
         model.put("currentPage", pageTitle)
         model.put("model", serviceDescription)
         model.put("pageList", pages)
+        model.put("subPageList", subPages)
         model.put("content", content)
 
         return "detail"
-    }
-
-    private fun getPageData(page: ServiceDescriptionPage, indent:Int): String {
-        var rawContent = ""
-        rawContent += pageWithHeading(page, indent)
-        if (page.subpages != null) for (subpage in page.subpages) {
-            rawContent += getPageData(subpage, indent + 1)
-        }
-        return rawContent
-    }
-
-    private fun pageWithHeading(page:ServiceDescriptionPage, indent:Int): String {
-        var output = "\n<a name=\"${page.title}\"></a>\n\n"
-        output += "${"#".repeat(indent)} ${page.title}\n\n${page.content}"
-        return output
     }
 
     private fun getMarkdown(md:String):String{
@@ -124,11 +116,19 @@ class Controller {
         return html
     }
 
-    private fun getPageTitleFromMarkdown(md:String):String
-    {
+    private fun getPageTitleFromMarkdown(md:String):String {
         var splitLines = md.lines()
         var title = splitLines.find { it.startsWith("# ",true) }
         return title!!.replace("# ","") ?: "No title defined"
+    }
+
+    private fun getPageSubHeadings(md:String):MutableList<String> {
+        val list = mutableListOf<String>()
+        var splitLines = md.lines()
+        var headings = splitLines.filter { it.startsWith("## ",true) }
+        headings.forEach { it -> list.add(it.replace("## ","")) }
+        return list
+
     }
 
 

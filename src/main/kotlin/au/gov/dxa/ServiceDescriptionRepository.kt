@@ -25,7 +25,7 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         listOf("ato_sbr_declarations", "matching_ato_records").forEach { it -> faqs.put(it, read("/faqs/$it.md")) }
     }
 
-    private fun getService(id:String) : ServiceDTO?
+    private fun getService(id:String) : ServiceDTO
     {
         var returnString: String = getRESTReturnString("service",id)
         val serviceDTO = Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
@@ -39,19 +39,6 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         return inputAsString
     }
 
-    private fun parse(name: String): Any? {
-        val cls = Parser::class.java
-        return cls.getResourceAsStream(name)?.let { inputStream ->
-            try {
-                return Parser().parse(inputStream)
-            } catch(e:Exception){
-                println("!!!!!!!!!!!!!!\n$e")
-                val position = e.message!!.replace("Unexpected character at position ","").split(":")[0].toInt()
-                val inputAsString = cls.getResourceAsStream(name).bufferedReader().use { it.readText() }
-                println(inputAsString.subSequence(position - 50,position + 50))
-            }
-        }
-    }
 
     fun get(id:String):ServiceDTO?{
         return getService(id)
@@ -73,7 +60,8 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
         for(serviceData in splitdata)
         {
-            list.add(ServiceListVM(serviceData.split("/").last(), "blah ","Metadata", "Published", serviceData.split("/").last()))
+            var serviceCuttent = getService(serviceData.split("/").last())
+            list.add(ServiceListVM(serviceCuttent.name, serviceCuttent.description,"Metadata", "Published", serviceData.split("/").last()))
         }
 
         return list.toList()

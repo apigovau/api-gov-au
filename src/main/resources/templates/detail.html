@@ -19,6 +19,9 @@
         <div th:each="page : ${pageList}" th:remove="tag">
             <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
             <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
+            <ul th:each="subpage : ${subPageList[page.key]}" class="uikit-link-list">
+                <li><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key} + '#' + ${subpage}" th:text="${subpage}"/></li>
+            </ul>
         </div>
     </div>
     <div class="col-sm-8 api_data">
