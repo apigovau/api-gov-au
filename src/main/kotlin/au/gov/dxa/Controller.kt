@@ -107,6 +107,9 @@ class Controller {
     private fun getMarkdown(md:String):String{
         val options = MutableDataSet()
         options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+        options.set(HtmlRenderer.GENERATE_HEADER_ID, true)
+        options.set(HtmlRenderer.RENDER_HEADER_ID, true)
+
         val parser = Parser.builder(options).build()
         val renderer = HtmlRenderer.builder(options).build()
 
