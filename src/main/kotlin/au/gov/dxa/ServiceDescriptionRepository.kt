@@ -4,25 +4,15 @@ import com.beust.klaxon.*
 import org.springframework.stereotype.Component
 import javax.servlet.http.HttpServletRequest
 import java.net.URL
-import java.io.File
 
-
-data class ServiceDescriptionPage(val title:String, val content:String, val subpages: List<ServiceDescriptionPage>?)
 data class ServiceDTO(val id:String = "", val name:String = "", val description:String = "", val pages:List<String> = listOf(""))
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
 class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
-    private var faqs = mutableMapOf<String,String>()
-
     init {
-        addFaqs()
-    }
 
-
-    private fun addFaqs() {
-        listOf("ato_sbr_declarations", "matching_ato_records").forEach { it -> faqs.put(it, read("/faqs/$it.md")) }
     }
 
     private fun getService(id:String) : ServiceDTO
@@ -44,13 +34,6 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         return getService(id)
     }
 
-
-
-    fun getFaq(id:String):String?{
-        if(id in faqs) return faqs[id]
-        return null
-    }
-
     fun list(): List<ServiceListVM>{
 
         val list = mutableListOf<ServiceListVM>()
@@ -60,12 +43,11 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
         for(serviceData in splitdata)
         {
+            //temp code until structure is final
             var serviceCuttent = getService(serviceData.split("/").last())
             list.add(ServiceListVM(serviceCuttent.name, serviceCuttent.description,"Metadata", "Published", serviceData.split("/").last()))
         }
-
         return list.toList()
-
     }
 
     private fun getRESTReturnString(endpoint : String = "index", endPointID:String = "") : String {
@@ -80,5 +62,4 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         }
         return returnString
     }
-
 }

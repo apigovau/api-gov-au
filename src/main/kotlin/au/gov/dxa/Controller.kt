@@ -14,7 +14,6 @@ import java.util.*
 @Controller
 class Controller {
 
-
     @Autowired
     lateinit var serviceDescriptionService:ServiceDescriptionService
 
@@ -42,15 +41,6 @@ class Controller {
         return _detailPage(serviceDescription, title, model)
     }
 
-    @RequestMapping("/faq/{id}")
-    fun detailFaq(@PathVariable id:String, model:MutableMap<String,Any?>): String{
-
-        var faq = serviceDescriptionService.getFaq(id)!!
-        val content = getMarkdown(faq)
-        model.put("content", content)
-        return "faq"
-    }
-
     private fun _detailPage(serviceDescription:ServiceDTO?, title: String, model: MutableMap<String, Any?>): String {
         if (serviceDescription == null) return "detail"
         var content:String = ""
@@ -66,8 +56,6 @@ class Controller {
             pages.put(pageTitle, pageMarkdown)
             subPages.put(pageTitle, subPagesList)
         }
-
-
 
         for (page in pages)
         {
@@ -92,8 +80,6 @@ class Controller {
         if (!firstPage) {
             model.put("prevPage", pages.keys.elementAt(currPageInded-1))
         }
-
-
 
         model.put("currentPage", pageTitle)
         model.put("model", serviceDescription)
@@ -131,8 +117,5 @@ class Controller {
         var headings = splitLines.filter { it.startsWith("## ",true) }
         headings.forEach { it -> list.add(it.replace("## ","")) }
         return list
-
     }
-
-
 }
