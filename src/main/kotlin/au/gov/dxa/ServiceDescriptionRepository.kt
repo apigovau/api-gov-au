@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 import javax.servlet.http.HttpServletRequest
 import java.net.URL
 
-data class ServiceDTO(val id:String = "", val name:String = "", val description:String = "", val pages:List<String> = listOf(""))
+data class ServiceDTO(val name:String = "", val description:String = "", val pages:List<String> = listOf(""))
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component

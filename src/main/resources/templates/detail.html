@@ -17,10 +17,10 @@
 
     <div class="col-sm-3 api_nav">
         <div th:each="page : ${pageList}" th:remove="tag">
-            <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
-            <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key}" th:text="${page.key}" /></p>
+            <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
+            <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
             <ul th:each="subpage : ${subPageList[page.key]}" class="uikit-link-list">
-                <li><a th:attr="href='/service/' + ${model.id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}" th:text="${subpage}"/></li>
+                <li><a th:attr="href='/service/' + ${id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}" th:text="${subpage}"/></li>
             </ul>
         </div>
     </div>
@@ -30,13 +30,13 @@
 
         <div th:if="${nextPage} or ${prevPage}" class="detail_pagination">
             <div th:if="${nextPage}" class="next_detail_page">
-                <a th:attr="href='/service/' + ${model.id} + '/' + ${nextPage}">
+                <a th:attr="href='/service/' + ${id} + '/' + ${nextPage}">
                     <div class="page_nav_label">Next</div>
                     <div class="page_nav_title"><div th:text="${nextPage}"/></div>
                 </a>
             </div>
         <div th:if="${prevPage}" class="prev_detail_page">
-            <a th:attr="href='/service/' + ${model.id} + '/' + ${prevPage}">
+            <a th:attr="href='/service/' + ${id} + '/' + ${prevPage}">
                 <div class="page_nav_label">Back</div>
                 <div class="page_nav_title"><div th:text="${prevPage}"/></div>
             </a>
