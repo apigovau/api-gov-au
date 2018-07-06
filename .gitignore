@@ -11,3 +11,4 @@
 /.project
 /out
 *.DS_Store
+.ENV

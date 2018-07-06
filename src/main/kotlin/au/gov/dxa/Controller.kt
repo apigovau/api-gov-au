@@ -38,10 +38,7 @@ class Controller {
     @RequestMapping("/service/{id}/{title}")
     fun detailPage(@PathVariable id:String,@PathVariable title:String, model:MutableMap<String, Any?>): String{
         val serviceDescription = serviceDescriptionService.get(id)
-        return _detailPage(serviceDescription, title, id, model)
-    }
 
-    private fun _detailPage(serviceDescription:ServiceDTO?, title: String, id: String, model: MutableMap<String, Any?>): String {
         if (serviceDescription == null) return "detail"
         var content:String = ""
         var pageTitle:String = title
