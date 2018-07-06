@@ -41,7 +41,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf') {
         exclude group: 'nz.net.ultraq.thymeleaf', module: 'thymeleaf-layout-dialect'
     }
-    compile 'com.beust:klaxon:0.30'
+    compile 'com.beust:klaxon:3.0.1'
     testCompile "junit:junit"
     compile "junit:junit"
     compile 'org.apache.httpcomponents:httpclient:4.5'

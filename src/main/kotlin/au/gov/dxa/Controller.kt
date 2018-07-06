@@ -14,7 +14,6 @@ import java.util.*
 @Controller
 class Controller {
 
-
     @Autowired
     lateinit var serviceDescriptionService:ServiceDescriptionService
 
@@ -39,74 +38,65 @@ class Controller {
     @RequestMapping("/service/{id}/{title}")
     fun detailPage(@PathVariable id:String,@PathVariable title:String, model:MutableMap<String, Any?>): String{
         val serviceDescription = serviceDescriptionService.get(id)
-        return _detailPage(serviceDescription, title, model)
+        return _detailPage(serviceDescription, title, id, model)
     }
 
-    @RequestMapping("/faq/{id}")
-    fun detailFaq(@PathVariable id:String, model:MutableMap<String,Any?>): String{
-
-        var faq = serviceDescriptionService.getFaq(id)!!
-        val content = getMarkdown(faq)
-        model.put("content", content)
-        return "faq"
-    }
-
-    private fun _detailPage(serviceDescription:ServiceDescription?, title: String, model: MutableMap<String, Any?>): String {
+    private fun _detailPage(serviceDescription:ServiceDTO?, title: String, id: String, model: MutableMap<String, Any?>): String {
         if (serviceDescription == null) return "detail"
+        var content:String = ""
+        var pageTitle:String = title
+        var pages: LinkedHashMap<String, String> = LinkedHashMap()
+        var subPages: LinkedHashMap<String, MutableList<String>> = LinkedHashMap()
 
-        var page: ServiceDescriptionPage = serviceDescription.subpages[0]
-
-        if (title != "") for (loopPage in serviceDescription.subpages) {
-            if (title == loopPage.title) {
-                page = loopPage
-                break
-            }
+        for (page in serviceDescription.pages)
+        {
+            var pageMarkdown = getMarkdown(page)
+            var pageTitle = getPageTitleFromMarkdown(page)
+            var subPagesList = getPageSubHeadings(page)
+            pages.put(pageTitle, pageMarkdown)
+            subPages.put(pageTitle, subPagesList)
         }
 
-        model.put("currentPage", page.title)
+        for (page in pages)
+        {
+            page.value
+        }
 
-        val lastPage = page == serviceDescription.subpages.last()
-        val firstPage = page == serviceDescription.subpages.first()
+        if (pageTitle=="" || !pages.keys.contains(pageTitle))
+        {
+            pageTitle = pages.keys.first()
+        }
+
+        content = pages.getValue(pageTitle)
+
+        val lastPage = pageTitle == pages.keys.last()
+        val firstPage = pageTitle == pages.keys.first()
+        val currPageInded = pages.keys.indexOf(pageTitle)
 
         if (!lastPage) {
-            val nextPageIndex = serviceDescription.subpages.indexOf(page) + 1
-            val nextPageName = serviceDescription.subpages.get(nextPageIndex).title
-            model.put("nextPage", nextPageName)
+            model.put("nextPage", pages.keys.elementAt(currPageInded+1))
         }
 
         if (!firstPage) {
-            val prevPageIndex = serviceDescription.subpages.indexOf(page) - 1
-            val prevPageName = serviceDescription.subpages.get(prevPageIndex).title
-            model.put("prevPage", prevPageName)
+            model.put("prevPage", pages.keys.elementAt(currPageInded-1))
         }
 
-        val rawContent = getPageData(page, 1)
-        val content = getMarkdown(rawContent)
-
+        model.put("currentPage", pageTitle)
+        model.put("id", id)
         model.put("model", serviceDescription)
+        model.put("pageList", pages)
+        model.put("subPageList", subPages)
         model.put("content", content)
+
         return "detail"
     }
-
-    private fun getPageData(page: ServiceDescriptionPage, indent:Int): String {
-        var rawContent = ""
-        rawContent += pageWithHeading(page, indent)
-        if (page.subpages != null) for (subpage in page.subpages) {
-            rawContent += getPageData(subpage, indent + 1)
-        }
-        return rawContent
-    }
-
-    private fun pageWithHeading(page:ServiceDescriptionPage, indent:Int): String {
-        var output = "\n<a name=\"${page.title}\"></a>\n\n"
-        output += "${"#".repeat(indent)} ${page.title}\n\n${page.content}"
-        return output
-    }
-
 
     private fun getMarkdown(md:String):String{
         val options = MutableDataSet()
         options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+        options.set(HtmlRenderer.GENERATE_HEADER_ID, true)
+        options.set(HtmlRenderer.RENDER_HEADER_ID, true)
+
         val parser = Parser.builder(options).build()
         val renderer = HtmlRenderer.builder(options).build()
 
@@ -116,5 +106,17 @@ class Controller {
         return html
     }
 
+    private fun getPageTitleFromMarkdown(md:String):String {
+        var splitLines = md.lines()
+        var title = splitLines.find { it.startsWith("# ",true) }
+        return title!!.replace("# ","") ?: "No title defined"
+    }
 
+    private fun getPageSubHeadings(md:String):MutableList<String> {
+        val list = mutableListOf<String>()
+        var splitLines = md.lines()
+        var headings = splitLines.filter { it.startsWith("## ",true) }
+        headings.forEach { it -> list.add(it.replace("## ","")) }
+        return list
+    }
 }
