@@ -14,9 +14,13 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
 
     }
 
-    private fun getService(id:String) : ServiceDTO
+    fun get(id:String) : ServiceDTO
     {
         var returnString: String = getRESTReturnString("service",id)
+        if(returnString != "") return Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
+        var tryByName = list().filter { it -> it.name.toLowerCase().replace(" ","-") == id }.firstOrNull()
+        if(tryByName == null) throw RuntimeException("Couldn't find service")
+        returnString = getRESTReturnString("service",tryByName.path)
         return Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
     }
 
@@ -25,10 +29,6 @@ class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
         val input = cls.getResourceAsStream(name)
         val inputAsString = input.bufferedReader().use { it.readText() }
         return inputAsString
-    }
-
-    fun get(id:String):ServiceDTO?{
-        return getService(id)
     }
 
     data class IndexDTO(val content:List<IndexServiceDTO>)
