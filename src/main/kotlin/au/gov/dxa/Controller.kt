@@ -32,7 +32,12 @@ class Controller {
 
     @RequestMapping("/service/{id}")
     fun detail(@PathVariable id:String, model:MutableMap<String,Any?>): String{
-        return detailPage(id, "", model)
+
+        try {
+            return detailPage(id, "", model)
+        }
+        catch(e:Exception){}
+        return searchSubmit(model)
     }
 
     @RequestMapping("/service/{id}/{title}")
