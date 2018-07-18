@@ -53,4 +53,6 @@ dependencies {
     compile 'org.postgresql:postgresql:9.4.1212'
     compile 'com.zaxxer:HikariCP:2.6.0'
 
+    compile 'khttp:khttp:0.1.0'
+
 }

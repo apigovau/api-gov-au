@@ -8,52 +8,34 @@ data class ServiceDTO(val name:String = "", val description:String = "", val pag
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
-class ServiceDescriptionRepository(mock:MutableList<String>? = null) {
+class ServiceDescriptionRepository() {
 
-    init {
-
-    }
+    val baseRepoUri = System.getenv("BaseRepoURI")?: throw RuntimeException("No environment variable: BaseRepoURI")
+    var descriptionCache = ResourceCache<ServiceDTO>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<ServiceDTO>(serial)!! })
+    var indexCache = ResourceCache<IndexDTO>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<IndexDTO>(serial)!! })
 
     fun get(id:String) : ServiceDTO
     {
-        var returnString: String = getRESTReturnString("service",id)
-        if(returnString != "") return Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
-        var tryByName = list().filter { it -> it.name.toLowerCase().replace(" ","-") == id }.firstOrNull()
-        if(tryByName == null) throw RuntimeException("Couldn't find service")
-        returnString = getRESTReturnString("service",tryByName.path)
-        return Klaxon().parse<ServiceDTO>(returnString) ?: ServiceDTO()
+        try {
+            val description = descriptionCache.get("$baseRepoUri/service/$id")
+            return description
+        }catch (e:Exception) {
+            val serviceWithMatchingName = list().filter { it -> it.name.toLowerCase().replace(" ", "-") == id }.firstOrNull()
+            if (serviceWithMatchingName == null) throw RuntimeException("Couldn't find service for id: $id")
+
+            val idOfServiceWithMatchingName = serviceWithMatchingName.path
+            val description = descriptionCache.get("$baseRepoUri/service/$idOfServiceWithMatchingName")
+            return description
+        }
     }
 
-    private fun read(name:String):String{
-        val cls = Parser::class.java
-        val input = cls.getResourceAsStream(name)
-        val inputAsString = input.bufferedReader().use { it.readText() }
-        return inputAsString
-    }
 
     data class IndexDTO(val content:List<IndexServiceDTO>)
     data class IndexServiceDTO(val id:String, val name:String, val description:String)
     fun list(): List<ServiceListVM>{
 
-        var returnString: String = getRESTReturnString()
-        val index = Klaxon().parse<IndexDTO>(returnString)
-
+        val index = indexCache.get("$baseRepoUri/index")
         return index!!.content.map { it -> ServiceListVM(it.name, it.description, "Metadata", "Published", it.id) }
     }
 
-    private fun getRESTReturnString(endpoint : String = "index", endPointID:String = "") : String {
-        var returnString: String = ""
-        val baseRepoUri = System.getenv("BaseRepoURI")?: throw RuntimeException("No environment variable: BaseRepoURI")
-
-
-        val url = baseRepoUri + endpoint + if (endpoint.last() == '/') endPointID else "/$endPointID"
-        try {
-            val con = URL(url).openConnection()
-            con.readTimeout = 1000
-            returnString = con.inputStream.bufferedReader().readText()
-        } catch (e:Exception) {
-
-        }
-        return returnString
-    }
 }
