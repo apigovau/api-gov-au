@@ -120,3 +120,12 @@ CODE
 {
 	color: white;
 }
+.api_data TD
+{
+	padding: 0px !important;
+	margin: 0px !important;
+}
+.api_data TR
+{
+	height: 20px;
+}
