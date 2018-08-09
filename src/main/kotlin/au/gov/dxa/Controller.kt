@@ -52,7 +52,7 @@ class Controller {
         model.put("id", id)
         model.put("model", serviceDescription)
         model.put("pageList", serviceDescription.navigation)
-        model.put("content", page.html)
+        model.put("content", page.html())
 
         return "detail"
     }
