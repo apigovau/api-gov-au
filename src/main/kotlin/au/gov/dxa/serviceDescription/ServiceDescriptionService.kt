@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service
 class ServiceDescriptionService {
 
     @Autowired
-    lateinit var service: ServiceDescriptionRepository
+    lateinit var repo: ServiceDescriptionRepository
 
     fun get(id:String): ServiceDescription? {
-        return service.get(id)
+        return repo.get(id)
     }
 
-    fun list(): List<ServiceListVM> = service.list()
+    fun list(): List<ServiceListVM> = repo.list()
+
+    fun flush(id:String) = repo.flush(id)
 }

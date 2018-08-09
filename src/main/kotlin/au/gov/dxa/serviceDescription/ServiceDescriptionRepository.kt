@@ -38,4 +38,8 @@ class ServiceDescriptionRepository() {
         return index!!.content.map { it -> ServiceListVM(it.name, it.description, "Metadata", "Published", it.id) }
     }
 
+    fun flush(id:String){
+        descriptionCache.expire("$baseRepoUri/service/$id")
+    }
+
 }
