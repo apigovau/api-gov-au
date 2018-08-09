@@ -1,7 +1,7 @@
-package au.gov
+package au.gov.web
 
-import au.gov.dxa.ResourceCache
-import au.gov.dxa.ServiceDTO
+import au.gov.dxa.web.ResourceCache
+import au.gov.dxa.serviceDescription.ServiceDescription
 import com.beust.klaxon.Klaxon
 import org.junit.Assert
 import org.junit.Test
@@ -11,9 +11,9 @@ class TestCache {
     fun can_get_deserialised_object_from_cache(){
 
         var fetcher = MockURIFetcher()
-        var cache = ResourceCache<ServiceDTO>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDTO>(serial)!! })
+        var cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
 
-        var testDTO = ServiceDTO("name","description",listOf("a","b"))
+        var testDTO = ServiceDescription("name", "description", listOf("a", "b"))
         var testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["aurl"] = testDTOString
@@ -29,9 +29,9 @@ class TestCache {
     fun cache_will_return_expired_content_if_live_not_available(){
 
         var fetcher = MockURIFetcher()
-        var cache = ResourceCache<ServiceDTO>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDTO>(serial)!! })
+        var cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
 
-        var testDTO = ServiceDTO("name","description",listOf("a","b"))
+        var testDTO = ServiceDescription("name", "description", listOf("a", "b"))
         var testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["aurl"] = testDTOString

@@ -1,8 +1,8 @@
-package au.gov.dxa
+package au.gov.dxa.web
 
 import java.time.LocalDateTime
 
-class ResourceCache<T>(private val fetcher:URIFetcher, private val minutesToLive:Long, private val convert: (serial:String) -> T) {
+class ResourceCache<T>(private val fetcher: URIFetcher, private val minutesToLive:Long, private val convert: (serial:String) -> T) {
     data class CacheItem<T>(var timestamp:LocalDateTime, var item:T)
     private var _cache = mutableMapOf<String, CacheItem<T>>()
 

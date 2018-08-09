@@ -1,8 +1,8 @@
-package au.gov
+package au.gov.web
 
-import au.gov.dxa.URIFetcher
+import au.gov.dxa.web.URIFetcher
 
-class MockURIFetcher:URIFetcher {
+class MockURIFetcher: URIFetcher {
 
     var map = mutableMapOf<String, String>()
 

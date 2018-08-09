@@ -1,20 +1,20 @@
-package au.gov.dxa
+package au.gov.dxa.serviceDescription
 
+import au.gov.dxa.web.NaiveAPICaller
+import au.gov.dxa.web.ResourceCache
 import com.beust.klaxon.*
 import org.springframework.stereotype.Component
-import java.net.URL
 
-data class ServiceDTO(val name:String = "", val description:String = "", val pages:List<String> = listOf(""))
 data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
 
 @Component
 class ServiceDescriptionRepository() {
 
     val baseRepoUri = System.getenv("BaseRepoURI")?: throw RuntimeException("No environment variable: BaseRepoURI")
-    var descriptionCache = ResourceCache<ServiceDTO>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<ServiceDTO>(serial)!! })
+    var descriptionCache = ResourceCache<ServiceDescription>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
     var indexCache = ResourceCache<IndexDTO>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<IndexDTO>(serial)!! })
 
-    fun get(id:String) : ServiceDTO
+    fun get(id:String) : ServiceDescription
     {
         try {
             val description = descriptionCache.get("$baseRepoUri/service/$id")
