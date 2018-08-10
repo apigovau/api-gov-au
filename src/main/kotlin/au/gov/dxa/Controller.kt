@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import java.net.URLDecoder
 
 
 @Controller
@@ -45,7 +46,9 @@ class Controller {
     fun detail(@PathVariable id:String, @PathVariable title:String, model:MutableMap<String, Any?>): String{
         val serviceDescription = serviceDescriptionService.get(id) ?: return "detail"
 
-        val page = serviceDescription.pages.firstOrNull {it -> it.title == title} ?: serviceDescription.pages.first()
+        val unescapedTitle = URLDecoder.decode(title)
+
+        val page = serviceDescription.pages.firstOrNull {it -> it.title == unescapedTitle} ?: serviceDescription.pages.first()
         model.put("prevPage", serviceDescription.previous(page))
         model.put("nextPage", serviceDescription.next(page))
         model.put("currentPage", page.title)
