@@ -53,11 +53,49 @@ some content
 
         Page.definitionCache = cache
 
-        var testDefinition = Definition(name = "Course Code")
+        var testDefinition = Definition(name = "Course Code", status = "Standard")
         var testDefinitionString = Klaxon().toJsonString(DefinitionDTO(testDefinition))
         fetcher.map["https://definitions.ausdx.io/api/definition/edu/edu307"] = testDefinitionString
 
         val md = "Use element defcat```edu/edu307``` here"
+        val page = Page(md)
+        val preProcessed = "Use element Course Code here"
+
+        Assert.assertEquals(preProcessed, page.preProcessed)
+    }
+
+    @Test
+    fun will_replace_defcat_attribute_specified(){
+
+        var fetcher = MockURIFetcher()
+        var cache = ResourceCache<DefinitionDTO>(fetcher, 1, convert = { serial -> Klaxon().parse<DefinitionDTO>(serial)!! })
+
+        Page.definitionCache = cache
+
+        var testDefinition = Definition(name = "Course Code", status = "Standard")
+        var testDefinitionString = Klaxon().toJsonString(DefinitionDTO(testDefinition))
+        fetcher.map["https://definitions.ausdx.io/api/definition/edu/edu307"] = testDefinitionString
+
+        val md = "The status of the element is: defcat```edu/edu307[status]```"
+        val page = Page(md)
+        val preProcessed = "The status of the element is: Standard"
+
+        Assert.assertEquals(preProcessed, page.preProcessed)
+    }
+
+    @Test
+    fun will_replace_defcat_attribute_specified_link(){
+
+        var fetcher = MockURIFetcher()
+        var cache = ResourceCache<DefinitionDTO>(fetcher, 1, convert = { serial -> Klaxon().parse<DefinitionDTO>(serial)!! })
+
+        Page.definitionCache = cache
+
+        var testDefinition = Definition(name = "Course Code", status = "Standard")
+        var testDefinitionString = Klaxon().toJsonString(DefinitionDTO(testDefinition))
+        fetcher.map["https://definitions.ausdx.io/api/definition/edu/edu307"] = testDefinitionString
+
+        val md = "Use element defcat```edu/edu307[name;1]``` here"
         val page = Page(md)
         val preProcessed = "Use element [Course Code](https://definitions.ausdx.io/definition/edu/edu307) here"
 
@@ -72,9 +110,9 @@ some content
 
         Page.definitionCache = cache
 
-        val md = "Use element defcat```edu/edu307``` here"
+        val md = "Use element defcat```edu/edu309``` here"
         val page = Page(md)
-        val preProcessed = "Use element ```edu/edu307``` here"
+        val preProcessed = "Use element ```edu/edu309``` here"
 
         Assert.assertEquals(preProcessed, page.preProcessed)
     }
