@@ -2,9 +2,9 @@
 Makes it easier to discover electronic government services
 
 ## Current Status
-[![Build Status](https://travis-ci.org/dxa/service-catalogue.svg?branch=master)](https://travis-ci.org/dxa/service-catalogue)
+The Services Catalogue is currently under development. It is currently at the alpha stage, a live version can be viewed at [https://services.ausdx.io/](https://services.ausdx.io/)
 
-The Services Catalogue is currently under development. It is currently in the alpha stage, a live version can be viewed at [https://services.ausdx.io/](https://services.ausdx.io/)
+[![Build Status](https://travis-ci.org/dxa/service-catalogue.svg?branch=master)](https://travis-ci.org/dxa/service-catalogue)
 
 ## Technology
 This service uses Kotlin, Spring Boot and is deployed to Heroku.
