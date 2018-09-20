@@ -136,3 +136,82 @@ CODE
 	padding-bottom: 20px;
 	padding-left: 10px;
 }
+
+.indexItemList
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /*background-color: #f0f0f5;*/
+    align-content: center;
+}
+.indexItemList li
+{
+    padding: 5px;
+    float: left;
+}
+
+.indexItemContainer
+{
+
+    width: 490px;
+    height: 190px;
+    /*background: #d8f0f3;*/
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    position:relative;
+}
+.indexItemContainerBodyTextContainer
+{
+    overflow: hidden;
+    height:130px;
+}
+.indexItemContainerBodyText
+{
+    overflow: auto;
+    width: 350px;
+}
+
+.indexItemContainerBody
+{
+    padding: 0.01em 5px;
+}
+
+.indexItemContainerBody ul
+{
+    list-style-type: none;
+    padding: 0px;
+    overflow: hidden;
+    align-content: center;
+}
+
+.indexItemContainerBody ul li
+{
+    float: left;
+}
+
+.indexItemBottomBar
+{
+    background:#ecf8f6
+    height: 20px;
+    font-size: 12px;
+    width:490px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: absolute;
+    bottom: 0;
+}
+.indexItemBottomBar ul
+{
+    list-style-type: none;
+}
+
+.indexItemBottomBar ul li
+{
+    padding: 0.01em 1px;
+    margin: 0px;
+}
