@@ -156,7 +156,7 @@ CODE
 {
 
     width: 490px;
-    height: 190px;
+    height: 170px;
     background: #ffffff;
     border: 1px solid #ccc !important;
     border-radius: 5px;
@@ -171,13 +171,13 @@ CODE
 .indexItemContainerBodyTextContainer
 {
     overflow: hidden;
-    height:130px;
+    height:110px;
 }
 .indexItemContainerBodyText
 {
     text-align: left;
     overflow: auto;
-    width: 350px;
+    width: 375px;
 }
 
 .indexItemContainerBody
