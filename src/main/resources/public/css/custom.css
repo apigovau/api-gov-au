@@ -157,10 +157,16 @@ CODE
 
     width: 490px;
     height: 190px;
-    /*background: #d8f0f3;*/
+    background: #ffffff;
     border: 1px solid #ccc !important;
     border-radius: 5px;
     position:relative;
+    padding: 0;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.15);
+}
+.indexItemContainer:hover
+{
+    box-shadow: 0 4px 8px 0 rgba(37, 101, 90, 0.2), 0 6px 20px 0 rgba(37, 101, 90, 0.2);
 }
 .indexItemContainerBodyTextContainer
 {
@@ -169,6 +175,7 @@ CODE
 }
 .indexItemContainerBodyText
 {
+    text-align: left;
     overflow: auto;
     width: 350px;
 }
@@ -203,6 +210,8 @@ CODE
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     position: absolute;
+    padding: 0px;
+    margin: -1px;
     bottom: 0;
 }
 .indexItemBottomBar ul
