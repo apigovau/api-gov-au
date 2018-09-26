@@ -50,13 +50,23 @@ class Page(val markdown:String) {
         var foundLinks = regex.findAll(markdown)
         for (item:MatchResult in  foundLinks)
         {
-            val definitionPath = item.value.split("```")[1]
+            val regexAttribute = kotlin.text.Regex("\\[(.*?)\\]")
+            var foundAttribute = regexAttribute.findAll(item.value)
+
+            var attribute = if (foundAttribute.count() > 0) foundAttribute.first().value else ""
+            val definitionPath = item.value.split("```")[1].replace(attribute,"")
             val apiLinkEndpoint = "https://definitions.ausdx.io/api/definition/$definitionPath"
             val webEndpoint = "https://definitions.ausdx.io/definition/$definitionPath"
 
             try {
-                val definition = Page.definitionCache.get(apiLinkEndpoint).content
-                output = output.replace(item.value, "[${definition.name}]($webEndpoint)")
+                val definitionVal = getAttribute(Page.definitionCache.get(apiLinkEndpoint).content,attribute)
+                if(attribute.replace("[","").replace("]","").split(';').last().equals("1"))
+                {
+                    output = output.replace(item.value, "[$definitionVal]($webEndpoint)")
+                } else {
+                    output = output.replace(item.value, "$definitionVal")
+                }
+
             } catch(e:Exception){
                 log.warn("Couldn't resolve definition: $apiLinkEndpoint")
                 output = output.replace(item.value, "```$definitionPath```")
@@ -65,6 +75,19 @@ class Page(val markdown:String) {
         return output
     }
 
+    fun getAttribute(def:Definition, attr:String):String{
+        return when(attr.replace("[","").replace("]","").split(';').first().toLowerCase()){
+            "name" -> def.name
+            "domain" -> def.domain
+            "status" -> def.status
+            "definition" -> def.definition
+            "guidance" -> def.guidance
+            "identifier" -> def.identifier
+            "type" -> def.type
+            "sourceURL" -> def.sourceURL
+            else -> def.name
+        }
+    }
     fun html():String{
         val options = MutableDataSet()
         options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
