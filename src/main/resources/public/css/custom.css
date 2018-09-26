@@ -202,6 +202,7 @@ CODE
 {
     background:#ecf8f6
     height: 20px;
+    max-height: 20px;
     font-size: 12px;
     width:490px;
     border-left: 1px solid #ccc;
@@ -213,6 +214,7 @@ CODE
     padding: 0px;
     margin: -1px;
     bottom: 0;
+    overflow:hidden;
 }
 .indexItemBottomBar ul
 {

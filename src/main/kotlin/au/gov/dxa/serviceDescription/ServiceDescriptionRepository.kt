@@ -5,7 +5,7 @@ import au.gov.dxa.web.ResourceCache
 import com.beust.klaxon.*
 import org.springframework.stereotype.Component
 
-data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val path:String)
+data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val agency:String, val security:String, val technology:String, val openAPISpec:String, val path:String, val tags:MutableList<String>, val logoURI:String)
 
 @Component
 class ServiceDescriptionRepository() {
@@ -31,11 +31,54 @@ class ServiceDescriptionRepository() {
 
 
     data class IndexDTO(val content:List<IndexServiceDTO>)
-    data class IndexServiceDTO(val id:String, val name:String, val description:String)
+    data class IndexServiceDTO(val id:String, val name:String, val description:String,  val tags:MutableList<String>, val logoURI:String)
     fun list(): List<ServiceListVM>{
 
         val index = indexCache.get("$baseRepoUri/index")
-        return index!!.content.map { it -> ServiceListVM(it.name, it.description, "Metadata", "Published", it.id) }
+        return processIndexList(index)
+
+    }
+
+    fun processIndexList(inList:IndexDTO):List<ServiceListVM>{
+        var output:MutableList<ServiceListVM> = mutableListOf()
+        inList.content.forEach{output.add(processIndexItem(it))}
+        return output
+    }
+    fun processIndexItem(inItem:IndexServiceDTO):ServiceListVM{
+        var tagsCopy = inItem.tags.toMutableList()
+        val name = inItem.name
+        val description = inItem.description
+        val domain = replaceIfBlank(getTagItem(tagsCopy, "Category"),"Unknown")
+        val status = replaceIfBlank(getTagItem(tagsCopy, "Status"), "Unknown")
+        val agency = replaceIfBlank(getTagItem(tagsCopy, "AgencyAcr"), "Unknown")
+        val security = replaceIfBlank(getTagItem(tagsCopy, "Security"), "Unknown")
+        val tech = replaceIfBlank(getTagItem(tagsCopy, "Technology"), "Unknown")
+        val openAPISpec = replaceIfBlank(getTagItem(tagsCopy, "OpenAPISpec"),"None")
+        val logoURI = replaceIfBlank(inItem.logoURI, "/img/NoLogo.png")
+        return  ServiceListVM(name,description,domain,status,agency,security,tech,openAPISpec,inItem.id,tagsCopy,logoURI)
+    }
+
+    fun replaceIfBlank(input:String, replaceWith:String):String{
+        return if(input.trim() == "") replaceWith else input.trim()
+    }
+
+    fun getTagItem(intags:MutableList<String>, tagToFind:String ):String{
+        var foundVal = false
+        var tagFoundIndex = 0
+        var output = ""
+        for(i in intags.indices){
+            if (intags[i].contains(tagToFind))
+            {
+                output = intags[i].replace("$tagToFind:","")
+                foundVal = true
+                break;
+            }
+            tagFoundIndex++
+        }
+        if(foundVal){
+            intags.removeAt(tagFoundIndex)
+        }
+        return output
     }
 
     fun flush(id:String){
