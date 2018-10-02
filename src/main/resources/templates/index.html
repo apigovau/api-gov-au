@@ -18,20 +18,13 @@
                 <div class="indexItemContainer">
                     <div class="indexItemContainerBody">
                         <strong><a th:attr="href='/service/' + ${service.path}" th:text="${service.name}"/></strong>
-                        <ul>
-                            <li>
-                                <img src="/img/NoLogo.png" style="width:75px;height:75px;" alt="API Logo"/>
-                            </li>
-                            <li>
-                                <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="${service.definition}"/></div>
-                            </li>
-                        </ul>
+                        <img src="/img/NoLogo.png" alt="API Logo"/>
+                        <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="${service.definition}"/></div>
                     </div>
 
                     <div class="indexItemBottomBar">
                         <ul>
                             <li th:text="${service.domain}" />
-                            <li> | </li>
                             <li th:text="${service.status}" />
                         </ul>
                     </div>
