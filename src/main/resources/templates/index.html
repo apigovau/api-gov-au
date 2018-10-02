@@ -18,41 +18,35 @@
                 <div class="indexItemContainer">
                     <div class="indexItemContainerBody">
                         <strong><a th:attr="href='/service/' + ${service.path}" th:text="${service.name}"/></strong>
-                        <ul>
-                            <li>
-                                <img th:src="${service.logoURI}" style="width:100px;height:75px;" alt="API Logo"/>
-                            </li>
-                            <li>
-                                <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="${service.definition}"/></div>
-                            </li>
-                        </ul>
+                        <img th:src="${service.logoURI}" alt="API Logo"/>
+                        <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="${service.definition}"/></div>
                     </div>
 
                     <div class="indexItemBottomBar">
                         <ul>
                             <li>
                                 <img src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;" alt="Category"/>
-                                <div style="display:inline-block;" th:text="' '+${service.domain} +' |'"/>
+                                <div th:text="' '+${service.domain}"/>
                             </li>
                             <li>
                                 <img src="/img/iconStatus25.png" style="width:10px;height:10px;display:inline-block;" alt="Status"/>
-                                <div style="display:inline-block;" th:text="' '+${service.status} +' |'"/>
+                                <div th:text="' '+${service.status}"/>
                             </li>
                             <li>
                                 <img src="/img/iconAgency25.png" style="width:10px;height:10px;display:inline-block;" alt="Agency"/>
-                                <div style="display:inline-block;" th:text="' '+${service.agency} +' |'"/>
+                                <div th:text="' '+${service.agency}"/>
                             </li>
                             <li>
                                 <img src="/img/iconSecurity25.png" style="width:10px;height:10px;display:inline-block;" alt="Security"/>
-                                <div style="display:inline-block;" th:text="' '+${service.security} +' |'"/>
+                                <div th:text="' '+${service.security}"/>
                             </li>
                             <li>
                                 <img src="/img/iconTech25.png" style="width:10px;height:10px;display:inline-block;" alt="Technology"/>
-                                <div style="display:inline-block;" th:text="' '+${service.technology} +' |'"/>
+                                <div th:text="' '+${service.technology}"/>
                             </li>
                             <li>
                                 <img src="/img/iconDoco25.png" style="width:10px;height:10px;display:inline-block;" alt="Interactive documentation"/>
-                                <div style="display:inline-block;" th:text="' '+${service.openAPISpec} +' |'"/>
+                                <div th:text="' '+${service.openAPISpec}"/>
                             </li>
                             <li><img src="/img/iconTags25.png" style="width:10px;height:10px;display:inline-block;" alt="Tags"/></li>
                             <li th:each="tag : ${service.tags}" th:text="' #'+${tag}"/>

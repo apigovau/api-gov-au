@@ -1,3 +1,139 @@
+@media screen and (max-width: 480px)
+{
+	UL.indexItemList IMG
+	{
+		display: none;
+	}
+	.indexItemList
+	{
+		margin: 0px !important;
+		padding: 0px !important;
+		width: calc( 100% - 5px);
+	}
+	.indexItemList > LI
+	{
+		border-bottom: 1px solid #DDD;
+		padding-bottom: 5px;
+		padding-top: 30px;
+	}
+	.indexItemContainer
+	{
+		border: none !important;
+	}
+	.indexItemBottomBar
+	{
+		display: none !important;
+	}
+}
+@media screen and (min-width: 481px) and (max-width: 767px)
+{
+	.indexItemList > LI
+	{
+		padding: 5px;
+		float: left;
+		width: calc(100% - 10px);
+		display: inline-block;
+	}
+}
+@media screen and (min-width: 768px)
+{
+	.indexItemList > LI
+	{
+		padding: 5px;
+		margin-bottom: 30px !important;
+		float: left;
+		width: 47%;
+		display: inline-block;
+	}
+}
+.indexItemContainer
+{
+	width: 100%;
+	min-height: 110px;
+	background: #FFFFFF;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	position: relative;
+	padding: 0;
+}
+.indexItemContainerBodyText
+{
+	text-align: left;
+	overflow: auto;
+	float: right;
+}
+.indexItemContainerBody
+{
+	padding: 0.01em 5px;
+	min-height: 100px;
+}
+.indexItemContainerBody > STRONG
+{
+	display: block;
+}
+.indexItemContainerBody > IMG
+{
+	padding: 10px;
+	float: left;
+	display: inline-block;
+	width: 60px !important;
+}
+.indexItemContainerBodyTextContainer
+{
+	overflow: hidden;
+	width: calc(100% - 100px);
+	padding-left: 10px;
+}
+.indexItemBottomBar
+{
+	background: #EEE;
+	max-height: 40px;
+	font-size: 12px;
+	width: 100%;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/*position: absolute;*/
+	padding: 0px;
+	margin: -1px;
+	bottom: 0;
+	display: block;
+	margin-top: 10px;
+}
+.indexItemBottomBar UL
+{
+	list-style-type: none;
+	display: inline-block;
+	margin-bottom: 0px !important;
+}
+.indexItemBottomBar UL LI
+{
+	padding: 0.01em 1px;
+	margin: 0px;
+	float: left;
+	border-right: 1px solid black;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.indexItemBottomBar UL LI:last-child
+{
+	border-right: none;
+}
+.indexItemList
+{
+	list-style-type: none;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: hidden;
+	align-content: center;
+	width: 100%;
+}
+.indexItemBottomBar UL LI DIV
+{
+	display: inline-block;
+}
 .hero_header
 {
 	margin-bottom: 0px !important;
@@ -135,94 +271,4 @@ CODE
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 10px;
-}
-
-.indexItemList
-{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    /*background-color: #f0f0f5;*/
-    align-content: center;
-}
-.indexItemList li
-{
-    padding: 5px;
-    float: left;
-}
-
-.indexItemContainer
-{
-
-    width: 490px;
-    height: 190px;
-    background: #ffffff;
-    border: 1px solid #ccc !important;
-    border-radius: 5px;
-    position:relative;
-    padding: 0;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.15);
-}
-.indexItemContainer:hover
-{
-    box-shadow: 0 4px 8px 0 rgba(37, 101, 90, 0.2), 0 6px 20px 0 rgba(37, 101, 90, 0.2);
-}
-.indexItemContainerBodyTextContainer
-{
-    overflow: hidden;
-    height:130px;
-}
-.indexItemContainerBodyText
-{
-    text-align: left;
-    overflow: auto;
-    width: 350px;
-}
-
-.indexItemContainerBody
-{
-    padding: 0.01em 5px;
-}
-
-.indexItemContainerBody ul
-{
-    list-style-type: none;
-    padding: 0px;
-    overflow: hidden;
-    align-content: center;
-}
-
-.indexItemContainerBody ul li
-{
-    float: left;
-}
-
-.indexItemBottomBar
-{
-    background:#ecf8f6
-    height: 20px;
-    max-height: 20px;
-    font-size: 12px;
-    width:490px;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    position: absolute;
-    padding: 0px;
-    margin: -1px;
-    bottom: 0;
-    overflow:hidden;
-}
-.indexItemBottomBar ul
-{
-    list-style-type: none;
-}
-
-.indexItemBottomBar ul li
-{
-    padding: 0.01em 1px;
-    margin: 0px;
 }
