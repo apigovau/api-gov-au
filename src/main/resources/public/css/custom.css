@@ -76,18 +76,19 @@
 	padding: 10px;
 	float: left;
 	display: inline-block;
-	width: 60px !important;
+	width: 100px !important;
 }
 .indexItemContainerBodyTextContainer
 {
 	overflow: hidden;
-	width: calc(100% - 100px);
+	width: calc(100% - 140px);
 	padding-left: 10px;
+	font-size: 15px;
 }
 .indexItemBottomBar
 {
 	background: #EEE;
-	max-height: 40px;
+	/*max-height: 40px;*/
 	font-size: 12px;
 	width: 100%;
 	border-left: 1px solid #CCC;
