@@ -48,18 +48,14 @@ class ServiceDescriptionRepository() {
         var tagsCopy = inItem.tags.toMutableList()
         val name = inItem.name
         val description = inItem.description
-        val domain = replaceIfBlank(getTagItem(tagsCopy, "Category"),"Unknown")
-        val status = replaceIfBlank(getTagItem(tagsCopy, "Status"), "Unknown")
-        val agency = replaceIfBlank(getTagItem(tagsCopy, "AgencyAcr"), "Unknown")
-        val security = replaceIfBlank(getTagItem(tagsCopy, "Security"), "Unknown")
-        val tech = replaceIfBlank(getTagItem(tagsCopy, "Technology"), "Unknown")
-        val openAPISpec = replaceIfBlank(getTagItem(tagsCopy, "OpenAPISpec"),"None")
-        val logoURI = replaceIfBlank(inItem.logoURI, "/img/NoLogo.png")
+        val domain = getTagItem(tagsCopy, "Category")
+        val status = getTagItem(tagsCopy, "Status")
+        val agency = getTagItem(tagsCopy, "AgencyAcr")
+        val security = getTagItem(tagsCopy, "Security")
+        val tech = getTagItem(tagsCopy, "Technology")
+        val openAPISpec = getTagItem(tagsCopy, "OpenAPISpec")
+        val logoURI = if (inItem.logoURI == "") "/img/NoLogo.png" else inItem.logoURI
         return  ServiceListVM(name,description,domain,status,agency,security,tech,openAPISpec,inItem.id,tagsCopy,logoURI)
-    }
-
-    fun replaceIfBlank(input:String, replaceWith:String):String{
-        return if(input.trim() == "") replaceWith else input.trim()
     }
 
     fun getTagItem(intags:MutableList<String>, tagToFind:String ):String{
