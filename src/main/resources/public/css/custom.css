@@ -96,7 +96,8 @@
 	border-bottom: 1px solid #CCC;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	/*position: absolute;*/
+	position: relative;
+    z-index:0;
 	padding: 0px;
 	margin: -1px;
 	bottom: 0;
