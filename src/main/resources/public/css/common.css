@@ -26,7 +26,11 @@ dl dl {
 }
 
 .hero_logo {
-    float: right;
+    float: left;
+    max-width: 3em;
+    padding-right: 20px;
+    position: relative;
+    top: 10px;
 }
 
 .heroline {
@@ -38,23 +42,24 @@ dl dl {
 .main_header {
     padding-bottom: 20px;
     padding-top: 20px;
-    background-color: #25655A;
+    background-color: #254558;
 }
 
 .hero_header {
-    background-color: #25655A;
+    background-color: #254558;
 }
 
 .badge {
-    background-color: white;
-    border-radius: 12px;
-    padding: 0.4em 0.8em;
-    margin-left: -2px;
+    /*background-color: white;*/
+    border-radius: 15px;
+    border: 2px solid white;
+    padding: 0.6em 1em;
+    /*margin-left: -2px;*/
     position: relative;
     top: -13px;
     letter-spacing: 1px;
-    color: black;
-    font-size: 0.4rem;
+    color: #FFFFFF;
+    font-size: 8px;
 }
 
 nav.uikit-breadcrumbs {
@@ -62,10 +67,11 @@ nav.uikit-breadcrumbs {
 }
 
 @media screen and (min-width: 768px) {
-    .badge {
-        font-size: 0.8rem;
-    }
-    
+    /*.badge
+    {
+    	font-size: 0.3rem;
+    	border-bottom-left-radius: 0;
+    }*/
     .table_definition {
         width: 50%;
     }

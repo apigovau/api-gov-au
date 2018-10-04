@@ -1,10 +1,10 @@
-# Services Catalogue
+# api.gov.au 
 Makes it easier to discover electronic government services
 
 ## Current Status
-The Services Catalogue is currently under development. It is currently at the alpha stage, a live version can be viewed at [https://services.ausdx.io/](https://services.ausdx.io/)
+api.gov.ai is under development. It is currently at the alpha stage, a live version can be viewed at [https://api.gov.au/](https://api.gov.au/)
 
-[![Build Status](https://travis-ci.org/dxa/service-catalogue.svg?branch=master)](https://travis-ci.org/dxa/service-catalogue)
+[![Build Status](https://travis-ci.org/ausdto/apigovau.svg?branch=master)](https://travis-ci.org/dxa/apigovau)
 
 ## Technology
 This service uses Kotlin, Spring Boot and is deployed to Heroku.
@@ -16,8 +16,8 @@ For a basic introduction to Kotlin, Spring Boot and Heroku, read the [Getting St
 Install the [Heroku CLI](https://cli.heroku.com/).
 
 ```sh
-$ git clone https://github.com/dxa/service-catalogue.git
-$ cd service-catalogue
+$ git clone https://github.com/ausdto/apigovau.git
+$ cd apigovau
 $ gradle build
 $ heroku local:start
 ```
