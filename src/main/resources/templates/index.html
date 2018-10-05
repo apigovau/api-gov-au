@@ -13,50 +13,12 @@
 
 <main class="container">
     <div>
-        <ul class="indexItemList">
-            <li th:each="service : ${services}">
-                <div class="indexItemContainer">
-                    <div class="indexItemContainerBody">
-                        <strong><a th:attr="href='/service/' + ${service.path}" th:text="${service.name}"/></strong>
-                        <img th:src="${service.logoURI}" alt="API Logo"/>
-                        <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="${service.definition}"/></div>
-                    </div>
-
-                    <div class="indexItemBottomBar">
-                        <ul>
-                            <li th:if='${service.domain != ""}'>
-                                <img src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;" alt="Category"/>
-                                <div th:text="' '+${service.domain}"/>
-                            </li>
-                            <li th:if='${service.status != ""}'>
-                                <img src="/img/iconStatus25.png" style="width:10px;height:10px;display:inline-block;" alt="Status"/>
-                                <div th:text="' '+${service.status}"/>
-                            </li>
-                            <li th:if='${service.agency != ""}'>
-                                <img src="/img/iconAgency25.png" style="width:10px;height:10px;display:inline-block;" alt="Agency"/>
-                                <div th:text="' '+${service.agency}"/>
-                            </li>
-                            <li th:if='${service.security!= ""}'>
-                                <img src="/img/iconSecurity25.png" style="width:10px;height:10px;display:inline-block;" alt="Security"/>
-                                <div th:text="' '+${service.security}"/>
-                            </li>
-                            <li th:if='${service.technology!= ""}'>
-                                <img src="/img/iconTech25.png" style="width:10px;height:10px;display:inline-block;" alt="Technology"/>
-                                <div th:text="' '+${service.technology}"/>
-                            </li>
-                            <li th:if='${service.openAPISpec!= ""}'>
-                                <img src="/img/iconDoco25.png" style="width:10px;height:10px;display:inline-block;" alt="Interactive documentation"/>
-                                <div th:text="' '+${service.openAPISpec}"/>
-                            </li>
-                            <div th:remove="tag" th:if="${not #lists.isEmpty(service.tags)}">
-                            <li><img src="/img/iconTags25.png" style="width:10px;height:10px;display:inline-block;" alt="Tags"/></li>
-                            <li th:if="${not #lists.isEmpty(service.tags)}" th:each="tag : ${service.tags}" th:text="' #'+${tag}"/>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
+            <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
+            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-1}">
+                    <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
+            </div>
+        </div>
     </div>
 </main>
 

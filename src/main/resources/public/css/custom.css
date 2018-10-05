@@ -1,55 +1,76 @@
 @media screen and (max-width: 480px)
 {
-	UL.indexItemList IMG
+	DIV.indexItemContainerBody IMG
 	{
 		display: none;
 	}
-	.indexItemList
+	DIV.indexItemContainerBody
 	{
-		margin: 0px !important;
-		padding: 0px !important;
-		width: calc( 100% - 5px);
-	}
-	.indexItemList > LI
-	{
-		border-bottom: 1px solid #DDD;
-		padding-bottom: 5px;
-		padding-top: 30px;
+		width: 100%;
 	}
 	.indexItemContainer
 	{
 		border: none !important;
+		width: 100% !important;
+		padding-bottom: 30px !important;
 	}
 	.indexItemBottomBar
 	{
 		display: none !important;
 	}
+	DIV.indexItemContainerBodyText
+	{
+		width: 100%;
+	}
+	DIV.indexItemContainerBodyTextContainer
+	{
+		width: 95%;
+	}
 }
 @media screen and (min-width: 481px) and (max-width: 767px)
 {
-	.indexItemList > LI
+	.indexItemContainer
 	{
-		padding: 5px;
+		padding: 0px;
+		margin-bottom: 5px;
+		margin-top: 5px;
 		float: left;
-		width: calc(100% - 10px);
+		width: 100% !important;
 		display: inline-block;
 	}
 }
 @media screen and (min-width: 768px)
 {
-	.indexItemList > LI
+	.indexItemContainer
 	{
-		padding: 5px;
-		margin-bottom: 30px !important;
-		float: left;
-		width: 47%;
-		display: inline-block;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		display: flex !important;
+		flex-direction: column;
+	}
+	.indexItemContainer:first-child
+	{
+		margin-right: 5px;
+	}
+	.itemIndexRow
+	{
+		display: flex;
+		width: 100%;
+		height: 100%;
+	}
+	.indexItemBottomBar
+	{
+		float: bottom;
+		width: 100% !important;
+		margin-top: auto !important;
 	}
 }
 .indexItemContainer
 {
-	width: 100%;
-	min-height: 110px;
+	width: 47%;
+	display: inline-block;
+	vertical-align: top;
+	/*min-height: 110px;*/
 	background: #FFFFFF;
 	border: 1px solid #CCC;
 	border-radius: 5px;
@@ -61,6 +82,7 @@
 	text-align: left;
 	overflow: auto;
 	float: right;
+	margin-bottom: 10px;
 }
 .indexItemContainerBody
 {
