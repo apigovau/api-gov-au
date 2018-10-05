@@ -119,5 +119,46 @@
     </footer>
 </div>
 
+
+                <div th:fragment="indexItemContainer(service)" class="indexItemContainer">
+                    <div class="indexItemContainerBody">
+                        <strong><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
+                        <img th:src="*{__${service}__.logoURI}" alt="API Logo"/>
+                        <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="*{__${service}__.definition}"/></div>
+                    </div>
+                    <div class="indexItemBottomBar">
+                        <ul>
+                            <li th:if='*{__${service}__.domain != ""}'>
+                                <img src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;" alt="Category"/>
+                                <div th:text="' '+*{__${service}__.domain}"/>
+                            </li>
+                            <li th:if='*{__${service}__.status != ""}'>
+                                <img src="/img/iconStatus25.png" style="width:10px;height:10px;display:inline-block;" alt="Status"/>
+                                <div th:text="' '+*{__${service}__.status}"/>
+                            </li>
+                            <li th:if='*{__${service}__.agency != ""}'>
+                                <img src="/img/iconAgency25.png" style="width:10px;height:10px;display:inline-block;" alt="Agency"/>
+                                <div th:text="' '+*{__${service}__.agency}"/>
+                            </li>
+                            <li th:if='*{__${service}__.security!= ""}'>
+                                <img src="/img/iconSecurity25.png" style="width:10px;height:10px;display:inline-block;" alt="Security"/>
+                                <div th:text="' '+*{__${service}__.security}"/>
+                            </li>
+                            <li th:if='*{__${service}__.technology!= ""}'>
+                                <img src="/img/iconTech25.png" style="width:10px;height:10px;display:inline-block;" alt="Technology"/>
+                                <div th:text="' '+*{__${service}__.technology}"/>
+                            </li>
+                            <li th:if='*{__${service}__.openAPISpec!= ""}'>
+                                <img src="/img/iconDoco25.png" style="width:10px;height:10px;display:inline-block;" alt="Interactive documentation"/>
+                                <div th:text="' '+*{__${service}__.openAPISpec}"/>
+                            </li>
+                            <div th:remove="tag" th:if="${not #lists.isEmpty(__${service}__.tags)}">
+                            <li><img src="/img/iconTags25.png" style="width:10px;height:10px;display:inline-block;" alt="Tags"/></li>
+                            <li th:if="${not #lists.isEmpty(__${service}__.tags)}" th:each="tag : *{__${service}__.tags}" th:text="' #'+${tag}"/>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
 </body>
 </html>
