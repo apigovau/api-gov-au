@@ -14,33 +14,16 @@ dl dl {
     margin-left: 30px;
 }
 
-.logo {
-    height: 80px;
-    top: 30px;
-    padding-right: 10px;
-    position: relative;
-}
-
-.hero_logo {
-    float: left;
-    max-width: 150px !important;
-    min-width: 200px;
-    padding-right: 20px;
-    position: relative;
-    vertical-align: middle;
-    display: inline-block;
-    border-right: 1px solid;
-}
-
-.heroline {
-    padding-bottom: 0px;
-    color: white;
-    font-size: 1.625rem;
+.hero_header .hero_logo {
+    display: block;
+    max-width: 12rem;
 }
 
 .hero_header {
     background-color: #313131 !important;
     color: white;
+    /*height: 200px;*/
+    position: relative;
     padding-bottom: 100px !important;
 }
 
@@ -50,21 +33,60 @@ dl dl {
 }
 
 .hero_header h1 {
-    display: inline;
+    display: block;
     padding-left: 10px;
-    padding-top: 20px;
     padding-bottom: 10px;
-    font-size: xx-large;
+    font-size: 2.5rem;
+    clear: both;
+    float: left;
 }
 
-.hero_header h1 > a:hover {
-    text-decoration: underline;
-    text-decoration-color: white !important;
+.hero_header .au-header__subline {
+    font-size: 1.2rem;
+    color: #CCC;
+    margin-top: 14px;
+}
+
+.hero_header .au-main-nav {
+    background: #313131;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 
 .main_header {
     font-size: medium;
     padding: 20px !important;
+}
+
+.hero_header .au-main-nav a {
+    color: #45C2F0 !important;
+}
+
+.hero_header .au-main-nav a:hover, .au-main-nav .au-main-nav__toggle:hover {
+    background: #212121;
+    color: white !important;
+    text-decoration-color: white !important;
+}
+
+.hero_header .au-main-nav .active a {
+    border-bottom: 8px solid #313131;
+    border-bottom: 0.5rem solid #313131;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav {
+    border-bottom: 8px solid #45C2F0;
+    border-bottom: 0.5rem solid #45C2F0;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav .githubLink {
+    float: right;
 }
 
 .main_header .hero_logo {
@@ -124,6 +146,28 @@ nav.uikit-breadcrumbs {
         padding-bottom: 10px;
         font-size: xx-large;
     }
+    
+    .au-main-nav .au-link-list > li {
+        display: block;
+        float: left;
+        border: none;
+    }
+    
+    .au-main-nav a, .au-main-nav .au-main-nav__toggle {
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 16px;
+        padding: 1rem;
+    }
+    
+    .au-main-nav .active a {
+        border-bottom: 8px solid #FFF;
+        border-bottom: 0.5rem solid #FFF;
+        margin-bottom: -8px;
+        margin-bottom: -0.5rem;
+        font-weight: normal;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -179,6 +223,36 @@ nav.uikit-breadcrumbs {
         display: block !important;
         max-width: 40vw !important;
     }
+    
+    .au-main-nav {
+        z-index: 100;
+        /*margin-bottom: -60px !important;*/
+    }
+    
+    .hero_header .au-main-nav .githubLink {
+        float: left;
+        width: 100%;
+    }
+    
+    .au-main-nav .container {
+        display: none;
+    }
+    
+    .au-main-nav label {
+        color: white;
+        position: relative;
+        left: 20px;
+        display: block;
+        cursor: pointer;
+    }
+    
+    input:checked ~ .container {
+        display: inline-block;
+        float: left;
+        margin-bottom: -60px !important;
+        background: #313131;
+        width: 100%;
+    }
 }
 
 .phase-banner {
@@ -187,6 +261,10 @@ nav.uikit-breadcrumbs {
     padding-top: 6px;
     padding-bottom: 6px;
     font-size: 0.875rem;
+}
+
+.au-main-nav input#menu {
+    display: none;
 }
 
 .footer {
