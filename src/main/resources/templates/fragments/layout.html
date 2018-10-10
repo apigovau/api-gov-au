@@ -50,28 +50,38 @@
 <body class="au-body au-grid">
 
 
-<div th:fragment="landing_head" th:remove="tag">
+<div th:fragment="header(landing)" th:remove="tag">
     <section th:fragment="dss_stage_note" class="phase-banner">
         <div class="wrapper au-grid container container-fluid">
             This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/ausdto/ausgovau/issues/new" class="dss_stage_link">let us know</a>
         </div>
     </section>
-        <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
-            <div class="container">
-                <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
-                <h1 class="au-header-heading">
-                    api.gov.au
-                    <span class="badge">ALPHA</span>
-                    <div class="au-header__subline">
-                            <p>Building government services into your product.</p>
-                    </div>
-                </h1>
+    <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
+            <div class="container" th:classappend="${!landing} ? main_header">
+
+                <div th:if="${landing}" th:remove="tag">
+                        <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
+                        <h1 class="au-header-heading">
+                            api.gov.au
+                            <span class="badge">ALPHA</span>
+                            <div class="au-header__subline">
+                                    <p>Building government services into your product.</p>
+                            </div>
+                        </h1>
+                </div>
+                <div th:if="${!landing}" th:remove="tag">
+                        <h1 class="au-header-heading">
+                            <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
+                            <a href="/">api.gov.au</a>
+                            <span class="badge">ALPHA</span>
+                        </h1>
+                </div>
             </div>
 
             <nav class="au-main-nav" aria-label="main navigation">
-                    <input type="checkbox" id="menu">
-                            <label for="menu">☰ Menu</label>
-                    </input>
+                <input type="checkbox" id="menu">
+                    <label for="menu">☰ Menu</label>
+                </input>
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
@@ -101,26 +111,6 @@
         </header>
 </div>
 
-<div th:fragment="main_head" th:remove="tag">
-    <section th:fragment="dss_stage_note" class="phase-banner">
-        <div class="wrapper au-grid container container-fluid">
-            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/ausdto/ausgovau/issues/new" class="dss_stage_link">let us know</a>
-        </div>
-    </section>
-        <header class="au-grid au-header au-header--hero au-header--dark main_header" role="banner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
-                        <h1 class="au-header-heading landing_heroline">
-                            <a href="/">api.gov.au</a>
-                            <span class="badge">ALPHA</span>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </header>
-</div>
 
 
 

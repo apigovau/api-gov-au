@@ -22,7 +22,6 @@ dl dl {
 .hero_header {
     background-color: #313131 !important;
     color: white;
-    /*height: 200px;*/
     position: relative;
     padding-bottom: 100px !important;
 }
@@ -52,11 +51,6 @@ dl dl {
     position: absolute;
     bottom: 0px;
     width: 100%;
-}
-
-.main_header {
-    font-size: medium;
-    padding: 20px !important;
 }
 
 .hero_header .au-main-nav a {
@@ -90,11 +84,10 @@ dl dl {
 }
 
 .main_header .hero_logo {
-    width: 5vw !important;
-}
-
-.main_header h1 {
-    font-size: x-large;
+    border-right: 1px solid;
+    padding-right: 15px;
+    float: left;
+    margin-right: 20px;
 }
 
 .badge {
@@ -226,6 +219,7 @@ nav.uikit-breadcrumbs {
     
     .au-main-nav {
         z-index: 100;
+        position: relative;
         /*margin-bottom: -60px !important;*/
     }
     
@@ -249,9 +243,26 @@ nav.uikit-breadcrumbs {
     input:checked ~ .container {
         display: inline-block;
         float: left;
-        margin-bottom: -60px !important;
+        margin-bottom: -600px !important;
         background: #313131;
         width: 100%;
+    }
+    
+    .main_header .hero_logo {
+        border-right: none;
+        width: 15rem !important;
+        max-width: 15rem !important;
+    }
+    
+    .main_header a {
+        float: left;
+        margin-top: 20px;
+        clear: both;
+    }
+    
+    .main_header span {
+        float: left;
+        margin-top: 20px;
     }
 }
 
