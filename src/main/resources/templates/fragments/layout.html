@@ -22,7 +22,7 @@
     </div>
 
     <div th:fragment="css" th:remove="tag">
-        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="stylesheet" href="/css/furnace.min.css" />
         <link rel="stylesheet" href="/css/custom.css" />
         <link rel="stylesheet" href="/css/common.css" />
     </div>
@@ -47,53 +47,51 @@
 
 </head>
 
-<body class="uikit-body uikit-grid">
+<body class="au-body au-grid">
 
 
 <div th:fragment="landing_head" th:remove="tag">
     <section th:fragment="dss_stage_note" class="phase-banner">
-        <div class="wrapper uikit-grid container container-fluid">
+        <div class="wrapper au-grid container container-fluid">
             This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/ausdto/ausgovau/issues/new" class="dss_stage_link">let us know</a>
         </div>
     </section>
-    <a href="/">
-        <header class="uikit-header hero_header">
+        <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="uikit-header-heading landing_heroline">
-                            <img class="hero_logo" src="/img/hero_logo.png" style="width:20vw" alt="Digital Exchange Australia logo"/>
-                            api.gov.au
+                        <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
+                        <h1 class="au-header-heading landing_heroline">
+                            <a href="/">api.gov.au</a>
                             <span class="badge">ALPHA</span>
                         </h1>
-                        <span class="uikit-header-subline">Building government services into your product.</span>
                     </div>
                 </div>
             </div>
         </header>
-    </a>
 </div>
-
 
 <div th:fragment="main_head" th:remove="tag">
-  <section th:replace="fragments/layout :: dss_stage_note"/>
-    <a href="/">
-      <header class="uikit-header main_header">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <h1 class="uikit-header-heading heroline">
-                  api.gov.au
-                  <img class="hero_logo" src="/img/hero_logo.png" style="width: 20vw" alt="Digital Exchange Australia logo"/>
-                <span class="badge">ALPHA</span>
-              </h1>
-              <span class="uikit-header-subline">Building government services into your product.</span>
-            </div>
-          </div>
+    <section th:fragment="dss_stage_note" class="phase-banner">
+        <div class="wrapper au-grid container container-fluid">
+            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/ausdto/ausgovau/issues/new" class="dss_stage_link">let us know</a>
         </div>
-      </header>
-    </a>
+    </section>
+        <header class="au-grid au-header au-header--hero au-header--dark hero_header main_header" role="banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
+                        <h1 class="au-header-heading landing_heroline">
+                            <a href="/">api.gov.au</a>
+                            <span class="badge">ALPHA</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
 </div>
+
 
 
 <div th:fragment="footer" th:remove="tag">
@@ -104,20 +102,25 @@
         <p id="feedbackCount"/>
     </div>
     <script src="/js/feedback.js"/>
-    <footer class="uikit-footer">
+    <footer class="au-footer footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm-2 ie_footer_hook">
-                    <img class="uikit-responsive-media-img" src="/img/coat-of-arms.png" alt="Commonwealth Coat of Arms crest logo" />
+                <div class="col-sm-4 ie_footer_hook">
+                    <img class="au-responsive-media-img coat-of-arms" src="/img/hero_logo.png" alt="api.gov.au logo" />
+                    <div class="joint-initiative">
+                        A joint initiative of the <a href="https://dta.gov.au">Digital&nbsp;Transformation&nbsp;Agency</a> and <a href="https://sbr.gov.au">Standard&nbsp;Business&nbsp;Reporting</a>
+                    </div>  
                 </div>
-                <div class="col-sm-2 ie_footer_hook">
-                    <img class="uikit-responsive-media-img sbr_footer_logo" src="/img/sbr.png" alt="Standard Business Reporting logo" />
+                <div class="col-sm-8 ie_footer_hook footer-phrase">
+                    <p class="copyright">© Commonwealth of Australia. With the exception of the Commonwealth Coat of Arms and where otherwise noted, this work is licensed under the <a href="https://github.com/ausdto/ausgovau">MIT license</a></p>
                 </div>
-                <div class="col-sm-8 ie_footer_hook footer-phrase">This site is part of the Standard Business Reporting program.<br />Visit <a style="font-weight: bold;" href="https://sbr.gov.au/">sbr.gov.au</a> to find out more.</div>
             </div>
         </div>
     </footer>
 </div>
+
+
+
 
 
                 <div th:fragment="indexItemContainer(service)" class="indexItemContainer">

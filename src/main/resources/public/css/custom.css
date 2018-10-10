@@ -125,12 +125,14 @@
 	bottom: 0;
 	display: block;
 	margin-top: 10px;
+	float: left;
 }
 .indexItemBottomBar UL
 {
 	list-style-type: none;
 	display: inline-block;
 	margin-bottom: 0px !important;
+	padding-left: 10px;
 }
 .indexItemBottomBar UL LI
 {
@@ -198,6 +200,13 @@
 {
 	margin-bottom: 0px;
 }
+.apiname
+{
+	margin-top: 50px !important;
+	padding-bottom: 40px !important;
+	font-size: xx-large !important;
+	border-bottom: 1px solid #CCC;
+}
 BLOCKQUOTE
 {
 	background-color: lightgray;
@@ -229,10 +238,15 @@ CODE
 .detail_pagination
 {
 	padding-top: 10px;
+	margin-top: 100px;
 	height: 100px;
 	margin-bottom: 20px;
 	background-color: #EEE;
 	border-top: 1px solid lightgray;
+}
+.detail_pagination A
+{
+	text-decoration: none;
 }
 .detail_pagination .prev_detail_page
 {
@@ -272,12 +286,12 @@ CODE
 }
 .api_nav .current_page
 {
-	background: #254558;
+	background: #313131;
 	padding-left: 10px;
 }
 .api_nav .current_page A
 {
-	color: white;
+	color: white !important;
 }
 .api_data TD
 {
