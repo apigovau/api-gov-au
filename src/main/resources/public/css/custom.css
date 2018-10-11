@@ -323,3 +323,21 @@ CODE
 	padding-bottom: 20px;
 	padding-left: 10px;
 }
+.tier
+{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.tier:first-child
+{
+	padding-top: 100px;
+}
+.tier:last-child
+{
+	padding-bottom: 100px;
+}
+.intro__text EM
+{
+	font-size: larger;
+	font-style: normal;
+}
