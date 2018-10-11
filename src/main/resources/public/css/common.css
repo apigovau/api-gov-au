@@ -274,6 +274,10 @@ nav.uikit-breadcrumbs {
         float: left;
         margin-top: 20px;
     }
+    
+    .hero_header .au-main-nav .divider {
+        display: none;
+    }
 }
 
 .phase-banner {
