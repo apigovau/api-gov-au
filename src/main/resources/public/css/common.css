@@ -238,6 +238,7 @@ nav.uikit-breadcrumbs {
         left: 20px;
         display: block;
         cursor: pointer;
+        width: 60px;
     }
     
     input:checked ~ .container {
@@ -275,7 +276,14 @@ nav.uikit-breadcrumbs {
 }
 
 .au-main-nav input#menu {
-    display: none;
+    /*display: none;*/
+    position: absolute;
+    left: -9999px;
+}
+
+input:focus + label {
+    outline: 3px solid #9263DE;
+    outline-offset: 2px;
 }
 
 .footer {
