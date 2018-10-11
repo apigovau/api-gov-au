@@ -341,3 +341,7 @@ CODE
 	font-size: larger;
 	font-style: normal;
 }
+.intro__img IMG
+{
+	max-width: 90%;
+}
