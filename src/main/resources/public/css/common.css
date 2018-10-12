@@ -1,7 +1,3 @@
-.footerlogo {
-    height: 80px;
-}
-
 .used_synonyms p {
     margin-bottom: 0;
 }
@@ -18,43 +14,102 @@ dl dl {
     margin-left: 30px;
 }
 
-.logo {
-    height: 80px;
-    top: 30px;
-    padding-right: 10px;
-    position: relative;
-}
-
-.hero_logo {
-    float: right;
-}
-
-.heroline {
-    padding-bottom: 0px;
-    color: white;
-    font-size: 1.625rem;
-}
-
-.main_header {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    background-color: #254558;
+.hero_header .hero_logo {
+    display: block;
+    max-width: 12rem;
 }
 
 .hero_header {
-    background-color: #254558;
+    background-color: #313131 !important;
+    color: white;
+    position: relative;
+    padding-bottom: 100px !important;
+}
+
+.hero_header a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.hero_header h1 {
+    display: block;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 2.5rem !important;
+    clear: both;
+    float: left;
+}
+
+.hero_header .au-header__subline {
+    font-size: 1.2rem;
+    color: #CCC;
+    margin-top: 14px;
+}
+
+.hero_header .au-main-nav {
+    background: #313131;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.hero_header .au-main-nav a {
+    color: #45C2F0 !important;
+}
+
+.hero_header .au-main-nav a:hover, .au-main-nav .au-main-nav__toggle:hover {
+    background: #212121;
+    color: white !important;
+    text-decoration-color: white !important;
+}
+
+.hero_header .au-main-nav .active a {
+    border-bottom: 8px solid #313131;
+    border-bottom: 0.5rem solid #313131;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav {
+    border-bottom: 8px solid #45C2F0;
+    border-bottom: 0.5rem solid #45C2F0;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav .githubLink {
+    float: right;
+}
+
+.main_header .hero_logo {
+    border-right: 1px solid;
+    padding-right: 15px;
+    float: left;
+    margin-right: 20px;
+}
+
+.hero_header .au-main-nav .divider {
+    width: 2px !important;
+    height: 50px;
+    position: relative;
+    top: 7px;
+    background: #45C2F0;
+    margin-left: 20px;
 }
 
 .badge {
-    background-color: white;
-    border-radius: 12px;
-    padding: 0.4em 0.8em;
-    margin-left: -2px;
+    /*background-color: white;*/
+    border-radius: 15px;
+    border: 2px solid white;
+    padding: 0.6em 1em;
+    /*margin-left: -2px;*/
     position: relative;
     top: -13px;
     letter-spacing: 1px;
-    color: black;
-    font-size: 0.4rem;
+    color: #FFFFFF;
+    font-size: 8px;
 }
 
 nav.uikit-breadcrumbs {
@@ -62,10 +117,6 @@ nav.uikit-breadcrumbs {
 }
 
 @media screen and (min-width: 768px) {
-    .badge {
-        font-size: 0.8rem;
-    }
-    
     .table_definition {
         width: 50%;
     }
@@ -89,6 +140,35 @@ nav.uikit-breadcrumbs {
     .search_help {
         padding-top: 100px;
         padding-bottom: 25px;
+    }
+    
+    .hero_header h1 {
+        display: inline;
+        padding-left: 10px !important;
+        padding-bottom: 10px;
+        font-size: xx-large;
+    }
+    
+    .au-main-nav .au-link-list > li {
+        display: block;
+        float: left;
+        border: none;
+    }
+    
+    .au-main-nav a, .au-main-nav .au-main-nav__toggle {
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 16px;
+        padding: 1rem;
+    }
+    
+    .au-main-nav .active a {
+        border-bottom: 8px solid #FFF;
+        border-bottom: 0.5rem solid #FFF;
+        margin-bottom: -8px;
+        margin-bottom: -0.5rem;
+        font-weight: normal;
     }
 }
 
@@ -131,14 +211,131 @@ nav.uikit-breadcrumbs {
         padding-top: 20px;
         padding-bottom: 20px;
     }
+    
+    .hero_header h1 {
+        position: relative !important;
+        top: 2vw;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: x-large;
+    }
+    
+    .hero_logo {
+        display: block !important;
+        max-width: 40vw !important;
+    }
+    
+    .au-main-nav {
+        z-index: 100;
+        position: relative;
+        /*margin-bottom: -60px !important;*/
+    }
+    
+    .hero_header .au-main-nav .githubLink {
+        float: left;
+        width: 100%;
+    }
+    
+    .au-main-nav .container {
+        display: none;
+    }
+    
+    .au-main-nav label {
+        color: white;
+        position: relative;
+        left: 20px;
+        display: block;
+        cursor: pointer;
+        width: 60px;
+    }
+    
+    input:checked ~ .container {
+        display: inline-block;
+        float: left;
+        margin-bottom: -600px !important;
+        background: #313131;
+        width: 100%;
+    }
+    
+    .main_header .hero_logo {
+        border-right: none;
+        width: 15rem !important;
+        max-width: 15rem !important;
+    }
+    
+    .main_header a {
+        float: left;
+        margin-top: 20px;
+        clear: both;
+    }
+    
+    .main_header span {
+        float: left;
+        margin-top: 20px;
+    }
+    
+    .hero_header .au-main-nav .divider {
+        display: none;
+    }
 }
 
 .phase-banner {
-    background-color: #313131;
+    background-color: black;
     color: white;
     padding-top: 6px;
     padding-bottom: 6px;
     font-size: 0.875rem;
+}
+
+.au-main-nav input#menu {
+    /*display: none;*/
+    position: absolute;
+    left: -9999px;
+}
+
+input:focus + label {
+    outline: 3px solid #9263DE;
+    outline-offset: 2px;
+}
+
+.footer {
+    background: #313131;
+    color: white !important;
+    border-top: none;
+}
+
+.footer-phrase {
+    display: flex;
+    flex-direction: column;
+    height: 190px;
+}
+
+.footer .copyright {
+    font-size: small !important;
+    margin-top: auto !important;
+}
+
+.footer .copyright a {
+    color: white !important;
+}
+
+.footer .coat-of-arms {
+    max-width: 130px !important;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+.footer .joint-initiative {
+    font-size: small;
+    width: 200px;
+    border-left: 1px solid #CCC;
+    padding-left: 10px !important;
+    padding: 5px;
+}
+
+.footer .joint-initiative a {
+    color: white !important;
 }
 
 a.new_issue_link {
@@ -262,4 +459,9 @@ ul.pagination_controls li {
     background: white;
     cursor: pointer;
     opacity: 1;
+}
+
+body a {
+    color: black !important;
+    text-decoration-color: #1B7991 !important;
 }

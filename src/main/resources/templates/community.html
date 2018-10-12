@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>api.gov.au</title>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing = false, current = 'community')"/>
+
+
+<main class="container">
+
+<div class="tier tier--even">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Community</h1>
+                <div class="intro">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-md-push-6">
+                            <div class="intro__img"><img class="au-responsive-media-img" src="/img/community.png" alt="robots working together illustration"/></div>
+                        </div>
+                        <div class="intro__text col-sm-12 col-md-5 col-md-pull-6">
+                            <div class="content">
+                                <p><em>Together we‘ll be able to build products and services better, faster and easier.</em></p>
+                                <p>Join our community today. It's a great chance to</p>
+                                <ul>
+                                    <li><p><strong>learn</strong> about data exchange and APIs from likeminded people in government</p></li>
+                                    <li><p><strong>share</strong> any APIs or machine-to-machine services your agency has developed</p></li>
+                                    <li><p><strong>contribute</strong> to the development of api.gov.au to make it work the way you and your users need</p></li>
+                                </ul>
+                            </div>
+                            <p class="intro__button"><a class="au-btn au-btn--secondary" href="https://community.digital.gov.au">Get started</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</main>
+
+
+<div th:replace="fragments/layout :: footer"/>
+</body>
+</html>

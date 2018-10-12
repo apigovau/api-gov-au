@@ -2,24 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <div th:replace="fragments/layout :: meta" />
-  <title th:text="${model.name} + ' | Services Catalogue'"></title>
+  <title th:text="${model.name} + ' | api.gov.au'"></title>
   <div th:replace="fragments/layout :: favicon"/>
   <div th:replace="fragments/layout :: css"/>
   <div th:replace="fragments/layout :: highlight"/>
 </head>
-<body class="uikit-body uikit-grid">
+<body class="au-body au-grid">
 
-<div th:replace="fragments/layout :: main_head"/>
+<div th:replace="fragments/layout :: header(landing = false, current='apis')"/>
 
 <main class="container">
 
-    <h3 th:text="${model.name}"></h3>
+    <h3 class="apiname" th:text="${model.name}"></h3>
 
     <div class="col-sm-3 api_nav">
         <div th:each="page : ${pageList}" th:remove="tag">
             <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
             <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
-            <ul th:each="subpage : ${page.value}" class="uikit-link-list">
+            <ul th:each="subpage : ${page.value}" class="au-link-list">
                 <li><a th:attr="href='/service/' + ${id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}" th:text="${subpage}"/></li>
             </ul>
         </div>

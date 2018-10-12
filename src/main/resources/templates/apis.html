@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <div th:replace="fragments/layout :: meta" />
-  <title>Services Catalogue</title>
+  <title>api.gov.au</title>
   <div th:replace="fragments/layout :: favicon"/>
   <div th:replace="fragments/layout :: css"/>
 </head>
-<body class="uikit-body uikit-grid">
+<body class="au-body au-grid">
 
-<div th:replace="fragments/layout :: landing_head"/>
+<div th:replace="fragments/layout :: header(landing = false, current = 'apis')"/>
 
 
 <main class="container">

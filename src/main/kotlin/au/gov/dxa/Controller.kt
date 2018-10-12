@@ -25,8 +25,20 @@ class Controller {
 
     @RequestMapping("/")
     fun index(model:MutableMap<String, Any?>): String{
+        return "about"
+
+    }
+
+    @RequestMapping("/community")
+    fun community(model:MutableMap<String, Any?>): String{
+        return "community"
+
+    }
+
+    @RequestMapping("/apis")
+    fun services(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
-        return "index"
+        return "apis"
 
     }
 
