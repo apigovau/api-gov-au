@@ -1,0 +1,8 @@
+---
+applications:
+- name: api-gov-au
+  memory: 1G
+  buildpack: java_buildpack
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+  path: build/libs/service-catalogue-1.0.jar
