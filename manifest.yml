@@ -6,3 +6,5 @@ applications:
   env:
     SPRING_PROFILES_ACTIVE: prod
   path: build/libs/service-catalogue-1.0.jar
+  services:
+  - api-gov-au-feedback
