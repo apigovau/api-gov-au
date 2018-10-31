@@ -53,7 +53,7 @@
 <div th:fragment="header(landing, current)" th:remove="tag">
     <section th:fragment="dss_stage_note" class="phase-banner">
         <div class="wrapper au-grid container container-fluid">
-            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/ausdto/ausgovau/issues/new" class="dss_stage_link">let us know</a>
+            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/govau/api-gov-au/issues/new" class="dss_stage_link">let us know</a>
         </div>
     </section>
     <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
@@ -94,9 +94,9 @@
                                     <li th:classappend="${current == 'apis'} ? active"><a href="/apis/">APIs</a></li>
                                     <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
                                     <li class="divider"/>
+                                    <li><a href="/definitions" rel="external">Data Definitions</a></li>
                                     <li><a href="https://ausdx.io" rel="external">Digital Community Playbook</a></li>
-                                    <li><a href="https://definitions.ausdx.io" rel="external">Data Definitions</a></li>
-                                    <li class="githubLink"><a href="https://github.com/ausdto/apigovau">Github</a></li>
+                                    <li class="githubLink"><a href="https://github.com/govau/api-gov-au">Github</a></li>
                                  </ul>
                                  <div class="au-main-nav__focus-trap-bottom"></div>
                               </div>
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="col-sm-8 ie_footer_hook footer-phrase">
-                    <p class="copyright">© Commonwealth of Australia. With the exception of the Commonwealth Coat of Arms and where otherwise noted, this work is licensed under the <a href="https://github.com/ausdto/ausgovau">MIT license</a></p>
+                    <p class="copyright">© Commonwealth of Australia. With the exception of the Commonwealth Coat of Arms and where otherwise noted, this work is licensed under the <a href="https://github.com/govau/api-gov-au">MIT license</a></p>
                 </div>
             </div>
         </div>
