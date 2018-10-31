@@ -15,7 +15,7 @@
     <div>
         <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
             <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
-            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-1}">
+            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-0}">
                     <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
             </div>
         </div>
