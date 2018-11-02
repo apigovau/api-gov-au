@@ -1,6 +1,6 @@
 ---
 applications:
-- name: api-gov-au
+- name: api-gov-au-blue
   memory: 1G
   buildpack: java_buildpack
   env:
@@ -8,3 +8,16 @@ applications:
   path: build/libs/service-catalogue-1.0.jar
   services:
   - api-gov-au-feedback
+  routes:
+  - route: api-gov-au.apps.y.cld.gov.au
+- name: api-gov-au-green
+  memory: 1G
+  buildpack: java_buildpack
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+  path: build/libs/service-catalogue-1.0.jar
+  services:
+  - api-gov-au-feedback
+  routes:
+  - route: api-gov-au.apps.y.cld.gov.au
+
