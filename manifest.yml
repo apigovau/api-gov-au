@@ -9,7 +9,7 @@ applications:
   services:
   - api-gov-au-feedback
   routes:
-  - route: api-gov-au.apps.y.cld.gov.au
+  - route: api.gov.au
 - name: api-gov-au-green
   memory: 1G
   buildpack: java_buildpack
@@ -19,5 +19,5 @@ applications:
   services:
   - api-gov-au-feedback
   routes:
-  - route: api-gov-au.apps.y.cld.gov.au
+  - route: api.gov.au
 
