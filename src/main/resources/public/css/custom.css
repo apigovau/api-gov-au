@@ -101,6 +101,7 @@
 	overflow: auto;
 	float: right;
 	margin-bottom: 10px;
+	margin-top: 10px;
 }
 .indexItemContainerBody
 {
@@ -116,12 +117,13 @@
 	padding: 10px;
 	float: left;
 	display: inline-block;
-	width: 100px !important;
+	width: 120px !important;
+	margin-top: 0px !important;
 }
 .indexItemContainerBodyTextContainer
 {
 	overflow: hidden;
-	width: calc(100% - 140px);
+	width: calc(100% - 160px);
 	padding-left: 10px;
 	font-size: 15px;
 }
