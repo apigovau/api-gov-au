@@ -5,6 +5,7 @@ applications:
   buildpack: java_buildpack
   env:
     SPRING_PROFILES_ACTIVE: prod
+    BaseRepoURI: https://api.gov.au/repository/
   path: build/libs/service-catalogue-1.0.jar
   services:
   - api-gov-au-feedback
@@ -15,6 +16,7 @@ applications:
   buildpack: java_buildpack
   env:
     SPRING_PROFILES_ACTIVE: prod
+    BaseRepoURI: https://api.gov.au/repository/
   path: build/libs/service-catalogue-1.0.jar
   services:
   - api-gov-au-feedback
