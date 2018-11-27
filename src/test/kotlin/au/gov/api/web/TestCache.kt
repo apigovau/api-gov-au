@@ -1,7 +1,7 @@
 package au.gov.web
 
-import au.gov.dxa.web.ResourceCache
-import au.gov.dxa.serviceDescription.ServiceDescription
+import au.gov.api.web.ResourceCache
+import au.gov.api.serviceDescription.ServiceDescription
 import com.beust.klaxon.Klaxon
 import org.junit.Assert
 import org.junit.Test

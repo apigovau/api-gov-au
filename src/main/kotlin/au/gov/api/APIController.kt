@@ -1,7 +1,7 @@
 
-package au.gov.dxa
+package au.gov.api
 
-import au.gov.dxa.serviceDescription.ServiceDescriptionService
+import au.gov.api.serviceDescription.ServiceDescriptionService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.slf4j.LoggerFactory

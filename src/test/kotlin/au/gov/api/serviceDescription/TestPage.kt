@@ -1,9 +1,9 @@
 package au.gov.serviceDescription
 
-import au.gov.dxa.serviceDescription.Definition
-import au.gov.dxa.serviceDescription.DefinitionDTO
-import au.gov.dxa.serviceDescription.Page
-import au.gov.dxa.web.ResourceCache
+import au.gov.api.serviceDescription.Definition
+import au.gov.api.serviceDescription.DefinitionDTO
+import au.gov.api.serviceDescription.Page
+import au.gov.api.web.ResourceCache
 import au.gov.web.MockURIFetcher
 import com.beust.klaxon.Klaxon
 import org.junit.Assert

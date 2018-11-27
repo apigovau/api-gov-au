@@ -1,7 +1,7 @@
-package au.gov.dxa.serviceDescription
+package au.gov.api.serviceDescription
 
-import au.gov.dxa.web.NaiveAPICaller
-import au.gov.dxa.web.ResourceCache
+import au.gov.api.web.NaiveAPICaller
+import au.gov.api.web.ResourceCache
 import com.beust.klaxon.Klaxon
 import com.vladsch.flexmark.ext.gfm.tables.TablesExtension
 import com.vladsch.flexmark.html.HtmlRenderer

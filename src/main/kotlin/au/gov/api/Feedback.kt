@@ -1,5 +1,5 @@
 
-package au.gov.dxa
+package au.gov.api
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource

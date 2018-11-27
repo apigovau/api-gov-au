@@ -15,7 +15,7 @@ apply plugin: 'idea'
 apply plugin: 'kotlin'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
-mainClassName = "au.gov.dxa.Application"
+mainClassName = "au.gov.api.Application"
 
 test {
     beforeTest { descriptor ->

@@ -1,6 +1,6 @@
-package au.gov.dxa
+package au.gov.api
 
-import au.gov.dxa.serviceDescription.ServiceDescriptionService
+import au.gov.api.serviceDescription.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller

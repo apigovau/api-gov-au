@@ -1,6 +1,6 @@
 package au.gov.web
 
-import au.gov.dxa.web.URIFetcher
+import au.gov.api.web.URIFetcher
 
 class MockURIFetcher: URIFetcher {
 

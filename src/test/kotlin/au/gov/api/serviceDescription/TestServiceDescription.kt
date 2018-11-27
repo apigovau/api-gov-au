@@ -1,6 +1,6 @@
 package au.gov.serviceDescription
 
-import au.gov.dxa.serviceDescription.ServiceDescription
+import au.gov.api.serviceDescription.ServiceDescription
 import org.junit.Assert
 import org.junit.Test
 

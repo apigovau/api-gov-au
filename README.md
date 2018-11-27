@@ -6,7 +6,6 @@ Makes it easier to discover electronic government services
 
 api.gov.au is under development. It is currently at the alpha stage, a live version can be viewed at [https://api.gov.au/](https://api.gov.au/)
 
-[![Build Status](https://travis-ci.org/ausdto/apigovau.svg?branch=master)](https://travis-ci.org/dxa/apigovau)
 
 ## Technology
 

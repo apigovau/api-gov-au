@@ -1,4 +1,4 @@
-package au.gov.dxa.web
+package au.gov.api.web
 
 interface URIFetcher {
 
