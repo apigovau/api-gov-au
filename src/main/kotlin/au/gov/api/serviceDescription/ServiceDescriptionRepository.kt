@@ -1,5 +1,6 @@
 package au.gov.api.serviceDescription
 
+import au.gov.api.config.*
 import au.gov.api.web.NaiveAPICaller
 import au.gov.api.web.ResourceCache
 import com.beust.klaxon.*
@@ -9,8 +10,8 @@ data class ServiceListVM(val name:String, val definition:String, val domain:Stri
 
 @Component
 class ServiceDescriptionRepository() {
+    val baseRepoUri = Config.get("BaseRepoURI")
 
-    val baseRepoUri = System.getenv("BaseRepoURI")?: throw RuntimeException("No environment variable: BaseRepoURI")
     var descriptionCache = ResourceCache<ServiceDescription>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
     var indexCache = ResourceCache<IndexDTO>(NaiveAPICaller(), 5, convert = { serial -> Klaxon().parse<IndexDTO>(serial)!! })
 

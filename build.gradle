@@ -10,6 +10,13 @@ buildscript {
     }
 }
 
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
+
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'kotlin'
@@ -54,5 +61,7 @@ dependencies {
     compile 'com.zaxxer:HikariCP:2.6.0'
 
     compile 'khttp:khttp:0.1.0'
+
+    compile 'com.github.apigovau:config:7c0a0fc'
 
 }
