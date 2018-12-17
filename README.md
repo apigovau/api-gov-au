@@ -17,7 +17,7 @@ You will need an instance of PostgreSQL running, for example here is how to run 
 
 ```bash
 # Clone git repo
-git clone https://github.com/govau/api-gov-au.git
+git clone https://github.com/apigovau/api-gov-au.git
 cd api-gov-au/
 
 # Build it
