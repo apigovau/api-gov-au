@@ -62,6 +62,6 @@ dependencies {
 
     compile 'khttp:khttp:0.1.0'
 
-    compile 'com.github.apigovau:config:7c0a0fc'
+    compile 'com.github.apigovau:config:v1.0'
 
 }

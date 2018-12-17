@@ -1,0 +1,14 @@
+---
+applications:
+- name: g
+  memory: 1G
+  buildpack: java_buildpack
+  env:
+    SPRING_PROFILES_ACTIVE: prod
+    config_environment: staging.api.gov.au
+    JAVA_OPTS: -Duser.timezone=Australia/Canberra
+  path: build/libs/service-catalogue-1.0.jar
+  services:
+    - staging-api-gov-au-feedback
+  routes:
+  - route: staging.api.gov.au
