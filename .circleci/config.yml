@@ -1,0 +1,54 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - master
+        - staging
+        - /rc-.*/
+    docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: gradle dependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run: gradle clean assemble jar
+      - run: java -jar build/libs/service-catalogue-1.0.jar &
+
+      # run tests!
+      - run: gradle test
+
+      # Set up CF
+      - run:
+          name: Setup CF CLI
+          command: |
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
+      - run:
+          name: Deploying to cloud.gov.au
+          command: bash ./scripts/deploy.sh
+
+
