@@ -18,14 +18,14 @@ class ServiceDescriptionRepository() {
     fun get(id:String) : ServiceDescription
     {
         try {
-            val description = descriptionCache.get("$baseRepoUri/service/$id")
+            val description = descriptionCache.get(baseRepoUri+"service/$id")
             return description
         }catch (e:Exception) {
             val serviceWithMatchingName = list().filter { it -> it.name.toLowerCase().replace(" ", "-") == id }.firstOrNull()
             if (serviceWithMatchingName == null) throw RuntimeException("Couldn't find service for id: $id")
 
             val idOfServiceWithMatchingName = serviceWithMatchingName.path
-            val description = descriptionCache.get("$baseRepoUri/service/$idOfServiceWithMatchingName")
+            val description = descriptionCache.get(baseRepoUri+"service/$idOfServiceWithMatchingName")
             return description
         }
     }
@@ -35,7 +35,7 @@ class ServiceDescriptionRepository() {
     data class IndexServiceDTO(val id:String, val name:String, val description:String,  val tags:MutableList<String>, val logoURI:String)
     fun list(): List<ServiceListVM>{
 
-        val index = indexCache.get("$baseRepoUri/index")
+        val index = indexCache.get(baseRepoUri+"index")
         return processIndexList(index)
 
     }
@@ -79,7 +79,7 @@ class ServiceDescriptionRepository() {
     }
 
     fun flush(id:String){
-        descriptionCache.expire("$baseRepoUri/service/$id")
+        descriptionCache.expire(baseRepoUri+"service/$id")
     }
 
 }
