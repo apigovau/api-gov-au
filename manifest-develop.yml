@@ -1,6 +1,6 @@
 ---
 applications:
-  - name: api-gov-au-definitions-catalogue-blue
+  - name: api-gov-au-blue
     memory: 1G
     buildpack: java_buildpack
     env:
@@ -9,8 +9,8 @@ applications:
       JAVA_OPTS: -Duser.timezone=Australia/Canberra
     path: build/libs/service-catalogue-1.0.jar
     routes:
-      - route: api-gov-au.apps.y.cld.gov.au/definitions
-  - name: api-gov-au-definitions-catalogue-green
+      - route: api-gov-au.apps.y.cld.gov.au
+  - name: api-gov-au-green
     memory: 1G
     buildpack: java_buildpack
     env:
@@ -19,5 +19,5 @@ applications:
       JAVA_OPTS: -Duser.timezone=Australia/Canberra
     path: build/libs/service-catalogue-1.0.jar
     routes:
-      - route: api-gov-au.apps.y.cld.gov.au/definitions
+      - route: api-gov-au.apps.y.cld.gov.au
 
