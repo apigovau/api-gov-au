@@ -30,9 +30,12 @@ login() {
 main() {
   login
 
-  apiguid = cf app api-gov-au-blue --guid
-  cf curl /v2/apps/$apiguid/droplet/download --output /tmp/droplet.tgz
-  cf push --droplet /tmp/droplet.tgz -f manifest-prod.yml
+  apiguid=`cf app staging-api-gov-au --guid`
+  [ -f /tmp/droplet_$apiguid.tgz] && rm /tmp/droplet_$apiguid.tgz 
+  echo "Downloading droplet for guid $apiguid"
+  cf curl /v2/apps/$apiguid/droplet/download --output /tmp/droplet_$apiguid.tgz
+  cf push --droplet /tmp/droplet_$apiguid.tgz -f manifest-prod-blue.yml
+  cf push --droplet /tmp/droplet_$apiguid.tgz -f manifest-prod-green.yml
 }
 
 main $@

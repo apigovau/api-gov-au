@@ -1,15 +1,5 @@
 ---
 applications:
-  - name: api-gov-au-blue
-    memory: 1G
-    env:
-      SPRING_PROFILES_ACTIVE: prod
-      config_environment: api.gov.au
-      JAVA_OPTS: -Duser.timezone=Australia/Canberra
-    services:
-      - api-gov-au-feedback
-    routes:
-      - route: api.gov.au
   - name: api-gov-au-green
     memory: 1G
     env:
@@ -20,4 +10,3 @@ applications:
       - api-gov-au-feedback
     routes:
       - route: api.gov.au
-
