@@ -22,12 +22,17 @@
             <ul th:each="subpage : ${page.value}" class="au-link-list">
                 <li><a th:attr="href='/service/' + ${id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}" th:text="${subpage}"/></li>
             </ul>
+
         </div>
     </div>
     <div class="col-sm-8 api_data">
 
         <div th:remove="tag" th:utext="${content}" />
 
+        <br/>
+        <br/>
+
+        <div class="last_edit" th:text="${lastEdit}" />
         <div th:if="${nextPage} or ${prevPage}" class="detail_pagination">
             <div th:if="${nextPage}" class="next_detail_page">
                 <a th:attr="href='/service/' + ${id} + '/' + ${nextPage}">

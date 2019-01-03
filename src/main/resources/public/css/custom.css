@@ -346,3 +346,10 @@ CODE
 {
 	max-width: 90%;
 }
+.last_edit
+{
+    font-style: italic;
+    text-align: right;
+    color: #666666;
+    font-size: small;
+}
