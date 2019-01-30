@@ -30,9 +30,10 @@ login() {
 main() {
   login
 
-  apiguid = cf app api-gov-au-blue --guid
+  apiguid=`cf app staging-api-gov-au --guid`
   cf curl /v2/apps/$apiguid/droplet/download --output /tmp/droplet.tgz
-  cf push --droplet /tmp/droplet.tgz -f manifest-prod.yml
+  cf push --droplet /tmp/droplet.tgz -f manifest-prod-blue.yml
+  cf push --droplet /tmp/droplet.tgz -f manifest-prod-green.yml
 }
 
 main $@
