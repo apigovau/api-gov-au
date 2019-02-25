@@ -308,12 +308,15 @@ input:focus + label {
 .footer-phrase {
     display: flex;
     flex-direction: column;
-    height: 190px;
+    /*height: 90px;*/
+    padding-left: 0 !important;
+    padding-top: 40px;
 }
 
 .footer .copyright {
     font-size: small !important;
     margin-top: auto !important;
+    margin-left: 10px !important;
 }
 
 .footer .copyright a {
@@ -336,6 +339,29 @@ input:focus + label {
 
 .footer .joint-initiative a {
     color: white !important;
+}
+
+.footer .footer-links {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(162, 162, 162);
+    padding-bottom: 40px;
+    padding-top: 80px;
+    margin-left: 10px !important;
+}
+
+.footer .footer-links ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer .footer-links li {
+    display: inline;
+}
+
+.footer .footer-links li a {
+    color: white !important;
+    text-decoration-color: white !important;
 }
 
 a.new_issue_link {

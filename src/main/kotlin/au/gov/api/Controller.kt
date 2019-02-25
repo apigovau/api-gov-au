@@ -35,6 +35,12 @@ class Controller {
 
     }
 
+    @RequestMapping("/disclaimer")
+    fun disclaimer(model:MutableMap<String, Any?>): String{
+        return "disclaimer"
+
+    }
+
     @RequestMapping("/apis")
     fun services(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
