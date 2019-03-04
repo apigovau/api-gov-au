@@ -28,7 +28,9 @@
     <div class="col-sm-8 api_data">
 
         <div th:remove="tag" th:utext="${content}" />
-
+        <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
+            <div  th:replace="fragments/collaborate" />
+        </div>
         <br/>
         <br/>
 

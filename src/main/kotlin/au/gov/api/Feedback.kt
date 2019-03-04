@@ -25,7 +25,7 @@ class Feedback {
         @Value("\${spring.datasource.url}")
         private var dbUrl: String? = null
 
-        @Autowired
+        //@Autowired
         private lateinit var dataSource: DataSource
 
         fun feedback(@RequestParam path: String, @RequestParam upVotes: Int):String {

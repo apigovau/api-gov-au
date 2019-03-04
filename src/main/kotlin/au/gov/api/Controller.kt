@@ -1,5 +1,6 @@
 package au.gov.api
 
+import au.gov.api.conversation.ConversationRepository
 import au.gov.api.serviceDescription.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,9 @@ class Controller {
 
     @Autowired
     lateinit var serviceDescriptionService: ServiceDescriptionService
+
+    @Autowired
+    lateinit var conversationService: ConversationRepository
 
     @RequestMapping("/mvp")
     fun mvp(model:MutableMap<String, Any?>): String{
@@ -64,6 +68,7 @@ class Controller {
     fun detail(@PathVariable id:String, @PathVariable title:String, model:MutableMap<String, Any?>): String{
         val serviceDescription = serviceDescriptionService.get(id) ?: return "detail"
 
+        val conversations = if (title == "Collaborate") conversationService.get(id) else null
         val unescapedTitle = URLDecoder.decode(title)
         val lastedit = serviceDescriptionService.getLastEdited(id)
         val page = serviceDescription.pages.firstOrNull {it -> it.title == unescapedTitle} ?: serviceDescription.pages.first()
@@ -75,6 +80,7 @@ class Controller {
         model.put("pageList", serviceDescription.navigation)
         model.put("content", page.html())
         model.put("lastEdit", lastedit)
+        model.put("conversations", conversations)
         return "detail"
     }
 
