@@ -1,6 +1,6 @@
 ---
 applications:
-- name: g
+- name: staging-api-gov-au
   memory: 1G
   buildpack: java_buildpack
   env:
