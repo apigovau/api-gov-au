@@ -48,6 +48,12 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf') {
         exclude group: 'nz.net.ultraq.thymeleaf', module: 'thymeleaf-layout-dialect'
     }
+
+
+	compile 'org.springframework.data:spring-data-commons'
+	compile 'org.springframework:spring-jdbc'
+
+
     compile 'com.beust:klaxon:3.0.1'
     testCompile "junit:junit"
     compile "junit:junit"
