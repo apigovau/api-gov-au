@@ -1,6 +1,7 @@
 ---
 applications:
   - name: api-gov-au
+    instances: 2
     memory: 1G
     buildpack: java_buildpack
     env:
