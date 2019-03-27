@@ -35,7 +35,6 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       - run: gradle clean assemble jar
-      - run: java -jar build/libs/service-catalogue-1.0.jar &
 
       # run tests!
       - run: gradle test
