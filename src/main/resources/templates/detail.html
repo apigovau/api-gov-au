@@ -6,6 +6,9 @@
   <div th:replace="fragments/layout :: favicon"/>
   <div th:replace="fragments/layout :: css"/>
   <div th:replace="fragments/layout :: highlight"/>
+  <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
+      <div  th:replace="fragments/collaborate :: style-sheet"/>
+  </div>
 </head>
 <body class="au-body au-grid">
 
@@ -29,7 +32,7 @@
 
         <div th:remove="tag" th:utext="${content}" />
         <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
-            <div  th:replace="fragments/collaborate" />
+            <div  th:replace="fragments/collaborate :: conversations" />
         </div>
         <br/>
         <br/>

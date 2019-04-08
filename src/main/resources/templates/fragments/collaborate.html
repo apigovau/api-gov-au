@@ -1,8 +1,87 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
-    <div id="conversations">
+    <div th:fragment="style-sheet" th:remove="tag">
+        <style>
+            <div th:each="conversation : ${conversations.content}" th:remove="tag">
+                <div th:if="${conversation.numComments} > 0" th:remove="tag">
+                    <p th:inline="text" th:remove="tag">
+                        #conversations #toggle-[[${conversation.id}]]:checked ~ #comments-[[${conversation.id}]] {
+                            display: block;
+                        }
+
+                        #conversations #comments-[[${conversation.id}]] {
+                            display: none;
+                        }
+
+                        #conversations #toggle-[[${conversation.id}]]:checked ~ div .comments-[[${conversation.id}]]-active {
+                            display: block;
+                        }
+
+                        #conversations #toggle-[[${conversation.id}]]:checked ~ div .comments-[[${conversation.id}]]-inactive {
+                            display: none;
+                        }
+
+                        #conversations div.comments-[[${conversation.id}]]-active {
+                            display: none;
+                        }
+
+                        #conversations div.comments-[[${conversation.id}]]-inactive {
+                            display: block;
+                        }
+                    </p>
+                </div>
+            </div>
+            <div th:each="tag : ${conversations.getUniqueTags()}" th:remove="tag">
+                <p th:inline="text" th:remove="tag">
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]:checked ~ ul div[data-labels ~= [[${#strings.replace(#strings.trim(tag), ' ', '-')}]]] {
+                        display: block;
+                    }
+
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]:checked ~ ul li.[[${#strings.replace(#strings.trim(tag), ' ', '-')}]] {
+                        background-color: #00698F;
+                        color: #FFF;
+                    }
+
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]] ~ ul div.[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]-active {
+                        display: none;
+                    }
+
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]] ~ ul div.[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]-inactive {
+                        color: black;
+                        font-size: 1em;
+                        display: inline-block;
+                        text-align: center;
+                        width: 8px;
+                        margin-left: 8px;
+                        margin-bottom: 2px;
+                        margin-right: 4px;
+                    }
+
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]:checked ~ ul div.[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]-active {
+                        color: #FFF;
+                        font-size: 1em;
+                        font-weight: bold;
+                        display: inline-block;
+                        text-align: center;
+                        width: 8px;
+                        margin-left: 8px;
+                        margin-bottom: 2px;
+                        margin-right: 4px;
+                    }
+
+                    #conversations #toggle-[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]:checked ~ ul div.[[${#strings.replace(#strings.trim(tag), ' ', '-')}]]-inactive {
+                        display: none;
+                    }
+                </p>
+            </div>
+        </style>
+    </div>
+    <div id="conversations" th:fragment="conversations">
         <input type="checkbox" class="toggle" id="toggle-issue" checked="checked" />
         <input type="checkbox" class="toggle" id="toggle-pull-request" checked="checked" />
+        <div th:each="tag : ${conversations.getUniqueTags()}" th:remove="tag">
+            <input type="checkbox" class="toggle" th:attr="id='toggle-' + ${#strings.replace(#strings.trim(tag), ' ', '-')}" checked="checked" />
+        </div>
         <ul class="au-tags">
             <li class="issue">
                 <label for="toggle-issue">Issue<div class="issue-active">-</div><div class="issue-inactive">+</div></label>
@@ -10,20 +89,92 @@
             <li class="pull-request">
                 <label for="toggle-pull-request">Pull Request<div class="pull-request-active">-</div><div class="pull-request-inactive">+</div></label>
             </li>
+            <div th:each="tag : ${conversations.getUniqueTags()}" th:remove="tag">
+                <li th:attr="class=${#strings.replace(#strings.trim(tag), ' ', '-')}">
+                    <label th:attr="for='toggle-' + ${#strings.replace(#strings.trim(tag), ' ', '-')}"><span th:remove="tag" th:text="${tag}"/><div th:attr="class=${#strings.replace(#strings.trim(tag), ' ', '-')} + '-active'">-</div><div th:attr="class=${#strings.replace(#strings.trim(tag), ' ', '-')} + '-inactive'">+</div></label>
+                </li>
+            </div>
         </ul>
         <div th:if="${conversations} != null" th:remove="tag">
             <ul class="conversation-list">
                 <div th:each="conversation : ${conversations.content}" th:remove="tag">
                     <li>
-                        <div class="conversation" th:attr="data-labels=${conversation.typeTag}">
-                            <ul class="au-tags">
-                                <li th:if="${conversation.typeTag} == 'issues'" class="issue">Issue</li>
-                                <li th:if="${conversation.typeTag} == 'pulls'" class="pull-request">Pull Request</li>
-                            </ul>
-                            <h5 th:text="${conversation.title}"></h5>
-                            <p th:text="${conversation.body}"></p>
+                        <div class="conversation container-fluid" th:attr="data-labels=${conversation.typeTag} + ' ' + ${#strings.listJoin(#strings.listReplace(#strings.listTrim(conversation.tags), ' ', '-'),' ')}">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="user-info">
+                                        <img th:attr="src=${conversation.mainUserImageURI}" alt="User profile picture" />
+                                        <p th:text="${conversation.mainUserName}"></p>
+                                        <th:block th:with="dateFormatter = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">
+                                            <p th:text="${#dates.format(dateFormatter.parse(conversation.lastUpdated), 'dd-MM-yyyy')}" />
+                                        </th:block>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <ul class="au-tags">
+                                        <li th:if="${conversation.typeTag} == 'issues'" class="issue">Issue</li>
+                                        <li th:if="${conversation.typeTag} == 'pulls'" class="pull-request">Pull Request</li>
+                                        <div th:each="tag : ${conversation.tags}" th:remove="tag">
+                                            <li th:attr="class=${#strings.replace(#strings.trim(tag), ' ', '-')}" th:text="${tag}" />
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row conversation-content">
+                                <div class="col-xs-12">
+                                    <h5 th:text="${conversation.title} + '    |    ' + ${conversation.state}"></h5>
+                                    <p th:text="${conversation.body}"></p>
+                                </div>
+                            </div>
+                            <div th:if="${conversation.numComments} > 0" th:remove="tag">
+                                <input type="checkbox" class="toggle" checked="checked" th:attr="id='toggle-' + ${conversation.id}" />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label th:attr="for='toggle-' + ${conversation.id}">
+                                            <div th:attr="class='comments-'+ ${conversation.id} + '-active au-direction-link au-direction-link--up'">Comments</div>
+                                            <div th:attr="class='comments-' + ${conversation.id} + '-inactive au-direction-link au-direction-link--down'">Comments</div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div th:each="comment : ${conversation.comments}" th:remove="tag">
+                                    <div class="row" th:attr="id='comments-' + ${conversation.id}">
+                                        <div class="col-xs-12">
+                                            <div class="comment container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xs-12" th:attr="style='text-align: center;'" >
+                                                        <img th:attr="src=${comment.userImageURI}" alt="User profile picture" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12" th:attr="style='text-align: center; padding-bottom: 8px;'">
+                                                        <p><span th:attr="style='font-weight: bold; font-style: italic;'" th:text="${conversation.mainUserName}" /><span th:attr="style='font-weight: bold;'" th:text="${comment.postedOnString()} + '...'" /></p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <p th:text="${comment.body}"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-5" style="text-align: right;">
+                            <div th:if="${conversations.firstPage} != true" th:remove="tag"><a th:attr="href='?convoPage=' + ${convoPage - 1} + '#conversations', class='au-direction-link au-direction-link--left'">Back</a></div>
+                        </div>
+                        <div class="col-xs-2" style="text-align: center;">
+                            <div>|</div>
+                        </div>
+                        <div class="col-xs-5" style="text-align: left;">
+                            <div th:if="${conversations.lastPage} != true" th:remove="tag"><a th:attr="href='?convoPage=' + ${convoPage + 1} + '#conversations', class='au-direction-link'">Next</a></div>
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>

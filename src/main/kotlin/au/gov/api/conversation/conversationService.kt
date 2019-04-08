@@ -9,7 +9,7 @@ class ConversationService {
     @Autowired
     lateinit var repo: ConversationRepository
 
-    fun get(id: String): ConversationsVM? {
-        return repo.get(id)
+    fun get(id:String, page:Int): ConversationsVM? {
+        return repo.get(id, page)
     }
 }

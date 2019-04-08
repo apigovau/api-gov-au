@@ -413,6 +413,10 @@ ul.conversation-list {
     display: none;
 }
 
+.conversation .conversation-content {
+    padding: 10px;
+}
+
 #conversations #toggle-issue ~ ul div.issue-inactive {
     color: black;
     font-size: 1em;
@@ -471,6 +475,46 @@ ul.conversation-list {
     display: none;
 }
 
+#conversations .conversation .user-info {
+    margin-left: 10px;
+    border: 2px solid #f5f5f0;
+    border-radius: 5%;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#conversations .conversation img {
+    border-radius: 50%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    margin-top: 4px;
+}
+
+#conversations .conversation .au-tags {
+    text-align: right;
+}
+
+#conversations .conversation .au-tags li {
+    white-space: nowrap;
+}
+
+.comment {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 10px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    min-height: 125px;
+}
 
 
 

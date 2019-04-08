@@ -21,14 +21,14 @@ import javax.sql.DataSource
 class APIController {
 
 
-    /**@Autowired
-    private lateinit var feedback: Feedback*/
+    @Autowired
+    private lateinit var feedback: Feedback
 
     @Autowired
     lateinit var serviceDescriptionService: ServiceDescriptionService
 
-    /*@GetMapping("/api/feedback")
-    fun feedback(@RequestParam path:String, @RequestParam upVotes:Int):String{
+    @GetMapping("/api/feedback")
+    fun feedback(@RequestParam path:String, @RequestParam upVotes:Int):String {
         return feedback.feedback(path, upVotes)
     }
 
@@ -40,7 +40,7 @@ class APIController {
     @GetMapping("/api/pathFeedback")
     fun getFeedback(@RequestParam path:String): String {
         return feedback.getFeedback(path)
-    }*/
+    }
 
     @GetMapping("/api/flush/{id}")
     fun flushServiceCache(@PathVariable id:String) = serviceDescriptionService.flush(id)
