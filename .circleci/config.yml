@@ -5,6 +5,7 @@ jobs:
       only:
         - master
         - staging
+        - prod
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -34,48 +35,18 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       - run: gradle clean assemble jar
-      - run: java -jar build/libs/service-catalogue-1.0.jar &
 
       # run tests!
       - run: gradle test
 
-      # Set up CF
+      # get the build scripts
       - run:
-          name: Setup CF CLI
+          name: Download the build scripts
           command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-            sudo dpkg -i cf-cli_amd64.deb
-            cf -v
+            curl -v -L -o "buildrc" 'https://raw.githubusercontent.com/apigovau/build/master/buildrc'
+            curl -v -L -o "deploy.sh" 'https://raw.githubusercontent.com/apigovau/build/master/deploy.sh'
       - run:
           name: Deploying to cloud.gov.au
-          command: bash ./scripts/deploy.sh
-  deployProd:
-    branches:
-      only:
-        - deploy
-    docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-
-    working_directory: ~/repo
-
-    environment:
-      # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
-
-    steps:
-      - checkout
-
-      # Set up CF
-      - run:
-          name: Setup CF CLI
-          command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-            sudo dpkg -i cf-cli_amd64.deb
-            cf -v
-      - run:
-          name: Deploying to cloud.gov.au
-          command: bash ./scripts/deployProd.sh
-
-
+          command: bash ./deploy.sh
+          environment:
+            APPNAME: api-gov-au
