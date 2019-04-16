@@ -1,5 +1,7 @@
 package au.gov.api
 
+import au.gov.api.asset.AssetService
+import au.gov.api.asset.Space
 import au.gov.api.serviceDescription.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +17,10 @@ class Controller {
     private val log = LoggerFactory.getLogger(this.javaClass)
 
     @Autowired
+    lateinit var assetService: AssetService
+
+
+    @Autowired
     lateinit var serviceDescriptionService: ServiceDescriptionService
 
     @RequestMapping("/mvp")
@@ -25,9 +31,14 @@ class Controller {
 
     @RequestMapping("/")
     fun index(model:MutableMap<String, Any?>): String{
-        return "about"
-
+        return "landing"
     }
+
+    @RequestMapping("/about")
+    fun about(model:MutableMap<String, Any?>): String{
+        return "about"
+    }
+
 
     @RequestMapping("/community")
     fun community(model:MutableMap<String, Any?>): String{
@@ -41,7 +52,7 @@ class Controller {
 
     }
 
-    @RequestMapping("/apis")
+    @RequestMapping("/firehose")
     fun services(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
         return "apis"
@@ -76,6 +87,28 @@ class Controller {
         model.put("content", page.html())
         model.put("lastEdit", lastedit)
         return "detail"
+    }
+
+
+    @RequestMapping("/space/{space}")
+    fun space(@PathVariable space:String, model:MutableMap<String, Any?>): String{
+        val theSpace = assetService.getSpace(space)
+
+
+        val parentSpaces = assetService.parentsOfSpace(space)
+
+        val agencyLogoText = when(parentSpaces.size){
+            0 -> theSpace.name
+            else -> parentSpaces.map { assetService.getSpace(it).name.replace(" ","+") }.joinToString("&agency=")
+        }
+        model["agencyLogo"] = "https://api-gov-au-crest-branding.apps.y.cld.gov.au/inline.png?agency=${agencyLogoText}&height=200"
+
+        model["space"] = theSpace
+        model["articlesTagString"] = theSpace.tag
+        val articles = assetService.getArticlesForTags(listOf(theSpace.tag))
+        model["popularArticles"] = articles.take(2)
+        model["articles"] = articles
+        return "space"
     }
 
 }

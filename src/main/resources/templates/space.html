@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>api.gov.au</title>
+  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing = true, current = 'about')"/>
+
+
+<main class="container">
+
+            <section class="highlighted-section au-body">
+                <div class="container-fluid">
+
+                    <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                      <ul class="au-link-list au-link-list--inline">
+                        <li><a href="/">Home</a></li>
+                        <li th:text="${space.name}"/>
+                      </ul>
+                    </nav>
+
+
+                    <div class="row dashboardHeader">
+
+                        <div class="col-sm-7">
+                            <img th:attr="src=${agencyLogo}" class="dashboardHeader__title" />
+                            <h2 th:text="${space.name}" class="dashboardHeader__title"/>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">2</div>
+                                </div>  
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">10</div>
+                                </div>  
+                            </div>  
+                            <div class="dashboardHeader__body">
+                                <p><span class="dashboardHeader__overview">Overview:</span><span th:text="${space.overview}"/></p>
+                            </div>  
+                        </div>
+
+                        <div class="col-sm-1"></div>
+
+                        <div class="col-sm-4">
+                            <div class="popularItems">
+                                <div class="popularItems__head">
+                                    <div class="popularItems__headTitle">Popular Articles</div>
+                                    <a th:attr="href=${'/articles?tag=' + articlesTagString}"><div class="popularItems__headMore working" th:text="${'All (' + articles.size()  + ')'}"/></a>
+                                </div>
+                                <div th:each="article: ${popularArticles}" class="popularItem">
+                                    <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title working"/></a>
+                                    <div th:text="${article.date}" class="popularItem__date"/>
+                                    <div th:text="${article.summary}" class="popularItem__summary"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section class="highlighted-section au-body au-body--alt callToAction">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4 class="section__title">Get involved</h4>
+                            <ul class="section__topiclist">
+                                <li class="section__topic"><a href="#">Become a developer</a></li>
+                                <li class="section__topic"><a href="#">Participae in working groups</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <a class="section__titleLink" href="#"><h4 class="section__title">Find software</h4></a>
+                            <p class="section__subtext">Get help integrating this service by using products from other providers</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4 class="section__title">I need help</h4>
+                            <ul class="section__topiclist">
+                                <li class="section__topic"><a href="#">Online Services for DSPs</a></li>
+                                <li class="section__topic"><a href="#">Community help forum</a></li>
+                            </ul>
+                        </div>
+                    </div>  
+                </div>
+            </section>
+
+
+            <section class="highlighted-section au-body servicesList">
+                <div class="container-fluid">
+                    <h3 class="section__head">Digital services</h3>
+                    <div class="row">
+                        <div class="col-sm-5 digitalService">
+                            <h4 class="section__title">Company Tax Return</h4>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">2</div>
+                                </div>  
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">10</div>
+                                </div>  
+                            </div>  
+                            <p class="section__subtext">List, Lodge and Prefill a return and all of it's associated schedules.</p>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5 digitalService">
+                            <h4 class="section__title">Super TFN Integrity Check</h4>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">7</div>
+                                </div>  
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">22</div>
+                                </div>  
+                            </div>  
+                            <p class="section__subtext">Get a yes/no response if a TFN number is correct for someone's name, age and address</p>
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col-sm-5 digitalService">
+                            <a class="section__titleLink" href="https://api.gov.au/service/5b639f0f63f18432cd0e1a66"><h4 class="section__title working">ABN Lookup</h4></a>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">2</div>
+                                </div>  
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">10</div>
+                                </div>  
+                            </div>  
+                            <p class="section__subtext">Get the public details for ABNs. You can search my ABN, Name and even postcode</p>
+                        </div>
+                    </div>  
+                </div>
+            </section>
+
+
+
+
+
+
+        </main>
+        <div th:replace="fragments/layout :: footer"/>
+    </body>
+</html>

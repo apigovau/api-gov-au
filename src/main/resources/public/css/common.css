@@ -346,7 +346,7 @@ input:focus + label {
     flex-direction: column;
     border-bottom: 1px solid rgb(162, 162, 162);
     padding-bottom: 40px;
-    padding-top: 80px;
+    padding-top: 50px;
     margin-left: 10px !important;
 }
 
@@ -356,7 +356,7 @@ input:focus + label {
 }
 
 .footer .footer-links li {
-    display: inline;
+    display: block;
 }
 
 .footer .footer-links li a {

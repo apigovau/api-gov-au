@@ -20,14 +20,14 @@ import javax.sql.DataSource
 class Feedback {
 
 
-    //companion object {
+    companion object {
 
         @Value("\${spring.datasource.url}")
         private var dbUrl: String? = null
 
         @Autowired
         private lateinit var dataSource: DataSource
-
+    }
         fun feedback(@RequestParam path: String, @RequestParam upVotes: Int):String {
             var output = ""
             var connection: Connection? = null
