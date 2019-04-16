@@ -11,6 +11,10 @@ import java.time.LocalDateTime
 import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.*
+import com.vladsch.flexmark.ext.gfm.tables.TablesExtension
+import com.vladsch.flexmark.html.HtmlRenderer
+import com.vladsch.flexmark.parser.Parser
+import com.vladsch.flexmark.util.options.MutableDataSet
 
 data class ConversationsVM(val content: MutableList<Conversation>, val firstPage:Boolean, val lastPage:Boolean, val links:MutableList<Link>, val totalPages:Int) {
     fun getUniqueTags(): List<String> = content
@@ -19,9 +23,9 @@ data class ConversationsVM(val content: MutableList<Conversation>, val firstPage
 }
 
 data class Comments(val content: MutableList<Comment>, val firstPage:Boolean, val lastPage:Boolean, val links:MutableList<Link>, val totalPages:Int)
-data class Conversation(val id:Int, val title: String, val body: String, val state: String, val typeTag: String, val tags: MutableList<String>, val mainUserName: String, val mainUserImageURI: String, val numComments: Int, val lastUpdated: String, @Json(ignored = true)var comments:MutableList<Comment> = mutableListOf())
+data class Conversation(val id:Int, val title: String, var body: String, val state: String, val typeTag: String, val tags: MutableList<String>, val mainUserName: String, val mainUserImageURI: String, val numComments: Int, val lastUpdated: String, @Json(ignored = true)var comments:MutableList<Comment> = mutableListOf())
 data class Link(val rel: String, val href: String)
-data class Comment(val username:String, val userImageURI:String, val created_at:String, val body:String) {
+data class Comment(val username:String, val userImageURI:String, val created_at:String, var body:String) {
     fun postedOnString() : String {
         val dateCreated = LocalDateTime.parse(created_at, DateTimeFormatter.ISO_DATE_TIME)
 
@@ -70,12 +74,36 @@ class ConversationRepository {
                         + "page=$commentPage"
                 )
 
+                comments.content.forEach { it.body = getHTMLFromMarkDown(it.body) }
+
                 totalComments.addAll(comments.content)
             }
 
             conversation.comments = totalComments
+            conversation.body = getHTMLFromMarkDown(conversation.body)
         }
 
         return conversations
     }
+
+    companion object{
+        @JvmStatic
+        fun getHTMLFromMarkDown(markdown:String):String {
+
+            val options = MutableDataSet()
+            options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create()));
+            options.set(HtmlRenderer.GENERATE_HEADER_ID, true)
+            options.set(HtmlRenderer.RENDER_HEADER_ID, true)
+
+            val parser = Parser.builder(options).build()
+            val renderer = HtmlRenderer.builder(options).build()
+
+            // You can re-use parser and renderer instances
+            val document = parser.parse(markdown)
+            val html = renderer.render(document)
+            return html
+
+        }
+    }
+
 }
