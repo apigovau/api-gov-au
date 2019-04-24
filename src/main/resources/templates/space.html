@@ -13,6 +13,14 @@
 
 
 <main class="container">
+    <div class="tier tier--even">
+            <div class="au-body au-page-alerts au-page-alerts--info">
+			  <h3>We're making some changes</h3>
+			  <p>We're out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
+			  
+			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+			</div>
+
 
             <section class="highlighted-section au-body">
                 <div class="container-fluid">
@@ -33,11 +41,11 @@
                             <div class="dashboardHeader__widgets">
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">2</div>
+                                    <div class="dashboardWidget__count">0</div>
                                 </div>  
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">10</div>
+                                    <div class="dashboardWidget__count">0</div>
                                 </div>  
                             </div>  
                             <div class="dashboardHeader__body">
@@ -51,10 +59,10 @@
                             <div class="popularItems">
                                 <div class="popularItems__head">
                                     <div class="popularItems__headTitle">Popular Articles</div>
-                                    <a th:attr="href=${'/articles?tag=' + articlesTagString}"><div class="popularItems__headMore working" th:text="${'All (' + articles.size()  + ')'}"/></a>
+                                    <a th:attr="href=${'/articles?tag=' + articlesTagString}"><div class="popularItems__headMore" th:text="${'All (' + articles.size()  + ')'}"/></a>
                                 </div>
                                 <div th:each="article: ${popularArticles}" class="popularItem">
-                                    <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title working"/></a>
+                                    <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title"/></a>
                                     <div th:text="${article.date}" class="popularItem__date"/>
                                     <div th:text="${article.summary}" class="popularItem__summary"/>
                                 </div>
@@ -72,19 +80,19 @@
                         <div class="col-sm-4">
                             <h4 class="section__title">Get involved</h4>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Become a developer</a></li>
-                                <li class="section__topic"><a href="#">Participae in working groups</a></li>
+                                <li class="section__topic">Become a developer</li>
+                                <li class="section__topic">Participae in working groups</li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            <a class="section__titleLink" href="#"><h4 class="section__title">Find software</h4></a>
+                            <p class="section__titleLink"><h4 class="section__title">Find software</h4></p>
                             <p class="section__subtext">Get help integrating this service by using products from other providers</p>
                         </div>
                         <div class="col-sm-4">
                             <h4 class="section__title">I need help</h4>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Online Services for DSPs</a></li>
-                                <li class="section__topic"><a href="#">Community help forum</a></li>
+                                <li th:if="${space.tag=='ato'}" class="section__topic"><a href="https://developer.sbr.gov.au/portal">Online Services for DSPs</a></li>
+                                <li class="section__topic"><a href="/community">Community help forum</a></li>
                             </ul>
                         </div>
                     </div>  
@@ -95,53 +103,27 @@
             <section class="highlighted-section au-body servicesList">
                 <div class="container-fluid">
                     <h3 class="section__head">Digital services</h3>
-                    <div class="row">
+
+                    <div th:remove="tag" th:each="service: ${services}">
+                    <a th:attr="href=${'/service/' + service.path}">
+                      <div class="row">
                         <div class="col-sm-5 digitalService">
-                            <h4 class="section__title">Company Tax Return</h4>
+                            <h4 class="section__title__underline" th:text="${service.name}"/>
                             <div class="dashboardHeader__widgets">
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">2</div>
-                                </div>  
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">10</div>
-                                </div>  
-                            </div>  
-                            <p class="section__subtext">List, Lodge and Prefill a return and all of it's associated schedules.</p>
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>
+                            </div>
+                            <p class="section__subtext" th:text="${service.definition}"/>
                         </div>
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-5 digitalService">
-                            <h4 class="section__title">Super TFN Integrity Check</h4>
-                            <div class="dashboardHeader__widgets">
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">7</div>
-                                </div>  
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">22</div>
-                                </div>  
-                            </div>  
-                            <p class="section__subtext">Get a yes/no response if a TFN number is correct for someone's name, age and address</p>
-                        </div>
-                    </div>  
-                    <div class="row">
-                        <div class="col-sm-5 digitalService">
-                            <a class="section__titleLink" href="https://api.gov.au/service/5b639f0f63f18432cd0e1a66"><h4 class="section__title working">ABN Lookup</h4></a>
-                            <div class="dashboardHeader__widgets">
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">2</div>
-                                </div>  
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">10</div>
-                                </div>  
-                            </div>  
-                            <p class="section__subtext">Get the public details for ABNs. You can search my ABN, Name and even postcode</p>
-                        </div>
-                    </div>  
+                   </div>
+</a>
+</div>
                 </div>
             </section>
 
@@ -149,7 +131,7 @@
 
 
 
-
+            </div>
         </main>
         <div th:replace="fragments/layout :: footer"/>
     </body>

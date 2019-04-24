@@ -16,48 +16,71 @@ class AssetRepository() {
     @EventListener(ApplicationReadyEvent::class)
     fun insertContentOnStartup(){
         load(Space(tag = "ato",
-                childSpaces = listOf("stp","tr"),
                 name = "Australian Taxation Office",
-                overview = "The ATO is the government's principal revenue collection agency with a large number of API-enabled services available and is bringing more online regularly. They are also responsible for managing the superannuation system and business registrations."
+                overview = "The ATO is the government's principal revenue collection agency with a large number of API-enabled services available and is bringing more online regularly. They are also responsible for managing the superannuation system and business registrations.",
+                childSpaces = listOf("super","abr","eInvoicing")
         ))
                  
         load(Article(metadata = Metadata(id = "Article1", tags = listOf("ato", "dhs")),
-            title = "The Operating Framework is coming", 
+            title = "SAMPLE: The Operating Framework is coming", 
             date = "01/01/1970",
             summary = "Here are the things you need to be doing now to remain compliant")
         )
-        load(Article(metadata = Metadata(id = "Article3", tags = listOf("tr")),
-            title = "FBT Dates are changing", 
-            date = "02/01/1970",
-            summary = "Has your software taken into account the new FBT dates this year")
-        )
-        load(Article(metadata = Metadata(id = "Article2", tags = listOf("stp")),
-            title = "Single Touch Payroll information sessions", 
+        load(Article(metadata = Metadata(id = "Article2", tags = listOf("eInvoicing")),
+            title = "SAMPLE: eInvoicing information sessions", 
             date = "02/01/1970",
             summary = "Learn about what employers will need to do, and what your software can do to help them")
         )
 
 
+        load(Space(tag = "eInvoicing",
+                name = "eInvoicing",
+                overview = "Overview"
+        ))
+        load(Space(tag = "super",
+                name = "Superannuation",
+                overview = "Overview"
+        ))
+        load(Space(tag = "insolvency",
+                name = "Australian Financial Security Authority",
+                overview = "Overview of AFSA."
+        ))
+        load(Space(tag = "anzsic",
+                name = "ABS",
+                overview = "Overview of ABS."
+        ))
 
-        load(Space(tag = "dhs",
-                name = "Department Of Human Services",
-                overview = "DHS delivers welfare services to the Australian public, with many API-enabled services that help doctors and other health providers lodge claims on behalf of their patients."
+
+        load(Space(tag = "afsa",
+                name = "Australian Financial Security Authority",
+                overview = "Overview of AFSA."
+        ))
+        load(Space(tag = "abs",
+                name = "Australian Bureau of Statistics",
+                overview = "Overview of ABS.",
+                childSpaces = listOf("anzsic")
+        ))
+        load(Space(tag = "wofg",
+                name = "Whole of Government",
+                overview = "Overview of whole of government",
+                childSpaces = listOf("apigovau")
         ))
                  
-        load(Article(metadata = Metadata(id = "Article3", tags = listOf("dhs")),
-            title = "WPIT, and what it means for software providers", 
-            date = "03/01/1970",
-            summary = "WPIT is nearly live, and it's now time to start thinking about how your businesses can take part")
-        )
-
-        load(Space("tr",
-                name = "Tax Returns",
-                overview = "Lodge the individual and company returns here"))
+        load(Space(tag = "apigovau",
+                name = "api.gov.au",
+                overview = "Overview of api.gov.au"
+        ))
+                 
+                 
+                 
         load(Space("stp",
                 name = "Single Touch Payroll",
                 overview = "Single Touch Payroll (STP) changes the way employers report their employees' tax and super information to us."))
 
     }
+
+
+	fun getArticles():List<Article> = articles
 
     fun getArticlesForTags(tags:List<String>): List<Article> {
         val allTags:MutableList<String> = mutableListOf()
@@ -75,17 +98,20 @@ class AssetRepository() {
         val tagList:MutableList<String> = mutableListOf()
         parentsOfSpace(id).forEach { tagList.add( it ) }
 
-        val thisSpace = getSpace(id)
+        val thisSpace = getSpace(id)!!
         tagList.add(thisSpace.tag)
 
-        thisSpace.childSpaces.forEach { tagList.add( getSpace(it).tag  ) }
+        thisSpace.childSpaces.forEach { 
+            val childSpace = getSpace(it)
+            if(childSpace != null)tagList.add( childSpace.tag  ) 
+        }
         return tagList 
     }
 
     fun load(space:Space) = this.spaces.add(space)
     fun load(article:Article) = this.articles.add(article)
 
-    fun getSpace(id:String) = spaces.first { it.tag == id }
+    fun getSpace(id:String) = spaces.firstOrNull { it.tag == id }
     fun getArticle(id:String) = articles.first { it.metadata.id == id }
 
 

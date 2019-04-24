@@ -15,56 +15,55 @@
 <main class="container">
 
 <div class="tier tier--even">
-  <a class="au-direction-link au-direction-link--right" href="/firehose">I'd rather browse the full list of APIs</a>
+
+
+			<div class="au-body au-page-alerts au-page-alerts--info">
+			  <h3>We're making some changes</h3>
+			  <p>We're working out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
+			  
+			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+			</div>
+
+
+			<section class="au-callout">
+				<h4 class="au-callout__heading" th:text="${numberOfServices + ' APIs'}" />
+				<a class="au-direction-link" href="/firehose">View them all</a>
+			</section>
+
 
             <section class="highlighted-section au-body">
                 <div class="container-fluid">
 
-                <h3 class="section__head">Browse by agency</h3>
+                <h3 class="section__head">Discover APIs by agency</h3>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/ato"><h4 class="section__title working">Australian Taxation Office</h4></a>
+                            <a class="section__titleLink" href="/space/ato"><h4 class="section__title">Australian Taxation Office</h4></a>
                             <ul class="section__topiclist">
-                                <li class="section__topic working"><a href="/space/stp">Single Touch Payroll</a></li>
-                                <li class="section__topic working"><a href="/space/tr">Tax Returns</a></li>
-                                <li class="section__topic"><a href="#">Superannuation</a></li>
+                                <li class="section__topic">Tax Returns</li>
+                                <li class="section__topic">Single Touch Payroll</li>
+                                <li class="section__topic"><a href="/space/super">Superannuation</a></li>
+                                <li class="section__topic"><a href="/space/eInvoicing">eInvoicing</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/dhs"><h4 class="section__title working">Department Of Human Services</h4></a>
+                            <a class="section__titleLink" href="/space/afsa"><h4 class="section__title">Australian Financial Security Authority</h4></a>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Welfare</a></li>
-                                <li class="section__topic"><a href="#">Aged Care</a></li>
-                                <li class="section__topic"><a href="#">Medicare</a></li>
+                                <li class="section__topic"><a href="/space/insolvency">Insolvency</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
-                            <a class="section__titleLink" href="#"><h4 class="section__title">Australian Prudential Regulation Authority</h4></a>
+                            <a class="section__titleLink" href="/space/abs"><h4 class="section__title">Australian Bureau of Statistics</h4></a>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Superannuation</a></li>
-                                <li class="section__topic"><a href="#">Banking</a></li>
+                                <li class="section__topic"><a href="/space/anzsic">ANZSIC codes</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <a class="section__titleLink" href="#"><h4 class="section__title">NSW Revenue</h4></a>
+                            <a class="section__titleLink" href="/space/wofg"><h4 class="section__title">Whole of Government</h4></a>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Payroll Tax</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="#"><h4 class="section__title">Australian Securities and Investments Commission</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Comapny Registration</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="#"><h4 class="section__title">IP Australia</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Trademarks</a></li>
-                                <li class="section__topic"><a href="#">Patents</a></li>
+                                <li class="section__topic"><a href="/space/apigovau">api.gov.au</a></li>
                             </ul>
                         </div>
                     </div>
@@ -83,22 +82,21 @@
                         <div class="col-sm-4">
                             <h4 class="section__title">I'm not a developer</h4>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Become a developer</a></li>
-                                <li class="section__topic"><a href="#">Looking for software</a></li>
+                                <li class="section__topic">Become a developer</li>
+                                <li class="section__topic">Looking for software</li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
                             <h4 class="section__title">I work in Government</h4>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">About Developer Hub</a></li>
-                                <li class="section__topic"><a href="#">Get involved</a></li>
+                                <li class="section__topic">About api.gov.au for Government</li>
+                                <li class="section__topic"><a href="https://github.com/apigovau">Get involved</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-4">
                             <h4 class="section__title">I need help</h4>
                             <ul class="section__topiclist">
-                                <li class="section__topic"><a href="#">Online Services for DSPs</a></li>
-                                <li class="section__topic"><a href="#">Community help forum</a></li>
+                                <li class="section__topic"><a href="/community">Community help forum</a></li>
                             </ul>
                         </div>
                     </div>  

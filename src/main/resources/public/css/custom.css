@@ -417,9 +417,15 @@ CODE
 {
 	margin-top: 20px;
 }
+.section__title__underline
+{
+	text-decoration: underline;
+}
+.section__subtext
 .section__subtext
 {
 	margin-top: 0px !important;
+    text-decoration: none !important;
 }
 /**/
 .dashboardHeader
@@ -529,8 +535,4 @@ CODE
 	border: 1px solid black;
 	padding-bottom: 30px;
 	margin-bottom: 20px;
-}
-.working
-{
-	border: 2px solid #FF5252;
 }
