@@ -28,7 +28,7 @@ class APIController {
     lateinit var serviceDescriptionService: ServiceDescriptionService
 
     @GetMapping("/api/feedback")
-    fun feedback(@RequestParam path:String, @RequestParam upVotes:Int):String{
+    fun feedback(@RequestParam path:String, @RequestParam upVotes:Int):String {
         return feedback.feedback(path, upVotes)
     }
 

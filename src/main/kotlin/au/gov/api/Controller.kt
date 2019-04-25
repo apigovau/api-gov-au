@@ -2,6 +2,7 @@ package au.gov.api
 
 import au.gov.api.asset.AssetService
 import au.gov.api.asset.Space
+import au.gov.api.conversation.ConversationRepository
 import au.gov.api.serviceDescription.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,6 +24,9 @@ class Controller {
 
     @Autowired
     lateinit var serviceDescriptionService: ServiceDescriptionService
+
+    @Autowired
+    lateinit var conversationService: ConversationRepository
 
     @RequestMapping("/mvp")
     fun mvp(model:MutableMap<String, Any?>): String{
@@ -65,7 +69,7 @@ class Controller {
     fun detail(@PathVariable id:String, model:MutableMap<String,Any?>): String{
 
         try {
-            return detail(id, "", model)
+            return detail(id, "", model, 1)
         }
         catch(e:Exception){
             log.warn(e.message)
@@ -74,12 +78,14 @@ class Controller {
     }
 
     @RequestMapping("/service/{id}/{title}")
-    fun detail(@PathVariable id:String, @PathVariable title:String, model:MutableMap<String, Any?>): String{
+    fun detail(@PathVariable id:String, @PathVariable title:String, model:MutableMap<String, Any?>, @RequestParam(value="convoPage", defaultValue = "1") convoPage:Int): String{
         val serviceDescription = serviceDescriptionService.get(id) ?: return "detail"
 
+        val conversations = if (title == "Collaborate") conversationService.get(id, convoPage) else null
         val unescapedTitle = URLDecoder.decode(title)
         val lastedit = serviceDescriptionService.getLastEdited(id)
         val page = serviceDescription.pages.firstOrNull {it -> it.title == unescapedTitle} ?: serviceDescription.pages.first()
+
         model.put("prevPage", serviceDescription.previous(page))
         model.put("nextPage", serviceDescription.next(page))
         model.put("currentPage", page.title)
@@ -88,6 +94,10 @@ class Controller {
         model.put("pageList", serviceDescription.navigation)
         model.put("content", page.html())
         model.put("lastEdit", lastedit)
+        model.put("conversations", conversations)
+
+        if (title == "Collaborate") model.put("convoPage", convoPage)
+
         return "detail"
     }
 

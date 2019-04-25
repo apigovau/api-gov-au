@@ -1,14 +1,9 @@
 package au.gov.api.serviceDescription
 
 import au.gov.api.config.Config
-import khttp.structures.authorization.BasicAuthorization
+import com.beust.klaxon.Klaxon
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import com.beust.klaxon.Klaxon
-import com.beust.klaxon.Parser
-import com.beust.klaxon.JsonObject
-import java.io.StringReader
-import java.lang.Exception
 
 @Service
 class ServiceDescriptionService {
