@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import au.gov.api.asset.Metadata
 import au.gov.api.asset.Article
 
-data class Article(val metadata:Metadata = Metadata(), val title:String = "", val date:String = "", val summary:String = "")
+data class Article(val metadata:Metadata = Metadata(), val title:String = "", val date:String = "", val summary:String = "", val markdown:String = "")
 
 
 @Service

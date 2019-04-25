@@ -38,7 +38,7 @@
                         <div class="col-sm-7">
                             <img th:attr="src=${agencyLogo}" class="dashboardHeader__title" />
                             <h2 th:text="${space.name}" class="dashboardHeader__title"/>
-                            <div class="dashboardHeader__widgets">
+                            <!--div class="dashboardHeader__widgets">
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
                                     <div class="dashboardWidget__count">0</div>
@@ -47,7 +47,7 @@
                                     <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
                                     <div class="dashboardWidget__count">0</div>
                                 </div>  
-                            </div>  
+                            </div-->  
                             <div class="dashboardHeader__body">
                                 <p><span class="dashboardHeader__overview">Overview:</span><span th:text="${space.overview}"/></p>
                             </div>  
@@ -109,7 +109,7 @@
                       <div class="row">
                         <div class="col-sm-5 digitalService">
                             <h4 class="section__title__underline" th:text="${service.name}"/>
-                            <div class="dashboardHeader__widgets">
+                            <!--div class="dashboardHeader__widgets">
                                 <div class="dashboardWidget">
                                     <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
                                     <div class="dashboardWidget__count">0</div>
@@ -118,7 +118,7 @@
                                     <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
                                     <div class="dashboardWidget__count">0</div>
                                 </div>
-                            </div>
+                            </div-->
                             <p class="section__subtext" th:text="${service.definition}"/>
                         </div>
                    </div>
