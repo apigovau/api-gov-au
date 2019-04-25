@@ -536,3 +536,168 @@ CODE
 	padding-bottom: 30px;
 	margin-bottom: 20px;
 }
+
+#conversations {
+    margin-top: 25px;
+}
+
+#conversations input.toggle {
+    position: absolute;
+    left: -9999px;
+}
+
+#conversations div.conversation {
+    display: none;
+    overflow-wrap: break-word;
+}
+
+#conversations #toggle-issue:checked ~ ul div[data-labels ~= "issues"] {
+    display: block;
+}
+
+#conversations #toggle-pull-request:checked ~ ul div[data-labels ~= "pulls"] {
+    display: block;
+}
+
+#conversations #toggle-issue:checked ~ ul li.issue {
+    background-color: #00698F;
+    color: #FFF;
+}
+
+#conversations #toggle-pull-request:checked ~ ul li.pull-request {
+    background-color: #00698F;
+    color: #FFF;
+}
+
+.conversation {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 10px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    min-height: 125px;
+}
+
+.conversation h5 {
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.conversation p {
+    margin: 0px;
+}
+
+ul.conversation-list {
+    padding: 0px;
+    list-style-type: none;
+}
+
+#conversations #toggle-issue ~ ul div.issue-active {
+    display: none;
+}
+
+.conversation .conversation-content {
+    padding: 10px;
+}
+
+#conversations #toggle-issue ~ ul div.issue-inactive {
+    color: black;
+    font-size: 1em;
+    display: inline-block;
+    text-align: center;
+    width: 8px;
+    margin-left: 8px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+}
+
+#conversations #toggle-issue:checked ~ ul div.issue-active {
+    color: #FFF;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    width: 8px;
+    margin-left: 8px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+}
+
+#conversations #toggle-issue:checked ~ ul div.issue-inactive {
+    display: none;
+}
+
+#conversations #toggle-pull-request ~ ul div.pull-request-active {
+    display: none;
+}
+
+#conversations #toggle-pull-request ~ ul div.pull-request-inactive {
+    color: black;
+    font-size: 1em;
+    display: inline-block;
+    text-align: center;
+    width: 8px;
+    margin-left: 8px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+}
+
+#conversations #toggle-pull-request:checked ~ ul div.pull-request-active {
+    color: #FFF;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    width: 8px;
+    margin-left: 8px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+}
+
+#conversations #toggle-pull-request:checked ~ ul div.pull-request-inactive {
+    display: none;
+}
+
+#conversations .conversation .user-info {
+    margin-left: 10px;
+    border: 2px solid #f5f5f0;
+    border-radius: 5%;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    min-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#conversations .conversation img {
+    border-radius: 50%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    margin-top: 4px;
+}
+
+#conversations .conversation .au-tags {
+    text-align: right;
+}
+
+#conversations .conversation .au-tags li {
+    white-space: nowrap;
+}
+
+.comment {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 10px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    min-height: 125px;
+}
+
+
+
