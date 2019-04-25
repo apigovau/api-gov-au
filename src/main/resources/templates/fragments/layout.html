@@ -62,11 +62,6 @@
 
 
 <div th:fragment="header(landing, current)" th:remove="tag">
-    <section th:fragment="dss_stage_note" class="phase-banner">
-        <div class="wrapper au-grid container container-fluid">
-            This is an <a href="https://www.dta.gov.au/standard/service-design-and-delivery-process/" class="dss_stage_link">alpha</a>. If you find something wrong, <a href="https://github.com/apigovau/api-gov-au/issues/new" class="dss_stage_link">let us know</a>
-        </div>
-    </section>
     <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
             <div class="container" th:classappend="${!landing} ? main_header">
 
@@ -74,7 +69,6 @@
                         <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
                         <h1 class="au-header-heading">
                             api.gov.au
-                            <span class="badge">ALPHA</span>
                             <div class="au-header__subline">
                                     <p>Building government services into your product.</p>
                             </div>
@@ -84,7 +78,6 @@
                         <h1 class="au-header-heading">
                             <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
                             <a href="/">api.gov.au</a>
-                            <span class="badge">ALPHA</span>
                         </h1>
                 </div>
             </div>
@@ -101,12 +94,11 @@
                               <div class="au-main-nav__menu-inner">
                                  <div class="au-main-nav__focus-trap-top"></div>
                                  <ul class="au-link-list">
-                                    <li th:classappend="${current == 'about'} ? active"><a href="/">About</a></li>
-                                    <li th:classappend="${current == 'apis'} ? active"><a href="/apis/">APIs</a></li>
-                                    <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
-                                    <li class="divider"/>
+                                    <li th:classappend="${current == 'home'} ? active"><a href="/">APIs</a></li>
                                     <li><a href="/definitions">Data Definitions</a></li>
-                                    <li><a href="/playbook">Digital Community Playbook</a></li>
+                                    <li><a href="/playbook">Playbook</a></li>
+                                    <li class="divider"/>
+                                    <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
                                     <li class="githubLink"><a href="https://github.com/apigovau/api-gov-au">Github</a></li>
                                  </ul>
                                  <div class="au-main-nav__focus-trap-bottom"></div>
@@ -126,13 +118,13 @@
 
 
 <div th:fragment="footer" th:remove="tag">
-    <div class="feedback">
+    <!--div class="feedback">
         <p id="feedbackMessage">Was this page helpful to you?</p>
         <a onclick="feedback(this, 1)" id="plus1"><img src="/img/ThumbUp.svg" alt="Rate this page as good"/></a>
         <a onclick="feedback(this, -1)" id="minus1"><img src="/img/ThumbDown.svg" alt="Rate this page as bad"/></a>
         <p id="feedbackCount"/>
     </div>
-    <script src="/js/feedback.js"/>
+    <script src="/js/feedback.js"/-->
     <footer class="au-footer footer">
         <div class="container">
             <div class="row">
@@ -144,6 +136,7 @@
                 </div>
                 <div class="footer-links">
                     <ul>
+                        <li><a href="/about">About api.gov.au</a></li>
                         <li><a href="/disclaimer">Disclaimer</a></li>
                     </ul>
                 </div>

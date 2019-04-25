@@ -1,13 +1,15 @@
 package au.gov.api
 
+import au.gov.api.asset.AssetService
+import au.gov.api.asset.Space
 import au.gov.api.conversation.ConversationRepository
 import au.gov.api.serviceDescription.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RequestMapping
 import java.net.URLDecoder
 
 
@@ -15,6 +17,10 @@ import java.net.URLDecoder
 class Controller {
 
     private val log = LoggerFactory.getLogger(this.javaClass)
+
+    @Autowired
+    lateinit var assetService: AssetService
+
 
     @Autowired
     lateinit var serviceDescriptionService: ServiceDescriptionService
@@ -30,9 +36,15 @@ class Controller {
 
     @RequestMapping("/")
     fun index(model:MutableMap<String, Any?>): String{
-        return "about"
-
+        model.put("numberOfServices", serviceDescriptionService.count())
+        return "landing"
     }
+
+    @RequestMapping("/about")
+    fun about(model:MutableMap<String, Any?>): String{
+        return "about"
+    }
+
 
     @RequestMapping("/community")
     fun community(model:MutableMap<String, Any?>): String{
@@ -46,7 +58,7 @@ class Controller {
 
     }
 
-    @RequestMapping("/apis")
+    @RequestMapping("/firehose")
     fun services(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
         return "apis"
@@ -88,5 +100,53 @@ class Controller {
 
         return "detail"
     }
+
+
+    @RequestMapping("/space/{space}")
+    fun space(@PathVariable space:String, model:MutableMap<String, Any?>): String{
+        val theSpace = assetService.getSpace(space)
+
+        if(theSpace != null){
+            val parentSpaces = assetService.parentsOfSpace(space)
+
+            val agencyLogoText = when(parentSpaces.size){
+                0 -> theSpace.name
+                else -> parentSpaces.map { assetService.getSpace(it)!!.name.replace(" ","+") }.joinToString("&agency=")
+            }
+            model["agencyLogo"] = "https://api-gov-au-crest-branding.apps.y.cld.gov.au/inline.png?agency=${agencyLogoText}&height=200"
+
+            model["space"] = theSpace
+        model["services"] = serviceDescriptionService.list().filter { it.metadata.space == space || it.metadata.space in theSpace.childSpaces}
+            val articles = assetService.getArticlesForTags(listOf(theSpace.tag))
+            model["articlesTagString"] = space 
+            model["popularArticles"] = articles.take(2)
+            model["articles"] = articles
+        }else{
+            model["articlesTagString"] = space 
+            model["services"] = serviceDescriptionService.list().filter { it.metadata.space == space}
+        }   
+        return "space"
+    }
+
+
+ 	@RequestMapping("/article/{id}")
+    fun article(@PathVariable id:String, model:MutableMap<String, Any?>): String{
+        model["article"] = assetService.getArticle(id)
+        return "article"
+    }
+
+
+    @RequestMapping("/articles")
+	fun articles(@RequestParam(required=false) tag:List<String>?, model:MutableMap<String, Any?>): String{
+		if(tag == null){
+    		model["articles"] = assetService.getArticles()
+		}
+		else{
+    		model["articles"] = assetService.getArticlesForTags(tag!!)
+        }	
+		return "articles"
+    }
+
+
 
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>api.gov.au</title>
+  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing = true, current = 'about')"/>
+
+
+<main class="container">
+    <div class="tier tier--even">
+            <div class="au-body au-page-alerts au-page-alerts--info">
+			  <h3>We're making some changes</h3>
+			  <p>We're out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
+			  
+			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+			</div>
+
+
+            <section class="highlighted-section au-body">
+                <div class="container-fluid">
+
+ 
+
+
+
+
+                    <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                      <ul class="au-link-list au-link-list--inline">
+                        <li><a href="/">Home</a></li>
+                        <li>Articles</li>
+                      </ul>
+                    </nav>
+
+
+                    <div class="col-lg-8">
+                        <div class="popularItems">
+                            <div th:each="article: ${articles}" class="popularItem">
+                                <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title working"/></a>
+                                <div th:text="${article.date}" class="popularItem__date"/>
+                                <div th:text="${article.summary}" class="popularItem__summary"/>
+                            </div>
+                        </div>
+                    </div>
+            
+
+                </div>
+            </section>
+
+
+
+        </div>
+        </main>
+        <div th:replace="fragments/layout :: footer"/>
+    </body>
+</html>

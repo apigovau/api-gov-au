@@ -6,7 +6,9 @@ import au.gov.api.web.ResourceCache
 import com.beust.klaxon.*
 import org.springframework.stereotype.Component
 
-data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val agency:String, val security:String, val technology:String, val openAPISpec:String, val path:String, val tags:MutableList<String>, val logoURI:String)
+data class ServiceListVM(val name:String, val definition:String, val domain:String, val status:String, val agency:String, val security:String, val technology:String, val openAPISpec:String, val path:String, val tags:MutableList<String>, val logoURI:String, val metadata:IndexMetadata)
+
+data class IndexMetadata(val agency:String, val space:String, val visibility:Boolean, val ingestSource:String, val numberOfConversations:Int)
 
 @Component
 class ServiceDescriptionRepository() {
@@ -32,7 +34,7 @@ class ServiceDescriptionRepository() {
 
 
     data class IndexDTO(val content:List<IndexServiceDTO>)
-    data class IndexServiceDTO(val id:String, val name:String, val description:String,  val tags:MutableList<String>, val logoURI:String)
+    data class IndexServiceDTO(val id:String, val name:String, val description:String,  val tags:MutableList<String>, val logoURI:String, val metadata:IndexMetadata)
     fun list(): List<ServiceListVM>{
 
         val index = indexCache.get(baseRepoUri+"index")
@@ -56,7 +58,8 @@ class ServiceDescriptionRepository() {
         val tech = getTagItem(tagsCopy, "Technology")
         val openAPISpec = getTagItem(tagsCopy, "OpenAPISpec")
         val logoURI = if (inItem.logoURI == "") "/img/NoLogo.png" else inItem.logoURI
-        return  ServiceListVM(name,description,domain,status,agency,security,tech,openAPISpec,inItem.id,tagsCopy,logoURI)
+        val metadata = inItem.metadata
+        return  ServiceListVM(name,description,domain,status,agency,security,tech,openAPISpec,inItem.id,tagsCopy,logoURI,metadata)
     }
 
     fun getTagItem(intags:MutableList<String>, tagToFind:String ):String{

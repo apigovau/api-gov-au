@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="fragments/layout :: meta" />
+  <title>api.gov.au</title>
+  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
+  <div th:replace="fragments/layout :: favicon"/>
+  <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing = true, current = 'about')"/>
+
+
+<main class="container">
+    <div class="tier tier--even">
+            <div class="au-body au-page-alerts au-page-alerts--info">
+			  <h3>We're making some changes</h3>
+			  <p>We're out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
+			  
+			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+			</div>
+
+
+            <section class="highlighted-section au-body">
+                <div class="container-fluid">
+
+                    <nav class="au-breadcrumbs" aria-label="breadcrumb">
+                      <ul class="au-link-list au-link-list--inline">
+                        <li><a href="/">Home</a></li>
+                        <li th:text="${space.name}"/>
+                      </ul>
+                    </nav>
+
+
+                    <div class="row dashboardHeader">
+
+                        <div class="col-sm-7">
+                            <img th:attr="src=${agencyLogo}" class="dashboardHeader__title" />
+                            <h2 th:text="${space.name}" class="dashboardHeader__title"/>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>  
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>  
+                            </div>  
+                            <div class="dashboardHeader__body">
+                                <p><span class="dashboardHeader__overview">Overview:</span><span th:text="${space.overview}"/></p>
+                            </div>  
+                        </div>
+
+                        <div class="col-sm-1"></div>
+
+                        <div class="col-sm-4">
+                            <div class="popularItems">
+                                <div class="popularItems__head">
+                                    <div class="popularItems__headTitle">Popular Articles</div>
+                                    <a th:attr="href=${'/articles?tag=' + articlesTagString}"><div class="popularItems__headMore" th:text="${'All (' + articles.size()  + ')'}"/></a>
+                                </div>
+                                <div th:each="article: ${popularArticles}" class="popularItem">
+                                    <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title"/></a>
+                                    <div th:text="${article.date}" class="popularItem__date"/>
+                                    <div th:text="${article.summary}" class="popularItem__summary"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section class="highlighted-section au-body au-body--alt callToAction">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4 class="section__title">Get involved</h4>
+                            <ul class="section__topiclist">
+                                <li class="section__topic">Become a developer</li>
+                                <li class="section__topic">Participae in working groups</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="section__titleLink"><h4 class="section__title">Find software</h4></p>
+                            <p class="section__subtext">Get help integrating this service by using products from other providers</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4 class="section__title">I need help</h4>
+                            <ul class="section__topiclist">
+                                <li th:if="${space.tag=='ato'}" class="section__topic"><a href="https://developer.sbr.gov.au/portal">Online Services for DSPs</a></li>
+                                <li class="section__topic"><a href="/community">Community help forum</a></li>
+                            </ul>
+                        </div>
+                    </div>  
+                </div>
+            </section>
+
+
+            <section class="highlighted-section au-body servicesList">
+                <div class="container-fluid">
+                    <h3 class="section__head">Digital services</h3>
+
+                    <div th:remove="tag" th:each="service: ${services}">
+                    <a th:attr="href=${'/service/' + service.path}">
+                      <div class="row">
+                        <div class="col-sm-5 digitalService">
+                            <h4 class="section__title__underline" th:text="${service.name}"/>
+                            <div class="dashboardHeader__widgets">
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>
+                                <div class="dashboardWidget">
+                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                    <div class="dashboardWidget__count">0</div>
+                                </div>
+                            </div>
+                            <p class="section__subtext" th:text="${service.definition}"/>
+                        </div>
+                   </div>
+</a>
+</div>
+                </div>
+            </section>
+
+
+
+
+
+            </div>
+        </main>
+        <div th:replace="fragments/layout :: footer"/>
+    </body>
+</html>

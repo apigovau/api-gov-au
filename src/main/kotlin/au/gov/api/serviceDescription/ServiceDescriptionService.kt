@@ -34,6 +34,8 @@ class ServiceDescriptionService {
 
     fun list(): List<ServiceListVM> = repo.list()
 
+    fun count(): Int = repo.list().size
+
     fun flush(id:String) = repo.flush(id)
 }
 data class Event(var timestamp:String = "", var key:String = "", var action:String = "", var type:String = "", var name:String = "", var reason:String = "")
