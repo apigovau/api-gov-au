@@ -22,16 +22,33 @@ class AssetRepository() {
         ))
                  
         load(Article(metadata = Metadata(id = "Article1", tags = listOf("ato", "dhs")),
-            title = "SAMPLE: The Operating Framework is coming", 
-            date = "01/01/1970",
-            summary = "Here are the things you need to be doing now to remain compliant")
-        )
-        load(Article(metadata = Metadata(id = "Article2", tags = listOf("eInvoicing")),
-            title = "SAMPLE: eInvoicing information sessions", 
-            date = "02/01/1970",
-            summary = "Learn about what employers will need to do, and what your software can do to help them")
-        )
+            title = "The Operating Framework", 
+            date = "18/12/2018",
+            summary = "All DSPs will need to meet the requirements of the new frameowrk. Read about them here.",
+            markdown = """
+The growth of our digital wholesale services increases productivity and community connectivity across the digital economy. This connectivity presents a range of service opportunities, business risks and security implications for the organisation and the Australian community.
 
+The Digital service provider (DSP) Operational Framework is part of our response to these risks and establishes how we will provide access to and monitor the digital transfer of data through software.
+
+Through consultation with DSPs, industry associations and across Government a position was established on each of the five issues of the DSP Operational Framework. From these positions we have developed the [Requirements for DSPs](https://softwaredevelopers.ato.gov.au/RequirementsforDSPs) to use our digital services and have updated the Operational Framework Questionnaire, this is now known as the [Digital Service Provider Operational Framework Security Questionnaire (DOCX, 826KB)](https://softwaredevelopers.ato.gov.au/sites/default/files/resource-attachments/Digital_Service_Provider_Operational_Framework_Security_Questionnaire.docx). The Questionnaire is used by DSPs to demonstrate how their product or service meets the requirements.
+
+All DSPs wanting to use our digital services will need to meet the relevant requirements which can include, but is not limited to:
+
+- Authentication
+- Encryption
+- Supply chain visibility
+- Certification
+- Data hosting
+- Personnel security
+- Encryption key management
+- Security monitoring practices
+
+A transition period has been established for DSPs who are already using our digital services to allow them time to meet the requirements. After consulting through the DSP Operational Framework working group, timeframes for [meeting the DSP requirements](https://softwaredevelopers.ato.gov.au/meeting_dsp_requirements) have been finalised.
+
+            """
+
+            )
+        )
 
         load(Space(tag = "eInvoicing",
                 name = "eInvoicing",
@@ -49,7 +66,6 @@ class AssetRepository() {
                 name = "ABS",
                 overview = "Overview of ABS."
         ))
-
 
         load(Space(tag = "afsa",
                 name = "Australian Financial Security Authority",
@@ -71,12 +87,6 @@ class AssetRepository() {
                 overview = "Overview of api.gov.au"
         ))
                  
-                 
-                 
-        load(Space("stp",
-                name = "Single Touch Payroll",
-                overview = "Single Touch Payroll (STP) changes the way employers report their employees' tax and super information to us."))
-
     }
 
 

@@ -37,28 +37,19 @@
                     <div class="row dashboardHeader">
                         <h2 th:text="${article.title}" />
                         <div th:text="${article.date}" class="popularItem__date"/>
-                        <div class="dashboardHeader__widgets">
+                        <!--div class="dashboardHeader__widgets">
                             <div class="dashboardWidget">
                                 <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
                                 <div class="dashboardWidget__count">0</div>
                             </div>  
-                        </div>  
+                        </div-->  
                         <div class="dashboardHeader__body">
-                            <p><span class="dashboardHeader__overview">Summary:</span><span th:text="${article.summary}"/></p>
+                            <span class="dashboardHeader__overview">Summary:</span><span th:text="${article.summary}"/>
                         </div>  
+                        <div th:remove="tag" th:utext="${content}" />
                     </div>
                 </div>
-                <p>The text of the article would go here. This is just some text we've taken from the api.gov.au playbook.</p>
-                <p>Look for evidence that your community has been consulted, and have actively participated. Don’t mistake silence for acceptance. Not all members of your community need to have responded, but alarm bells should ring if none of them have.</p>
-                <p>If you’ve done an exceptionally good job, your community might unanimously agree to your proposal. If this doesn’t happen, look for evidence of suggestions coming from the community, and that they have been carefully considered by your people.</p>
-                <p>Check who was consulted against your stakeholder plan. Not all your stakeholders need to be consulted, but you should be happy with the reason why any weren’t.</p>
-                <p>You should check to make sure that the views from the community are genuinely reflective of the entire community, and not a segment with a vested interest.</p>
-                <p>Look for evidence that community members from different backgrounds, with different capabilities and perspectives are consulted. Don’t be biased by the people who talk the loudest, have been there the longest, or who have invested the most.
-                In a community, everyone’s view is equally important.</p>
             </section>
-
-
-
         </div>
         </main>
         <div th:replace="fragments/layout :: footer"/>

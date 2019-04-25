@@ -1,6 +1,7 @@
 package au.gov.api
 
 import au.gov.api.asset.AssetService
+import au.gov.api.serviceDescription.Page
 import au.gov.api.asset.Space
 import au.gov.api.conversation.ConversationRepository
 import au.gov.api.serviceDescription.ServiceDescriptionService
@@ -131,7 +132,9 @@ class Controller {
 
  	@RequestMapping("/article/{id}")
     fun article(@PathVariable id:String, model:MutableMap<String, Any?>): String{
-        model["article"] = assetService.getArticle(id)
+        val article = assetService.getArticle(id)
+        model["article"] = article 
+        model["content"] = Page(article.markdown).html()
         return "article"
     }
 
