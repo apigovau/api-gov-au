@@ -103,27 +103,14 @@
             <section class="highlighted-section au-body servicesList">
                 <div class="container-fluid">
                     <h3 class="section__head">Digital services</h3>
-
-                    <div th:remove="tag" th:each="service: ${services}">
-                    <a th:attr="href=${'/service/' + service.path}">
-                      <div class="row">
-                        <div class="col-sm-5 digitalService">
-                            <h4 class="section__title__underline" th:text="${service.name}"/>
-                            <!--div class="dashboardHeader__widgets">
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">0</div>
-                                </div>
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">0</div>
-                                </div>
-                            </div-->
-                            <p class="section__subtext" th:text="${service.definition}"/>
+                    <div>
+                        <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
+                            <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
+                            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-0}">
+                                    <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
+                            </div>
                         </div>
-                   </div>
-</a>
-</div>
+                    </div>
                 </div>
             </section>
 
