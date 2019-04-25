@@ -58,7 +58,7 @@ class Controller {
 
     }
 
-    @RequestMapping("/firehose")
+    @RequestMapping("/apis")
     fun services(model:MutableMap<String, Any?>): String{
         model.put("services", serviceDescriptionService.list())
         return "apis"
