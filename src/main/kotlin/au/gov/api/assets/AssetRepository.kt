@@ -18,7 +18,7 @@ class AssetRepository() {
         load(Space(tag = "ato",
                 name = "Australian Taxation Office",
                 overview = "The ATO is the government's principal revenue collection agency with a large number of API-enabled services available and is bringing more online regularly. They are also responsible for managing the superannuation system and business registrations.",
-                childSpaces = listOf("super","abr","eInvoicing")
+                childSpaces = listOf("super","abr")
         ))
                  
         load(Article(metadata = Metadata(id = "Article1", tags = listOf("ato", "dhs")),
@@ -50,10 +50,6 @@ A transition period has been established for DSPs who are already using our digi
             )
         )
 
-        load(Space(tag = "eInvoicing",
-                name = "eInvoicing",
-                overview = "Overview"
-        ))
         load(Space(tag = "super",
                 name = "Superannuation",
                 overview = "Overview"
