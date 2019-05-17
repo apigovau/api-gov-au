@@ -63,6 +63,11 @@ A transition period has been established for DSPs who are already using our digi
                 overview = "Overview of ABS."
         ))
 
+        load(Space(tag = "abr",
+                name = "Australian Business Register",
+                overview = "The Australian Business Register (ABR) provides access to publicly available information supplied by businesses when they register for an Australian Business Number (ABN)."
+        ))
+
         load(Space(tag = "afsa",
                 name = "Australian Financial Security Authority",
                 overview = "Overview of AFSA."

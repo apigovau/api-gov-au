@@ -62,7 +62,7 @@
 	}
 	.itemIndexRow:first-child
 	{
-		margin-top: 100px;
+		margin-top: 20px;
 	}
 	.itemIndexRow:last-child
 	{
@@ -431,7 +431,7 @@ CODE
 .dashboardHeader
 {
 	padding-top: 20px;
-	padding-bottom: 50px;
+	padding-bottom: 20px;
 }
 .dashboardHeader__title
 {
