@@ -61,7 +61,7 @@ A transition period has been established for DSPs who are already using our digi
         load(Space(tag = "anzsic",
                 name = "ABS",
                 overview = "Overview of ABS.",
-                logoURL = "https://acems.org.au/sites/default/files/partners/abs_logo_large_mono.jpg"
+                logoURL = "https://www.abs.gov.au/ausstats/wmdata.nsf/activeotherresource/ABS_Logo_333/\$File/ABS_Logo_333.svg"
         ))
 
         load(Space(tag = "abr",
@@ -76,7 +76,7 @@ A transition period has been established for DSPs who are already using our digi
         load(Space(tag = "abs",
                 name = "Australian Bureau of Statistics",
                 overview = "Overview of ABS.",
-                logoURL = "https://acems.org.au/sites/default/files/partners/abs_logo_large_mono.jpg",
+                logoURL = "https://www.abs.gov.au/ausstats/wmdata.nsf/activeotherresource/ABS_Logo_333/\$File/ABS_Logo_333.svg",
                 childSpaces = listOf("anzsic")
         ))
         load(Space(tag = "wofg",
