@@ -36,7 +36,7 @@
                     <div class="row dashboardHeader">
 
                         <div class="col-sm-7">
-                            <img th:attr="src=${agencyLogo}" class="dashboardHeader__title" />
+                            <img th:attr="src=${agencyLogo},class=${agencyLogo__class}" />
                             <h2 th:text="${space.name}" class="dashboardHeader__title"/>
                             <!--div class="dashboardHeader__widgets">
                                 <div class="dashboardWidget">

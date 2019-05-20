@@ -110,12 +110,18 @@ class Controller {
         if(theSpace != null){
             val parentSpaces = assetService.parentsOfSpace(space)
 
-            val agencyLogoText = when(parentSpaces.size){
-                0 -> theSpace.name
-                else -> parentSpaces.map { assetService.getSpace(it)!!.name.replace(" ","+") }.joinToString("&agency=")
-            }
-            model["agencyLogo"] = "https://api-gov-au-crest-branding.apps.y.cld.gov.au/inline.png?agency=${agencyLogoText}&height=200"
+            if(theSpace.logoURL == ""){
+                val agencyLogoText = when(parentSpaces.size){
+                    0 -> theSpace.name
+                    else -> parentSpaces.map { assetService.getSpace(it)!!.name.replace(" ","+") }.joinToString("&agency=")
+                }
+                model["agencyLogo"] = "https://api-gov-au-crest-branding.apps.y.cld.gov.au/inline.png?agency=${agencyLogoText}&height=200"
+                model["agencyLogo__class"] = ""
 
+            } else {
+                model["agencyLogo"] = theSpace.logoURL 
+                model["agencyLogo__class"] = "dashboardHeader__title__logo"
+            }
             model["space"] = theSpace
         model["services"] = serviceDescriptionService.list().filter { it.metadata.space == space || it.metadata.space in theSpace.childSpaces}
             val articles = assetService.getArticlesForTags(listOf(theSpace.tag))

@@ -433,6 +433,10 @@ CODE
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+.dashboardHeader__title__logo
+{
+    height:100px !important;
+}
 .dashboardHeader__title
 {
 	width: 350px;
