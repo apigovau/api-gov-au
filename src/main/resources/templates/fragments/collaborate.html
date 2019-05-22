@@ -123,7 +123,7 @@
                             <div class="row conversation-content">
                                 <div class="col-xs-12">
                                     <h5 th:text="${conversation.title} + '    |    ' + ${conversation.state}"></h5>
-                                    <p th:text="${conversation.body}"></p>
+                                    <p th:utext="${conversation.body}"></p>
                                 </div>
                             </div>
                             <div th:if="${conversation.numComments} > 0" th:remove="tag">
@@ -152,7 +152,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <p th:text="${comment.body}"></p>
+                                                        <p th:utext="${comment.body}"></p>
                                                     </div>
                                                 </div>
                                             </div>
