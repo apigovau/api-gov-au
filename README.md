@@ -49,7 +49,7 @@ For more information about using Java and Kotlin on Heroku, see these Dev Center
 
 ## Reusing government tools
 
-The prototype also uses [Gov.au UI-Kit](https://github.com/govau/uikit). If you want to make any significant changes to the styling, you'll need [Node](https://nodejs.org/en/), [NPM](https://www.npmjs.com/) and [Yarn](https://yarnpkg.com).
+The prototype also uses the [Australian Government Design System](https://github.com/govau/design-system-components). If you want to make any significant changes to the styling, you'll need [Node](https://nodejs.org/en/), [NPM](https://www.npmjs.com/) and [Yarn](https://yarnpkg.com).
 
 ## Making contributions
 
