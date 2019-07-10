@@ -249,6 +249,16 @@ CODE
 		border-top: 6px solid #555;
 		padding-top: 20px;
 	}
+
+    .ie_global_footer_hook
+    {
+        background: white !important;
+        border-bottom: 200px solid rgb(49, 49, 49);
+        padding-bottom: 0px;
+        width:97.8%;
+        margin-left:2%
+    }
+
 }
 .detail_pagination
 {
