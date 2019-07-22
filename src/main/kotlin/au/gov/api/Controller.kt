@@ -37,8 +37,9 @@ class Controller {
 
     @RequestMapping("/")
     fun index(model:MutableMap<String, Any?>): String{
-        model.put("numberOfServices", serviceDescriptionService.count())
-        return "landing"
+        //model.put("numberOfServices", serviceDescriptionService.count())
+        //return "landing"
+        return "about"
     }
 
     @RequestMapping("/about")
