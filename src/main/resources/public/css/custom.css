@@ -714,4 +714,38 @@ ul.conversation-list {
 }
 
 
+/*-------------------------------*/
 
+.section{
+    background-color:white;
+}
+
+.section--dark{
+    background-color:#eee;
+}
+
+.landing__cards{
+    padding-bottom:20px;
+}
+
+
+.landing__cards .au-card__title{
+    text-align:center;
+}
+
+.section--dark.landing__cards .au-card__title h4{
+	color: #00678f;
+}
+
+.landing__cards .au-card{
+    border:none;
+}
+
+.section--dark.landing__cards .au-card__title A{
+    text-decoration:underline !important;
+    text-decoration-color: rgb(27, 121, 145) !important;
+}
+
+.section.landing__cards .au-card__title A{
+    text-decoration:none;
+}
