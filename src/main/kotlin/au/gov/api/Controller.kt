@@ -37,9 +37,19 @@ class Controller {
 
     @RequestMapping("/")
     fun index(model:MutableMap<String, Any?>): String{
-        //model.put("numberOfServices", serviceDescriptionService.count())
+        model.put("numberOfServices", serviceDescriptionService.count())
         //return "landing"
         return "about"
+    }
+
+    @RequestMapping("/roadmap")
+    fun roadmap(model:MutableMap<String, Any?>): String{
+        return "roadmap"
+    }
+
+    @RequestMapping("/share")
+    fun share(model:MutableMap<String, Any?>): String{
+        return "share"
     }
 
     @RequestMapping("/about")
