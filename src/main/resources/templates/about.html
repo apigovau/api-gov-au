@@ -1,51 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <div th:replace="fragments/layout :: meta" />
-  <title>api.gov.au</title>
-  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
-</head>
-<body class="au-body au-grid">
+    <head>
+        <div th:replace="fragments/layout :: meta" />
+            <title>api.gov.au</title>
+            <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
+            <div th:replace="fragments/layout :: favicon"/>
+                <div th:replace="fragments/layout :: css"/>
+    </head>
+    <body class="au-body au-grid">
 
-<div th:replace="fragments/layout :: header(landing = true, current = 'about')"/>
+        <div th:replace="fragments/layout :: header(landing = true, current = 'about')"/>
 
 
-<main class="container">
+            <main class="container">
 
-<div class="tier tier--even">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>About</h1>
-                <div class="intro">
+            <div class="tier tier--even">
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-md-push-6">
-                            <div class="intro__img"><img class="au-responsive-media-img" src="/img/about.png" alt="robot connecting cables from big system into clouds illustration"/></div>
-                        </div>
-                        <div class="intro__text col-sm-12 col-md-5 col-md-pull-6">
-                            <div class="content">
-                                <p><em>We are working with all levels of government to collect and document government APIs and other machine-to-machine services in one place.</em></p>
-                                <p>Here you will be able to discover what APIs are available, how to use them, and understand what data they need.</p>
-                                <p>You will also find guidance on creating and using APIs, and a community discussion forum where you can ask for help</p>
-                                <p class="intro__button"><a class="au-btn au-btn--secondary" href="/apis">Get started</a></p>
-                                <h2>Want to get in touch?</h2>
-                                <p>If you work for a government agency and would like to talk about APIs or api.gov.au, send us an email to sbr_tdt@sbr.gov.au</p>
-                                <p>If you don't work in government and have questions about specific APIs, please contact the agency who owns the API for more information on it's availablity, or having it listed on api.gov.au</p>
+                        <div class="col-md-12">
+                            <h1>About</h1>
+                            <div class="intro">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-md-push-6">
+                                        <div class="intro__img"><img class="au-responsive-media-img" src="/img/about.png" alt="robot connecting cables from big system into clouds illustration"/></div>
+                                    </div>
+                                    <div class="intro__text col-sm-12 col-md-5 col-md-pull-6">
+                                        <div class="content">
+                                            <p><em>We are working with all levels of government to collect and document government APIs and other machine-to-machine services in one place.</em></p>
+                                            <p>Here you will be able to discover what APIs are available, how to use them, and understand what data they need.</p>
+                                            <p>You will also find guidance on creating and using APIs, and a community discussion forum where you can ask for help</p>
+                                            <p class="intro__button"><a class="au-btn au-btn--secondary" href="/apis">Get started</a></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            </main>
+
+            <div class="section section--dark landing__cards">
+                <div class="container">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul class="au-card-list au-card-list--matchheight">
+                                <li class="col-sm-4 xol-xs-6">
+                                    <div class="au-card">
+                                        <div class="au-card__inner">
+                                            <div class="au-card__title">
+                                                <a href="/apis"><h4>Browse APIs</h4></a>
+                                            </div>
+                                            <p th:text="${numberOfServices + ' APIs available. We will have more to share soon.'}" />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-sm-4 xol-xs-6">
+                                    <div class="au-card">
+                                        <div class="au-card__inner">
+                                            <div class="au-card__title">
+                                                <a href="/share"><h4>Share an API</h4></a>
+                                            </div>
+                                            <p>Contact us to find out the steps on how to share a government API</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-sm-4 xol-xs-6">
+                                    <div class="au-card">
+                                        <div class="au-card__inner">
+                                            <div class="au-card__title">
+                                                <a href="/definitions"><h4>Search data definitions</h4></a>
+                                            </div>
+                                            <p>Search for data definitions used on government APIs</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section landing__cards">
+                <div class="container">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <ul class="au-card-list au-card-list--matchheight">
+                                <li class="col-sm-2 xol-xs-6" />
+                                <li class="col-sm-4 xol-xs-6">
+                                    <div class="au-card">
+                                        <div class="au-card__inner">
+                                            <div class="au-card__title">
+                                                <a href="/roadmap"><h4>Road map</h4></a>
+                                            </div>
+                                            <p>Here is what we have planned for future development phases of this service.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-sm-4 xol-xs-6">
+                                    <div class="au-card">
+                                        <div class="au-card__inner">
+                                            <div class="au-card__title">
+                                                <a href="/community"><h4>Join the discussion</h4></a>
+                                            </div>
+                                            <p>Whether you are working in government or elsewhere, join the commuinity to discuss, ask or share.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
-</main>
-
-
-<div th:replace="fragments/layout :: footer"/>
-</body>
+            <div th:replace="fragments/layout :: footer"/>
+    </body>
 </html>
