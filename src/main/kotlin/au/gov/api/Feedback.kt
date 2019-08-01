@@ -20,14 +20,9 @@ import javax.sql.DataSource
 class Feedback {
 
 
-    companion object {
-
-        @Value("\${spring.datasource.url}")
-        private var dbUrl: String? = null
-
         @Autowired
         private lateinit var dataSource: DataSource
-    }
+    
         fun feedback(@RequestParam path: String, @RequestParam upVotes: Int):String {
             var output = ""
             var connection: Connection? = null
@@ -126,21 +121,5 @@ class Feedback {
             return ""
         }
 
-        @Bean
-        @Throws(SQLException::class)
-        fun dataSource(): DataSource? {
-            if (dbUrl?.isEmpty() ?: true) {
-                return HikariDataSource()
-            } else {
-                val config = HikariConfig()
-                config.jdbcUrl = dbUrl
-                try {
-                    return HikariDataSource(config)
-                } catch (e: Exception) {
-                    return null
-                }
-            }
-        }
 
-    //}
-}
+    }
