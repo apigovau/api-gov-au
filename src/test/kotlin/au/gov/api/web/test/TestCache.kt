@@ -1,7 +1,10 @@
 package au.gov.web
 
+import au.gov.api.models.ServiceDescription
+import au.gov.api.repositories.dto.ServiceDescriptionDTO
+import au.gov.api.repositories.processors.PageProcessor
 import au.gov.api.web.ResourceCache
-import au.gov.api.serviceDescription.ServiceDescription
+import au.gov.api.web.mock.MockURIFetcher
 import com.beust.klaxon.Klaxon
 import org.junit.Assert
 import org.junit.Test
@@ -10,19 +13,19 @@ class TestCache {
     @Test
     fun can_get_deserialised_object_from_cache(){
 
-        var fetcher = MockURIFetcher()
-        var cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
+        val fetcher = MockURIFetcher()
+        val cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
 
-        var testDTO = ServiceDescription("name", "description", listOf("a", "b"))
-        var testDTOString = Klaxon().toJsonString(testDTO)
+        val testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
+        val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["aurl"] = testDTOString
 
-        var fetchedDTO = cache.get("aurl")
+        val fetchedDTO = cache.get("aurl")
 
         Assert.assertEquals(fetchedDTO.description, testDTO.description)
         Assert.assertEquals(fetchedDTO.name, testDTO.name)
-        Assert.assertEquals(fetchedDTO.pages, testDTO.pages)
+        Assert.assertEquals(fetchedDTO.pages, testDTO.pagesMarkdown)
     }
 
     @Test
@@ -31,7 +34,7 @@ class TestCache {
         var fetcher = MockURIFetcher()
         var cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
 
-        var testDTO = ServiceDescription("name", "description", listOf("a", "b"))
+        var testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
         var testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["aurl"] = testDTOString
@@ -49,8 +52,6 @@ class TestCache {
 
         Assert.assertEquals(fetchedDTO.description, testDTO.description)
         Assert.assertEquals(fetchedDTO.name, testDTO.name)
-        Assert.assertEquals(fetchedDTO.pages, testDTO.pages)
-
+        Assert.assertEquals(fetchedDTO.pages, testDTO.pagesMarkdown)
     }
-
 }
