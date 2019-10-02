@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>Definitions Catalogue</title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+
+<div th:replace="fragments/layout :: header(landing=false, current='about')"/>
+
+
+<main class="container">
+    <h2 th:if="${domainName}" th:text="'Definitions from ' + ${domainName}"/>
+    <form th:if="${search} != null" action="#" th:action="@{${action}}" th:object="${search}" method="get">
+        <input th:if="${showResults} != null" type="text" id="query" name="query" th:value="${queryString}"
+               class="au-text-input main_search_bar"/>
+        <input th:if="${showResults} == null" type="text" th:field="*{query}" placeholder="search"
+               class="au-text-input main_search_bar"/>
+        <input type="submit" value="Search" class="au-btn main_search_button"/>
+
+        <label class="filterBox au-btn" for="_1">Filters</label>
+        <input id="_1" type="checkbox"/>
+        <div class="filterContent">
+            <br/>
+            <ul class="filtercontentList">
+                <li>
+                    <span>
+                        <label> <input type="checkbox" name="IgnoreSynonym" value="1"
+                                       th:checked="${filter.IgnoreSynonym} ? 'checked'"/>
+                        <strong class="filterContentListNormal">Ignore synonyms</strong></label>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="filterTagList" style="padding-top:10px;">
+                <li th:each="domain : ${filter.Domains}"><a style="" th:text="${domain.name}"/></li>
+                <li th:if="${filter.IgnoreSynonym}"><a style="text-decoration:none;">Ignore synonyms</a><label><input
+                        type="submit" name="removeTag" value="ignoreS"/><span>&nbsp;x</span></label></li>
+            </ul>
+        </div>
+    </form>
+
+    <div class="used_synonyms" th:if="${not #maps.isEmpty(usedSynonyms)}">
+        <p>These <a th:href="@{/definitions/synonyms}">synonyms</a> were included in the search:</p>
+        <div th:remove="tag" th:each="synonym : ${usedSynonyms}">
+            <strong th:text="${synonym.key}"/><span th:text="': ' + ${synonym.value}"/><br/>
+            <!--dd th:each="synonymWord : ${synonym.value}" th:text="${synonymWord}"/-->
+        </div>
+    </div>
+
+    <p th:if="${queryString} != null" th:text="${totalResults} + ' results for ' + ${queryString}"/>
+    <p th:if="${queryString} == null" th:text="${totalResults} + ' definitions'"/>
+
+    <div th:if="${spellCheck} != ''">
+        <span th:text="' Did you mean: '"/>
+        <strong><a th:attr="href='?query=' + ${spellCheck}"><span th:text="${spellCheck}"/></a></strong>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th class="table_name">Name</th>
+            <th class="table_definition">Definition</th>
+            <th th:if="!${domainName}" class="table_domain">Domain</th>
+            <th th:if="${domainName}" class="table_domain">Type</th>
+            <th class="table_status">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="defn : ${definitions}">
+            <td class="table_name"><strong><a th:attr="href=@{'/definitions/definition/' +  ${defn.identifier}}"
+                                              th:text="${defn.name}"/></strong></td>
+            <td class="table_definition" th:text="${defn.definition}"/>
+            <td th:if="!${domainName}" class="table_domain" th:text="${defn.domain}"/>
+            <td th:if="${domainName}" class="table_domain" th:text="${defn.type}"/>
+            <td class="table_status" th:text="${defn.status}"/>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <div class="page_number">
+        Page <strong th:text="${pageNumber}"/> of <strong th:text="${lastPageNumber}"/>
+    </div>
+    <div>
+        <ul class="pagination_controls">
+            <li th:if="${prevPage} != null"><a th:attr="href=${prevPage}" class="next_page">&lt;Previous</a></li>
+
+            <li th:if="${firstPage} != null"><a th:attr="href=${firstPage}">1</a></li>
+            <li th:if="${firstPage} != null" class="more_pages"><span>...</span></li>
+
+            <li th:if="${leftPage} != null"><a th:attr="href=${leftPage}" th:text="${leftPageNumber}"/></li>
+
+            <li class="current_page"><a th:attr="href=${pageURL}" th:text="${pageNumber}"/></li>
+
+            <li th:if="${rightPage} != null"><a th:attr="href=${rightPage}" th:text="${rightPageNumber}"/></li>
+
+            <li th:if="${lastPage} != null" class="more_pages"><span>...</span></li>
+            <li th:if="${lastPage} != null"><a th:attr="href=${lastPage}" th:text="${lastPageNumber}"/></li>
+
+
+            <li th:if="${nextPage} != null"><a th:attr="href=${nextPage}" class="next_page">Next&gt;</a></li>
+        </ul>
+    </div>
+
+</main>
+
+
+<div th:replace="fragments/layout :: footer"/>
+
+</body>
+</html>

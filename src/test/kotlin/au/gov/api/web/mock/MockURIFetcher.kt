@@ -1,4 +1,4 @@
-package au.gov.web
+package au.gov.api.web.mock
 
 import au.gov.api.web.URIFetcher
 

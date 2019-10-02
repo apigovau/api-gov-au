@@ -1,4 +1,4 @@
-package au.gov.api.services.mock
+package au.gov.api.repositories.mock
 
 import au.gov.api.config.Config
 import au.gov.api.repositories.IServiceDescriptionRepository

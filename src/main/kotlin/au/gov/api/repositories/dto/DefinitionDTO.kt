@@ -1,3 +1,5 @@
-package au.gov.api.models
+package au.gov.api.repositories.dto
 
-data class DefinitionDTO(val content:Definition)
+import au.gov.api.models.Definition
+
+data class DefinitionDTO(val content: Definition)

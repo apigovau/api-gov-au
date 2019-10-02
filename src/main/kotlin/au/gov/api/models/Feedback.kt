@@ -1,4 +1,3 @@
 package au.gov.api.models
 
-class Feedback {
-}
+data class Feedback(val count: Int, val queries: List<PathUpVotes>)

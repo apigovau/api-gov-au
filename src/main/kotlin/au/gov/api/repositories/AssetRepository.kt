@@ -1,27 +1,33 @@
-package au.gov.api.asset
+package au.gov.api.repositories
 
-import com.beust.klaxon.*
-import org.springframework.stereotype.Component
-import org.springframework.context.event.EventListener
+import au.gov.api.models.Article
+import au.gov.api.models.ArticleMetadata
+import au.gov.api.models.Space
+import au.gov.api.repositories.dto.ArticleDTO
+import au.gov.api.repositories.processors.PageProcessor
 import org.springframework.boot.context.event.ApplicationReadyEvent
-
+import org.springframework.context.event.EventListener
+import org.springframework.stereotype.Component
 
 @Component
-class AssetRepository() {
+class AssetRepository : IAssetRepository {
 
     private val spaces:MutableList<Space> = mutableListOf()
-    private val articles:MutableList<Article> = mutableListOf()
+    private val articles:MutableList<ArticleDTO> = mutableListOf()
 
-
+    //TODO Check still works after making private
     @EventListener(ApplicationReadyEvent::class)
-    fun insertContentOnStartup(){
-        load(Space(tag = "ato",
+    private fun insertContentOnStartup(){
+        upsertSpace(Space(tag = "ato",
                 name = "Australian Taxation Office",
                 overview = "The ATO is the government's principal revenue collection agency with a large number of API-enabled services available and is bringing more online regularly. They are also responsible for managing the superannuation system and business registrations.",
                 childSpaces = listOf("super","abr")
         ))
                  
-        load(Article(metadata = Metadata(id = "Article1", tags = listOf("ato", "dhs")),
+        upsertArticle(Article(
+            ArticleMetadata(
+                id = "Article1",
+                tags = listOf("ato", "dhs")),
             title = "The Operating Framework", 
             date = "18/12/2018",
             summary = "All DSPs will need to meet the requirements of the new frameowrk. Read about them here.",
@@ -46,67 +52,68 @@ All DSPs wanting to use our digital services will need to meet the relevant requ
 A transition period has been established for DSPs who are already using our digital services to allow them time to meet the requirements. After consulting through the DSP Operational Framework working group, timeframes for [meeting the DSP requirements](https://softwaredevelopers.ato.gov.au/meeting_dsp_requirements) have been finalised.
 
             """
-
             )
         )
 
-        load(Space(tag = "super",
+        upsertSpace(Space(tag = "super",
                 name = "Superannuation",
                 overview = "Overview"
         ))
-        load(Space(tag = "insolvency",
+
+        upsertSpace(Space(tag = "insolvency",
                 name = "Australian Financial Security Authority",
                 overview = "Overview of AFSA."
         ))
-        load(Space(tag = "anzsic",
+        upsertSpace(Space(tag = "anzsic",
                 name = "ABS",
                 overview = "Overview of ABS.",
                 logoURL = "https://www.abs.gov.au/ausstats/wmdata.nsf/activeotherresource/ABS_Logo_333/\$File/ABS_Logo_333.svg"
         ))
 
-        load(Space(tag = "abr",
+        upsertSpace(Space(tag = "abr",
                 name = "Australian Business Register",
                 overview = "The Australian Business Register (ABR) provides access to publicly available information supplied by businesses when they register for an Australian Business Number (ABN)."
         ))
 
-        load(Space(tag = "afsa",
+        upsertSpace(Space(tag = "afsa",
                 name = "Australian Financial Security Authority",
                 overview = "Overview of AFSA."
         ))
-        load(Space(tag = "abs",
+
+        upsertSpace(Space(tag = "abs",
                 name = "Australian Bureau of Statistics",
                 overview = "Overview of ABS.",
                 logoURL = "https://www.abs.gov.au/ausstats/wmdata.nsf/activeotherresource/ABS_Logo_333/\$File/ABS_Logo_333.svg",
                 childSpaces = listOf("anzsic")
         ))
-        load(Space(tag = "wofg",
+
+        upsertSpace(Space(tag = "wofg",
                 name = "Whole of Government",
                 overview = "Overview of whole of government",
                 childSpaces = listOf("apigovau")
         ))
                  
-        load(Space(tag = "apigovau",
+        upsertSpace(Space(tag = "apigovau",
                 name = "api.gov.au",
                 overview = "Overview of api.gov.au"
         ))
-                 
     }
 
+	override fun getArticles():List<Article> = articles.map { convertToArticle(it) }
 
-	fun getArticles():List<Article> = articles
-
-    fun getArticlesForTags(tags:List<String>): List<Article> {
+    override fun getArticlesForTags(tags:List<String>): List<Article> {
         val allTags:MutableList<String> = mutableListOf()
         tags.forEach { allTags.addAll( getTreeTags(it) )  }
-        return articles.filter { it.metadata.matchesTags(allTags) }
+        return articles.filter { matchesTags(it.tags, allTags) }
+                .map { convertToArticle(it) }
     }
 
-
-    fun getArticlesForSpace(space:Space): List<Article>{
-        return listOf()
+    override fun getArticlesForSpace(space:Space): List<Article>{
+        return articles.filter { it.tags.contains(space.tag) }
+                .map { convertToArticle(it) }
     }
 
-    fun getTreeTags(id:String):List<String> {
+    override fun getTreeTags(id:String):List<String> {
         // This isn't recursive. One up and One down only
         val tagList:MutableList<String> = mutableListOf()
         parentsOfSpace(id).forEach { tagList.add( it ) }
@@ -116,18 +123,30 @@ A transition period has been established for DSPs who are already using our digi
 
         thisSpace.childSpaces.forEach { 
             val childSpace = getSpace(it)
-            if(childSpace != null)tagList.add( childSpace.tag  ) 
+            if(childSpace != null)tagList.add( childSpace.tag  )
         }
         return tagList 
     }
 
-    fun load(space:Space) = this.spaces.add(space)
-    fun load(article:Article) = this.articles.add(article)
+    override fun upsertSpace(space:Space) {
+        this.spaces.removeAll { it.tag == space.tag }
+        this.spaces.add(space)
+    }
 
-    fun getSpace(id:String) = spaces.firstOrNull { it.tag == id }
-    fun getArticle(id:String) = articles.first { it.metadata.id == id }
+    override fun upsertArticle(article:Article) {
+        this.articles.removeAll { it.id == article.articleMetadata.id }
+        this.articles.add(convertFromArticle(article))
+    }
 
+    override fun getSpace(id:String) = spaces.firstOrNull { it.tag == id }
 
-    fun parentsOfSpace(space:String):List<String> = spaces.filter { it.childSpaces.contains(space) }.map{ it.tag }
+    override fun getArticle(id:String) = convertToArticle(articles.first { it.id == id })
 
+    override fun parentsOfSpace(space:String):List<String> = spaces.filter { it.childSpaces.contains(space) }.map{ it.tag }
+
+    private fun convertToArticle(dto: ArticleDTO): Article = Article(ArticleMetadata(dto.id, dto.tags), dto.title, dto.date, dto.summary, dto.markdown, if (dto.markdown.isNotEmpty()) PageProcessor.processPage(dto.markdown) else null)
+
+    private fun convertFromArticle(article: Article): ArticleDTO = ArticleDTO(article.articleMetadata.id, article.articleMetadata.tags, article.title, article.date, article.markdown)
+
+    private fun matchesTags(tags:List<String>, otherTags:List<String>) = tags.intersect(otherTags).isNotEmpty()
 }

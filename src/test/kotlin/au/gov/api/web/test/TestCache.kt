@@ -1,8 +1,6 @@
-package au.gov.web
+package au.gov.api.web.test
 
-import au.gov.api.models.ServiceDescription
 import au.gov.api.repositories.dto.ServiceDescriptionDTO
-import au.gov.api.repositories.processors.PageProcessor
 import au.gov.api.web.ResourceCache
 import au.gov.api.web.mock.MockURIFetcher
 import com.beust.klaxon.Klaxon
@@ -10,11 +8,12 @@ import org.junit.Assert
 import org.junit.Test
 
 class TestCache {
+
     @Test
     fun can_get_deserialised_object_from_cache(){
 
         val fetcher = MockURIFetcher()
-        val cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
+        val cache = ResourceCache(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescriptionDTO>(serial)!! })
 
         val testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
         val testDTOString = Klaxon().toJsonString(testDTO)
@@ -25,17 +24,17 @@ class TestCache {
 
         Assert.assertEquals(fetchedDTO.description, testDTO.description)
         Assert.assertEquals(fetchedDTO.name, testDTO.name)
-        Assert.assertEquals(fetchedDTO.pages, testDTO.pagesMarkdown)
+        Assert.assertEquals(fetchedDTO.pagesMarkdown, testDTO.pagesMarkdown)
     }
 
     @Test
     fun cache_will_return_expired_content_if_live_not_available(){
 
-        var fetcher = MockURIFetcher()
-        var cache = ResourceCache<ServiceDescription>(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescription>(serial)!! })
+        val fetcher = MockURIFetcher()
+        val cache = ResourceCache(fetcher, 1, convert = { serial -> Klaxon().parse<ServiceDescriptionDTO>(serial)!! })
 
-        var testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
-        var testDTOString = Klaxon().toJsonString(testDTO)
+        val testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
+        val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["aurl"] = testDTOString
 
@@ -47,11 +46,11 @@ class TestCache {
         fetcher.map.clear()
 
 
-        var fetchedDTO = cache.get("aurl")
+        val fetchedDTO = cache.get("aurl")
         Assert.assertEquals(ResourceCache.LastOperationStatus.EXPIRED, cache.lastOperationStatus)
 
         Assert.assertEquals(fetchedDTO.description, testDTO.description)
         Assert.assertEquals(fetchedDTO.name, testDTO.name)
-        Assert.assertEquals(fetchedDTO.pages, testDTO.pagesMarkdown)
+        Assert.assertEquals(fetchedDTO.pagesMarkdown, testDTO.pagesMarkdown)
     }
 }

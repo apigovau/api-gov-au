@@ -1,4 +1,3 @@
 package au.gov.api.repositories.dto
 
-class IndexDTO {
-}
+data class IndexDTO(val content:List<IndexServiceDTO>)

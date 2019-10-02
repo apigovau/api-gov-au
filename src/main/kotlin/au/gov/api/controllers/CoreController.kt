@@ -1,33 +1,29 @@
-package au.gov.api
+package au.gov.api.controllers
 
-import au.gov.api.asset.AssetService
-import au.gov.api.serviceDescription.Page
-import au.gov.api.asset.Space
-import au.gov.api.conversation.ConversationRepository
-import au.gov.api.serviceDescription.ServiceDescriptionService
+import au.gov.api.services.AssetService
+import au.gov.api.services.ConversationsService
+import au.gov.api.services.ServiceDescriptionService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import java.net.URLDecoder
 
-
 @Controller
-class Controller {
+class CoreController {
 
     private val log = LoggerFactory.getLogger(this.javaClass)
 
     @Autowired
-    lateinit var assetService: AssetService
-
-
-    @Autowired
-    lateinit var serviceDescriptionService: ServiceDescriptionService
+    private lateinit var assetService: AssetService
 
     @Autowired
-    lateinit var conversationService: ConversationRepository
+    private lateinit var serviceDescriptionService: ServiceDescriptionService
+
+    @Autowired
+    private lateinit var conversationService: ConversationsService
 
     @RequestMapping("/mvp")
     fun mvp(model:MutableMap<String, Any?>): String{
@@ -61,7 +57,6 @@ class Controller {
     @RequestMapping("/community")
     fun community(model:MutableMap<String, Any?>): String{
         return "community"
-
     }
 
     @RequestMapping("/disclaimer")
@@ -93,7 +88,7 @@ class Controller {
     fun detail(@PathVariable id:String, @PathVariable title:String, model:MutableMap<String, Any?>, @RequestParam(value="convoPage", defaultValue = "1") convoPage:Int): String{
         val serviceDescription = serviceDescriptionService.get(id) ?: return "detail"
 
-        val conversations = if (title == "Collaborate") conversationService.get(id, convoPage) else null
+        val conversations = if (title == "Collaborate") conversationService.getConversations(id, convoPage) else null
         val unescapedTitle = URLDecoder.decode(title)
         val lastedit = serviceDescriptionService.getLastEdited(id)
         val page = serviceDescription.pages.firstOrNull {it -> it.title == unescapedTitle} ?: serviceDescription.pages.first()
@@ -151,7 +146,7 @@ class Controller {
     fun article(@PathVariable id:String, model:MutableMap<String, Any?>): String{
         val article = assetService.getArticle(id)
         model["article"] = article 
-        model["content"] = Page(article.markdown).html()
+        model["content"] = article.page?.html()
         return "article"
     }
 
@@ -162,7 +157,7 @@ class Controller {
     		model["articles"] = assetService.getArticles()
 		}
 		else{
-    		model["articles"] = assetService.getArticlesForTags(tag!!)
+    		model["articles"] = assetService.getArticlesForTags(tag)
         }	
 		return "articles"
     }

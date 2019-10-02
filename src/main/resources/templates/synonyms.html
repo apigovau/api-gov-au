@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>Definitions Catalogue</title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing=false, current='about')"/>
+
+<main class="container">
+    <header class="page-heading-smaller">
+        <h1>Synonyms used in search</h1>
+    </header>
+
+    <p>If your search included any of the words from a set of synonyms (the words between [ and ] ), your results will
+        contain definitions that match any of the words. The word you initially searched for gets slightly higher
+        relevance.</p>
+    <p>Contact us if you want to change them</p>
+
+    <ul>
+        <li th:each="synonymSet : ${synonyms}" th:text="${synonymSet}"/>
+    </ul>
+
+</main>
+
+<div th:replace="fragments/layout :: footer"/>
+
+</body>
+</html>

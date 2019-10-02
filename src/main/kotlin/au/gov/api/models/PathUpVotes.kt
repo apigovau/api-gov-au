@@ -1,4 +1,3 @@
 package au.gov.api.models
 
-class PathUpVotes {
-}
+data class PathUpVotes(val path: String, val upVotes: String)
