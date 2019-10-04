@@ -8,7 +8,7 @@
 </head>
 <body class="au-body au-grid">
 
-<div th:replace="fragments/layout :: header(landing=(${showResults} == null), current='about')"/>
+<div th:replace="fragments/layout :: header(landing=(${showResults} == null), current='definitions')"/>
 
 
 <main class="container">
@@ -105,8 +105,15 @@
         </table>
 
 
-        <div class="page_number">
-            Page <strong th:text="${pageNumber}"/> of <strong th:text="${lastPageNumber}"/>
+        <div th:if="${lastPageNumber} > 0" th:remove="tag">
+            <div class="page_number">
+                Page <strong th:text="${pageNumber}"/> of <strong th:text="${lastPageNumber}"/>
+            </div>
+        </div>
+        <div th:if="${lastPageNumber} == 0" th:remove="tag">
+            <div class="page_number">
+                No results to display
+            </div>
         </div>
         <div>
             <ul class="pagination_controls">

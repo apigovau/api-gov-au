@@ -8,7 +8,7 @@
 </head>
 <body class="au-body au-grid">
 
-<div th:replace="fragments/layout :: header(landing=false, current='about')"/>
+<div th:replace="fragments/layout :: header(landing=false, current='definitions')"/>
 
 
 <main class="container">
@@ -43,12 +43,12 @@
         <p>The API is <a href="https://api.gov.au/service/5b3eb4707d0e99000457ffa5">documented in the service
             catalogue</a></p>
         <ul>
-            <li>search for definitions: <a th:href="@{/api/search?query=government}">/api/search?query=government</a>
+            <li>search for definitions: <a th:href="@{/definitions/api/search?query=government}">/api/search?query=government</a>
             </li>
-            <li>search for defintions from one domain: <a th:href="@{/api/search?query=government&amp;domain=fs}">/api/search?query=government&amp;domain=fs</a>
+            <li>search for defintions from one domain: <a th:href="@{/definitions/api/search?query=government&amp;domain=fs}">/api/search?query=government&amp;domain=fs</a>
             </li>
             <li>browse definitions: <a th:href="@{/definitions/api/browse}">/api/browse</a></li>
-            <li>get the details of a specific definition: <a th:href="@{/api/definition/trc/de55}">/api/definition/trc/de55</a>
+            <li>get the details of a specific definition: <a th:href="@{/definitions/api/definition/trc/de55}">/api/definition/trc/de55</a>
             </li>
         </ul>
     </div>
