@@ -40,17 +40,17 @@
         <div class="last_edit" th:text="${lastEdit}" />
         <div th:if="${nextPage} or ${prevPage}" class="detail_pagination">
             <div th:if="${nextPage}" class="next_detail_page">
-                <a th:attr="href='/service/' + ${id} + '/' + ${nextPage}">
+                <a th:attr="href='/service/' + ${id} + '/' + ${nextPage.title}">
                     <div class="page_nav_label">Next</div>
-                    <div class="page_nav_title"><div th:text="${nextPage}"/></div>
+                    <div class="page_nav_title"><div th:text="${nextPage.title}"/></div>
                 </a>
             </div>
-        <div th:if="${prevPage}" class="prev_detail_page">
-            <a th:attr="href='/service/' + ${id} + '/' + ${prevPage}">
-                <div class="page_nav_label">Back</div>
-                <div class="page_nav_title"><div th:text="${prevPage}"/></div>
-            </a>
-        </div>
+            <div th:if="${prevPage}" class="prev_detail_page">
+                <a th:attr="href='/service/' + ${id} + '/' + ${prevPage.title}">
+                    <div class="page_nav_label">Back</div>
+                    <div class="page_nav_title"><div th:text="${prevPage.title}"/></div>
+                </a>
+            </div>
         </div>
     </div>
 </main>
