@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>Definitions Catalogue</title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.9/svg4everybody.min.js"></script>
+    <script>svg4everybody();</script>
+    <style>
+    svg {
+        width:2000px;
+        height:1400px;
+        max-width:100vw;
+        max-height:100vh;
+    }
+
+    </style>
+</head>
+<body class="au-body au-grid">
+
+<div th:replace="fragments/layout :: header(landing=false, current='definitions')"/>
+
+<main class="container">
+    <header class="page-heading-smaller">
+        <p class="detail_domain" th:text="${domain}"/>
+        <h1 class="detail_name" th:text="${name}"/>
+        <p class="detail_status">Status: <strong th:text="${status}"/></p>
+    </header>
+
+    <dl>
+        <dt>Definition</dt>
+        <dd th:utext="${definition}"/>
+
+        <dt th:if="${guidance} != ''" th:text="Guidance"/>
+        <dd th:if="${guidance} != ''" th:utext="${guidance}"/>
+
+        <dt>Unique identifier</dt>
+        <dd><a th:attr="href=@{${href}}" th:text="${identifier}"/></dd>
+
+        <div th:remove="tag" th:if="${source}">
+            <dt>Source</dt>
+            <dd><a th:attr="href=${source}" th:text="${source}"/></dd>
+        </div>
+
+        <dt th:if="${not #lists.isEmpty(usage)}">Used by</dt>
+        <div th:remove="tag" th:each="use : ${usage}">
+            <dd th:text="${use}"/>
+        </div>
+
+        <div th:remove="tag" th:if="${type}">
+            <dt>Type</dt>
+            <dd th:text="${type}"/>
+        </div>
+
+        <dt th:if="${not #lists.isEmpty(typeValues)}">Suggested enumerations</dt>
+        <div th:remove="tag" th:each="value : ${typeValues}">
+            <dd th:text="${value}"/>
+        </div>
+
+        <dt th:if="${not #maps.isEmpty(typeFacets)}">Suggested restrictions</dt>
+        <div th:remove="tag" th:each="value : ${typeFacets}">
+            <dd><strong th:text="${value.key}"/>
+                <div th:remove="tag" th:text="': ' + ${value.value}"/>
+            </dd>
+        </div>
+
+        <div th:remove="tag" th:if="${syntaxes}">
+            <dt>Syntax specifics</dt>
+            <dl>
+                <div th:remove="tag" th:each="syntaxName : ${syntaxes}">
+                    <dt><strong th:text="${syntaxName.key}"/></dt>
+                    <div th:remove="tag" th:each="syntaxValue : ${syntaxName.value}">
+                        <dd><strong th:text="${syntaxValue.key}"/>
+                            <div th:remove="tag" th:text="': ' + ${syntaxValue.value}"/>
+                        </dd>
+                    </div>
+                </div>
+            </dl>
+        </div>
+
+
+        <dt>API url</dt>
+        <dd><a th:attr="href=@{${api}}" th:text="'https://api.gov.au' + ${api}"/></dd>
+
+        <div th:remove="tag" th:if="${relationships}">
+            <dt>Related definitions</dt>
+
+
+            <dl>
+                <div th:remove="tag" th:each="relationshipName : ${relationships}">
+                    <dt><strong th:text="${relationshipName.key}"/></dt>
+                    <div th:remove="tag" th:each="relationshipValue : ${relationshipName.value}">
+                        <dd><span
+                                th:text="${relationshipValue.relationship.meta.verbs[relationshipValue.relationship.direction]} + ' '"/><a
+                                th:attr="href=@{${relationshipValue.relationship.to}}"
+                                th:text="${relationshipValue.definition.name}"/></dd>
+                    </div>
+                </div>
+            </dl>
+            <!--[if !IE]><!-->
+            <svg viewBox="0 0 2000 1400" width="100%">
+                <use th:attr="'xlink:href'='/definitions/api/imgRedirect.svg?url=https://api.gov.au/graph/relations.svg?url=https://api.gov.au' + ${relationShipImageUrl}  + '#graph00'"></use>
+            </svg>
+            <!--<![endif]-->
+            <!--[if IE]><img th:attr="src='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">
+            <![endif]-->
+            <a th:attr="href='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">Click
+                here for a bigger version</a>
+
+        </div>
+
+    </dl>
+</main>
+
+<div th:replace="fragments/layout :: footer"/>
+
+</body>
+</html>
