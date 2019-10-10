@@ -93,7 +93,7 @@
                     <div th:remove="tag" th:each="relationshipValue : ${relationshipName.value}">
                         <dd><span
                                 th:text="${relationshipValue.relationship.meta.verbs[relationshipValue.relationship.direction]} + ' '"/><a
-                                th:attr="href=@{${relationshipValue.relationship.to}}"
+                                th:attr="href=@{${'/definitions/' + relationshipValue.relationship.to}}"
                                 th:text="${relationshipValue.definition.name}"/></dd>
                     </div>
                 </div>
