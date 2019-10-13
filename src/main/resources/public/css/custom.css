@@ -1,3 +1,500 @@
+/* Start - Taken from common.css */
+.used_synonyms p {
+    margin-bottom: 0;
+}
+
+.used_synonyms {
+    padding-bottom: 20px;
+}
+
+.search_help {
+    width: 140px;
+}
+
+dl dl {
+    margin-left: 30px;
+}
+
+.hero_header .hero_logo {
+    display: block;
+    max-width: 12rem;
+}
+
+.hero_header {
+    background-color: #313131 !important;
+    color: white;
+    position: relative;
+    padding-bottom: 100px !important;
+}
+
+.hero_header a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.hero_header h1 {
+    display: block;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 2.5rem !important;
+    clear: both;
+    float: left;
+}
+
+.hero_header .au-header__subline {
+    font-size: 1.2rem;
+    color: #CCC;
+    margin-top: 14px;
+}
+
+.hero_header .au-main-nav {
+    background: #313131;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.hero_header .au-main-nav a {
+    color: #45C2F0 !important;
+}
+
+.hero_header .au-main-nav a:hover, .au-main-nav .au-main-nav__toggle:hover {
+    background: #212121;
+    color: white !important;
+    text-decoration-color: white !important;
+}
+
+.hero_header .au-main-nav .active a {
+    border-bottom: 8px solid #313131;
+    border-bottom: 0.5rem solid #313131;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav {
+    border-bottom: 8px solid #45C2F0;
+    border-bottom: 0.5rem solid #45C2F0;
+    margin-bottom: -8px;
+    margin-bottom: -0.5rem;
+    font-weight: normal;
+}
+
+.hero_header .au-main-nav .githubLink {
+    float: right;
+}
+
+.main_header .hero_logo {
+    border-right: 1px solid;
+    padding-right: 15px;
+    float: left;
+    margin-right: 20px;
+}
+
+.hero_header .au-main-nav .divider {
+    width: 2px !important;
+    height: 50px;
+    position: relative;
+    top: 7px;
+    background: #45C2F0;
+    margin-left: 20px;
+}
+
+.badge {
+    /*background-color: white;*/
+    border-radius: 15px;
+    border: 2px solid white;
+    padding: 0.6em 1em;
+    /*margin-left: -2px;*/
+    position: relative;
+    top: -13px;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-size: 8px;
+}
+
+nav.uikit-breadcrumbs {
+    margin-bottom: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    .table_definition {
+        width: 50%;
+    }
+
+    .main_search_bar {
+        max-width: 85%;
+        width: 100%;
+    }
+
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+        margin-left: -5px;
+    }
+
+    .search_help {
+        padding-top: 100px;
+        padding-bottom: 25px;
+    }
+
+    .hero_header h1 {
+        display: inline;
+        padding-left: 10px !important;
+        padding-bottom: 10px;
+        font-size: xx-large;
+    }
+
+    .au-main-nav .au-link-list > li {
+        display: block;
+        float: left;
+        border: none;
+    }
+
+    .au-main-nav a, .au-main-nav .au-main-nav__toggle {
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 16px;
+        padding: 1rem;
+    }
+
+    .au-main-nav .active a {
+        border-bottom: 8px solid #FFF;
+        border-bottom: 0.5rem solid #FFF;
+        margin-bottom: -8px;
+        margin-bottom: -0.5rem;
+        font-weight: normal;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .table_definition {
+        display: none;
+    }
+
+    .main_search_bar {
+        max-width: 95%;
+        width: 100%;
+    }
+
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+    }
+
+    .uikit-responsive-media-img {
+        width: 100px;
+        float: left;
+        padding-bottom: 20px;
+    }
+
+    .sbr_footer_logo {
+        width: 60px;
+        padding-left: 15px;
+    }
+
+    .footer-phrase {
+        clear: both;
+    }
+
+    .search_help {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .hero_header h1 {
+        position: relative !important;
+        top: 2vw;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: x-large;
+    }
+
+    .hero_logo {
+        display: block !important;
+        max-width: 40vw !important;
+    }
+
+    .au-main-nav {
+        z-index: 100;
+        position: relative;
+        /*margin-bottom: -60px !important;*/
+    }
+
+    .hero_header .au-main-nav .githubLink {
+        float: left;
+        width: 100%;
+    }
+
+    .au-main-nav .container {
+        display: none;
+    }
+
+    .au-main-nav label {
+        color: white;
+        position: relative;
+        left: 20px;
+        display: block;
+        cursor: pointer;
+        width: 60px;
+    }
+
+    input:checked ~ .container {
+        display: inline-block;
+        float: left;
+        margin-bottom: -600px !important;
+        background: #313131;
+        width: 100%;
+    }
+
+    .main_header .hero_logo {
+        border-right: none;
+        width: 15rem !important;
+        max-width: 15rem !important;
+    }
+
+    .main_header a {
+        float: left;
+        margin-top: 20px;
+        clear: both;
+    }
+
+    .main_header span {
+        float: left;
+        margin-top: 20px;
+    }
+
+    .hero_header .au-main-nav .divider {
+        display: none;
+    }
+}
+
+.phase-banner {
+    background-color: black;
+    color: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+}
+
+.au-main-nav input#menu {
+    /*display: none;*/
+    position: absolute;
+    left: -9999px;
+}
+
+input:focus + label {
+    outline: 3px solid #9263DE;
+    outline-offset: 2px;
+}
+
+.footer {
+    background: #313131;
+    color: white !important;
+    border-top: none;
+}
+
+.footer-phrase {
+    display: flex;
+    flex-direction: column;
+    /*height: 90px;*/
+    padding-left: 0 !important;
+    padding-top: 40px;
+}
+
+.footer .copyright {
+    font-size: small !important;
+    margin-top: auto !important;
+    margin-left: 10px !important;
+}
+
+.footer .copyright a {
+    color: white !important;
+}
+
+.footer .coat-of-arms {
+    max-width: 130px !important;
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+.footer .joint-initiative {
+    font-size: small;
+    width: 200px;
+    border-left: 1px solid #CCC;
+    padding-left: 10px !important;
+    padding: 5px;
+}
+
+.footer .joint-initiative a {
+    color: white !important;
+}
+
+.footer .footer-links {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(162, 162, 162);
+    padding-bottom: 40px;
+    padding-top: 50px;
+    margin-left: 10px !important;
+}
+
+.footer .footer-links ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer .footer-links li {
+    display: block;
+}
+
+.footer .footer-links li a {
+    color: white !important;
+    text-decoration-color: white !important;
+}
+
+a.new_issue_link {
+    color: white;
+}
+
+.error-page {
+    padding-left: 10vw;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0px 0px;
+    margin: 0px 0px 30px;
+    text-align: left;
+    font-size: smaller;
+}
+
+tr {
+    height: 70px;
+    vertical-align: middle;
+}
+
+td {
+    box-sizing: border-box;
+    vertical-align: top;
+    /*width: 57px;*/
+    border-top: 1px solid rgb(221, 221, 221);
+    padding: 15px 15px 15px 0px;
+}
+
+dt {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.detail_name {
+    margin-top: -30px;
+    margin-bottom: 0px;
+}
+
+.pagination_controls {
+    text-align: center;
+    margin-left: -45px;
+}
+
+.pagination_controls .current_page {
+    background-color: #F0F3F5;
+}
+
+ul.pagination_controls li a {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li a.next_page {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li {
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.more_pages {
+    width: 25px;
+}
+
+.next_page {
+    display: inline-block;
+    height: 27px;
+    width: 75px;
+    padding: 8.5px;
+    /*margin-left: 4px;*/
+    margin-right: -4px;
+}
+
+.page_number {
+    text-align: center;
+    padding-bottom: 17.5px;
+}
+
+.dss_stage_link {
+    color: white !important;
+}
+
+.quick_domain_list {
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
+.quick_domain_list li {
+    display: inline;
+    white-space: nowrap;
+    margin-right: 0;
+    padding-right: 15px;
+}
+
+.feedback {
+    width: 400px;
+    display: block;
+    margin: auto;
+    padding: 37px;
+    text-align: center;
+    font-size: smaller;
+}
+
+.feedback img {
+    width: 32px;
+    height: 32px;
+}
+
+.feedback a {
+    border-bottom: 0px;
+    opacity: 0.4;
+}
+
+.feedback a:hover {
+    background: white;
+    cursor: pointer;
+    opacity: 1;
+}
+
+body a {
+    color: black !important;
+    text-decoration-color: #1B7991 !important;
+}
+
+/* End - Taken from common.css */
+
 @media screen and (max-width: 480px)
 {
 	DIV.indexItemContainerBody IMG
@@ -47,8 +544,79 @@
 		margin-bottom: 10px;
 	}
 }
+
+/* Start - Taken from api-gov-au-defintions */
+@media screen and (max-width: 768px) {
+    .table_definition {
+        display: none;
+    }
+    
+    .main_search_bar {
+        max-width: 95%;
+        width: 100%;
+    }
+    
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+    }
+    
+    .uikit-responsive-media-img {
+        width: 100px;
+        float: left;
+        padding-bottom: 20px;
+    }
+    
+    .sbr_footer_logo {
+        width: 60px;
+        padding-left: 15px;
+    }
+    
+    .footer-phrase {
+        clear: both;
+    }
+    
+    .search_help {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+/* End - Taken from api-gov-au-defintions */
+
 @media screen and (min-width: 768px)
 {
+	/* Start - Taken from api-gov-au-defintions */
+	.table_definition {
+        width: 50%;
+    }
+    
+    .main_search_bar {
+        max-width: 85%;
+        width: 100%;
+    }
+    
+    .main_search_button {
+        /*+border-radius: 0;*/
+        -moz-border-radius: 0;
+        -webkit-border-radius: 0;
+        -khtml-border-radius: 0;
+        border-radius: 0;
+        padding: 8px;
+        padding-top: 7.5px;
+        margin-left: -5px;
+    }
+    
+    .search_help {
+        padding-top: 100px;
+        padding-bottom: 25px;
+	}	
+	/* End - Taken from api-gov-au-defintions */
+
 	.indexItemContainer
 	{
 		margin-top: 5px;
@@ -81,6 +649,286 @@
 		margin-top: auto !important;
 	}
 }
+
+/* Start - Taken from api-gov-au-defintions */
+main.container {
+    padding-bottom: 80px;
+    padding-top: 80px;
+}
+
+dd {
+    border-left: none !important;
+    margin-left: 10px !important;
+}
+
+.used_synonyms p {
+    margin-bottom: 0;
+}
+
+.used_synonyms {
+    padding-bottom: 20px;
+}
+
+.search_help {
+    width: 140px;
+}
+
+dl dl {
+    margin-left: 30px;
+}
+
+.logo {
+    height: 80px;
+    top: 30px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.heroline {
+    padding-bottom: 0px;
+    color: white;
+    font-size: 1.625rem;
+}
+
+.hero_header {
+    background-color: #254558;
+}
+
+nav.uikit-breadcrumbs {
+    margin-bottom: 50px;
+}
+
+.phase-banner {
+    background-color: #313131;
+    color: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 0.875rem;
+}
+
+a.new_issue_link {
+    color: white;
+}
+
+.error-page {
+    padding-left: 10vw;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0px 0px;
+    margin: 0px 0px 30px;
+    text-align: left;
+    font-size: smaller;
+}
+
+tr {
+    height: 70px;
+    vertical-align: middle;
+}
+
+td {
+    box-sizing: border-box;
+    vertical-align: top;
+    width: 57px;
+    border-top: 1px solid rgb(221, 221, 221);
+    padding: 15px 15px 15px 0px;
+}
+
+dt {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.detail_name {
+    margin-top: -30px;
+    margin-bottom: 0px;
+}
+
+.pagination_controls {
+    text-align: center;
+    margin-left: -45px;
+}
+
+.current_page {
+    background-color: #F0F3F5;
+}
+
+ul.pagination_controls li a {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li a.next_page {
+    display: inline-block;
+    height: 27px;
+    padding: 8.5px 20px 8.5px 17px;
+}
+
+ul.pagination_controls li {
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.more_pages {
+    width: 25px;
+}
+
+.next_page {
+    display: inline-block;
+    height: 27px;
+    width: 75px;
+    padding: 8.5px;
+    /*margin-left: 4px;*/
+    margin-right: -4px;
+}
+
+.page_number {
+    text-align: center;
+    padding-bottom: 17.5px;
+}
+
+.dss_stage_link {
+    color: white !important;
+}
+
+.quick_domain_list {
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
+.quick_domain_list li {
+    display: inline;
+    white-space: nowrap;
+    margin-right: 0;
+    padding-right: 15px;
+}
+
+.filterBox {
+    padding: 4px 8px 8px;
+    /*+border-radius: 0;*/
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -khtml-border-radius: 0;
+    border-radius: 0;
+    height: 23px;
+}
+
+.filterBox > a {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.filterBox + input {
+    display: none;
+    /* hide the checkboxes */
+}
+
+.filterBox + input + div {
+    display: none;
+}
+
+.filterBox + input:checked + div {
+    display: block;
+}
+
+.filter_button {
+    /*+border-radius: 0;*/
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    -khtml-border-radius: 0;
+    border-radius: 0;
+    padding: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: -5px;
+    background: #1B7991;
+}
+
+.filter_button:hover {
+    background: #135566;
+}
+
+.filterContent {
+    max-width: 100%;
+    width: calc(100% - 6px);
+    border-top: 2px solid #1B7991;
+    padding-bottom: 1px;
+    background-color: #DBE8F0;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.filterContentListNormal {
+    list-style-type: none;
+    background-color: none;
+}
+
+.filterContentListNormal li {
+    list-style: none;
+    float: none;
+    padding-right: 10px;
+}
+
+.filtercontentList ul {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.filtercontentList ul li {
+    float: left;
+    list-style-type: none;
+}
+
+.filterTagList ul {
+    list-style-type: none;
+    padding-top: 2px;
+}
+
+.filterTagList li {
+    background-color: #E6F3FF;
+    border-radius: 1px;
+    color: black;
+    display: inline;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.filterTagList input {
+    background: none !important;
+    color: inherit;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+    display: none;
+}
+
+.filterTagList a {
+    text-decoration: none !important;
+    text-decoration-color: white;
+    background: none !important;
+    color: #808080;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    border-bottom: 1px solid #444;
+    cursor: default;
+}
+
+.filterTagList a:hover {
+    text-decoration: none;
+    color: #808080;
+}
+
+.filterContent .filtercontentList {
+    list-style-type: none;
+}
+/* End - Taken from api-gov-au-defintions */
+
 .indexItemContainer
 {
 	width: calc(50% - 20px);
@@ -713,9 +1561,7 @@ ul.conversation-list {
     min-height: 125px;
 }
 
-
-/*-------------------------------*/
-
+/* Start - DTA Feedback implementation */
 .section{
     background-color:white;
 }
@@ -727,7 +1573,6 @@ ul.conversation-list {
 .landing__cards{
     padding-bottom:20px;
 }
-
 
 .landing__cards .au-card__title{
     text-align:center;
@@ -749,3 +1594,4 @@ ul.conversation-list {
 .section.landing__cards .au-card__title A{
     text-decoration:none;
 }
+/* End - DTA Feedback implementation */

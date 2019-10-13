@@ -35,7 +35,6 @@
     <div th:fragment="css" th:remove="tag">
         <link rel="stylesheet" href="/css/designsystem.min.css" />
         <link rel="stylesheet" href="/css/custom.css" />
-        <link rel="stylesheet" href="/css/common.css" />
     </div>
 
     <div th:fragment="highlight" th:remove="tag">
@@ -97,7 +96,7 @@
                                     <li th:classappend="${current == 'about'} ? active"><a href="/">About Us</a></li>
                                     <li th:classappend="${current == 'apis'} ? active"><a href="/apis">Discover APIs</a></li>
                                     <li th:classappend="${current == 'share'} ? active"><a href="/share">Share an API</a></li>
-                                    <li><a href="/definitions">Data Definitions</a></li>
+                                    <li th:classappend="${current == 'definitions'} ? active"><a href="/definitions">Data Definitions</a></li>
                                     <li><a href="/playbook">Playbook</a></li>
                                     <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
                                     <li class="githubLink"><a target="_blank" href="https://github.com/apigovau/api-gov-au">Github</a></li>

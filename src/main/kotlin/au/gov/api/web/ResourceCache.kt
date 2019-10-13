@@ -3,6 +3,7 @@ package au.gov.api.web
 import java.time.LocalDateTime
 
 class ResourceCache<T>(private val fetcher: URIFetcher, private val minutesToLive:Long, private val convert: (serial:String) -> T) {
+
     data class CacheItem<T>(var timestamp:LocalDateTime, var item:T)
     private var _cache = mutableMapOf<String, CacheItem<T>>()
 
@@ -45,6 +46,4 @@ class ResourceCache<T>(private val fetcher: URIFetcher, private val minutesToLiv
     }
 
     private fun fetch(url:String):T = convert(fetcher.fetch(url).response)
-
-
 }

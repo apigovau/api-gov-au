@@ -12,7 +12,8 @@
 
 
 <main class="container">
-    <div>
+    <p th:if="${#lists.size(services)==0}">There are no APIs here</p>
+   <div th:if="${#lists.size(services)>0}">
         <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
             <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
             <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-0}">
