@@ -1,130 +1,137 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <div th:replace="fragments/layout :: meta" />
-  <title>api.gov.au</title>
-  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>api.gov.au</title>
+    <meta content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."
+          name="description"/>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing = false, current = 'about')"/>
 
 
 <main class="container">
     <div class="tier tier--even">
-            <div class="au-body au-page-alerts au-page-alerts--info">
-			  <h3>We're making some changes</h3>
-			  <p>We're working out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
-			  
-			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
-			</div>
+        <div class="au-body au-page-alerts au-page-alerts--info">
+            <h3>We're making some changes</h3>
+            <p>We're working out a new way to help you find the APIs you are interested in. While that's happening some
+                of the content on this page won't work.</p>
+
+            <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+        </div>
 
 
-            <section class="highlighted-section au-body">
-                <div class="container-fluid">
+        <section class="highlighted-section au-body">
+            <div class="container-fluid">
 
-                    <nav class="au-breadcrumbs" aria-label="breadcrumb">
-                      <ul class="au-link-list au-link-list--inline">
+                <nav aria-label="breadcrumb" class="au-breadcrumbs">
+                    <ul class="au-link-list au-link-list--inline">
                         <li><a href="/">Home</a></li>
                         <li th:text="${space.name}"/>
-                      </ul>
-                    </nav>
+                    </ul>
+                </nav>
 
 
-                    <div class="row dashboardHeader">
+                <div class="row dashboardHeader">
 
-                        <div class="col-sm-7">
-                            <img th:attr="src=${agencyLogo},class=${agencyLogo__class}" />
-                            <h2 th:text="${space.name}" class="dashboardHeader__title"/>
-                            <!--div class="dashboardHeader__widgets">
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
-                                    <div class="dashboardWidget__count">0</div>
-                                </div>  
-                                <div class="dashboardWidget">
-                                    <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
-                                    <div class="dashboardWidget__count">0</div>
-                                </div>  
-                            </div-->  
-                            <div class="dashboardHeader__body">
-                                <p><span class="dashboardHeader__overview">Overview:</span><span th:text="${space.overview}"/></p>
-                            </div>  
-                        </div>
-
-                        <div class="col-sm-1"></div>
-
-                        <div class="col-sm-4">
-                            <div class="popularItems">
-                                <div class="popularItems__head">
-                                    <div class="popularItems__headTitle">Popular Articles</div>
-                                    <a th:attr="href=${'/articles?tag=' + articlesTagString}"><div class="popularItems__headMore" th:text="${'All (' + articles.size()  + ')'}"/></a>
-                                </div>
-                                <div th:each="article: ${popularArticles}" class="popularItem">
-                                    <a th:attr="href=${'/article/' + article.metadata.id}"><div th:text="${article.title}" class="popularItem__title"/></a>
-                                    <div th:text="${article.date}" class="popularItem__date"/>
-                                    <div th:text="${article.summary}" class="popularItem__summary"/>
-                                </div>
+                    <div class="col-sm-7">
+                        <img th:attr="src=${agencyLogo},class=${agencyLogo__class}"/>
+                        <h2 class="dashboardHeader__title" th:text="${space.name}"/>
+                        <!--div class="dashboardHeader__widgets">
+                            <div class="dashboardWidget">
+                                <img class="dashboardWidget__icon" src="/img/calendar.svg"/>
+                                <div class="dashboardWidget__count">0</div>
                             </div>
+                            <div class="dashboardWidget">
+                                <img class="dashboardWidget__icon" src="/img/conversations.svg"/>
+                                <div class="dashboardWidget__count">0</div>
+                            </div>
+                        </div-->
+                        <div class="dashboardHeader__body">
+                            <p><span class="dashboardHeader__overview">Overview:</span><span
+                                    th:text="${space.overview}"/></p>
                         </div>
                     </div>
 
-                </div>
-            </section>
+                    <div class="col-sm-1"></div>
 
-
-
-            <section class="highlighted-section au-body servicesList" th:if="${#lists.size(services) > 0}">
-                <div class="container-fluid">
-                    <h3 class="section__head">Digital services</h3>
-                    <div> 
-                        <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
-                            <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
-                            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-0}">
-                                    <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
+                    <div class="col-sm-4">
+                        <div class="popularItems">
+                            <div class="popularItems__head">
+                                <div class="popularItems__headTitle">Popular Articles</div>
+                                <a th:attr="href=${'/articles?tag=' + articlesTagString}">
+                                    <div class="popularItems__headMore" th:text="${'All (' + articles.size()  + ')'}"/>
+                                </a>
+                            </div>
+                            <div class="popularItem" th:each="article: ${popularArticles}">
+                                <a th:attr="href=${'/article/' + article.metadata.id}">
+                                    <div class="popularItem__title" th:text="${article.title}"/>
+                                </a>
+                                <div class="popularItem__date" th:text="${article.date}"/>
+                                <div class="popularItem__summary" th:text="${article.summary}"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-
-
-
-
-            <section class="highlighted-section au-body au-body--alt callToAction">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4 class="section__title">Get involved</h4>
-                            <ul class="section__topiclist">
-                                <li class="section__topic">Become a developer</li>
-                                <li class="section__topic">Participae in working groups</li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="section__title">Find software</h4>
-                            <p class="section__subtext">Get help integrating this service by using products from other providers</p>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="section__title">I need help</h4>
-                            <ul class="section__topiclist">
-                                <li th:if="${space.tag=='ato'}" class="section__topic"><a href="https://developer.sbr.gov.au/portal">Online Services for DSPs</a></li>
-                                <li class="section__topic"><a href="/community">Community help forum</a></li>
-                            </ul>
-                        </div>
-                    </div>  
-                </div>
-            </section>
-
-
-
-
-
 
             </div>
-        </main>
-        <div th:replace="fragments/layout :: footer"/>
-    </body>
+        </section>
+
+
+        <section class="highlighted-section au-body servicesList" th:if="${#lists.size(services) > 0}">
+            <div class="container-fluid">
+                <h3 class="section__head">Digital services</h3>
+                <div>
+                    <div class="itemIndexRow" th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
+                        <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
+                        <div th:if="${index + 1 &lt; #lists.size(services)-0}" th:remove="tag">
+                            <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="highlighted-section au-body au-body--alt callToAction">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="section__title">Get involved</h4>
+                        <ul class="section__topiclist">
+                            <li class="section__topic">Become a developer</li>
+                            <li class="section__topic">Participae in working groups</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4 class="section__title">Find software</h4>
+                        <p class="section__subtext">Get help integrating this service by using products from other
+                            providers</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4 class="section__title">I need help</h4>
+                        <ul class="section__topiclist">
+                            <li class="section__topic" th:if="${space.tag=='ato'}"><a
+                                    href="https://developer.sbr.gov.au/portal">Online Services for DSPs</a></li>
+                            <li class="section__topic"><a href="/community">Community help forum</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+</main>
+<div th:replace="fragments/layout :: footer"/>
+</body>
 </html>

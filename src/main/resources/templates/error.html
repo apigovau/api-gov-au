@@ -7,14 +7,20 @@
     <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing=false, current='about')"/>
 
 
 <main class="">
 
 
-    <article role="main" id="content" class="content-main">
+    <article class="content-main" id="content" role="main">
 
 
         <div class="error-page">

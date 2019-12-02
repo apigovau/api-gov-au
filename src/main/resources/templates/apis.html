@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <div th:replace="fragments/layout :: meta" />
-  <title>api.gov.au</title>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>api.gov.au</title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing = false, current = 'apis')"/>
 
 
 <main class="container">
     <p th:if="${#lists.size(services)==0}">There are no APIs here</p>
-   <div th:if="${#lists.size(services)>0}">
-        <div class="itemIndexRow"  th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
+    <div th:if="${#lists.size(services)>0}">
+        <div class="itemIndexRow" th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">
             <div th:replace="fragments/layout :: indexItemContainer(services[index])"/>
-            <div th:remove="tag" th:if="${index + 1 &lt; #lists.size(services)-0}">
-                    <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
+            <div th:if="${index + 1 &lt; #lists.size(services)-0}" th:remove="tag">
+                <div th:replace="fragments/layout :: indexItemContainer(services[__${index + 1}__])"/>
             </div>
         </div>
     </div>

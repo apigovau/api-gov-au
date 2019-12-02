@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <div th:replace="fragments/layout :: meta" />
-            <title>api.gov.au</title>
-            <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
-            <div th:replace="fragments/layout :: favicon"/>
-                <div th:replace="fragments/layout :: css"/>
-    </head>
-    <body class="au-body au-grid">
+<head>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>api.gov.au</title>
+    <meta content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."
+          name="description"/>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
+</head>
+<body class="au-body au-grid">
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
+<div th:replace="fragments/layout :: header(landing = false, current = 'share')"/>
 
-        <div th:replace="fragments/layout :: header(landing = false, current = 'share')"/>
 
+<main class="container">
 
-            <main class="container">
-
-            <div class="tier tier--even">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>Want to share an API?</h2>
-                            <div class="intro">
-                                <p/>
-                                <p>If you work for a government agency and have an API you would like to publish, we'd be happy to help.</p>
-                                <p/>
-                                <p>We're developing a variety of APIs and wizards to help you list and maintain your API's here, but they're not ready just yet. For now, please email us at sbr_tdt@sbr.gov.au, and we'll get back to you.</p>
-                                <p/>
-                                <p>If you don't work in government and have questions about specific APIs, please contact the agency who owns the API for more information on it's availablity, or having it listed on api.gov.au</p>
-                            </div>
-                        </div>
+    <div class="tier tier--even">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Want to share an API?</h2>
+                    <div class="intro">
+                        <p/>
+                        <p>If you work for a government agency and have an API you would like to publish, we'd be happy
+                            to help.</p>
+                        <p/>
+                        <p>We're developing a variety of APIs and wizards to help you list and maintain your API's here,
+                            but they're not ready just yet. For now, please email us at sbr_tdt@sbr.gov.au, and we'll
+                            get back to you.</p>
+                        <p/>
+                        <p>If you don't work in government and have questions about specific APIs, please contact the
+                            agency who owns the API for more information on it's availablity, or having it listed on
+                            api.gov.au</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
 
-            </main>
+</main>
 
 
-            <div th:replace="fragments/layout :: footer"/>
-    </body>
+<div th:replace="fragments/layout :: footer"/>
+</body>
 </html>

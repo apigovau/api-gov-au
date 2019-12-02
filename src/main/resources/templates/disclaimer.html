@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <div th:replace="fragments/layout :: meta" />
-  <title>api.gov.au</title>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>api.gov.au</title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing = false, current = 'disclaimer')"/>
 
 
 <main class="container">
 
-<div class="tier tier--even">
-    <div class="container-fluid">
-        <h1>Disclaimer</h1>
-        <p>The Commonwealth recommends that users exercise their own skill and care with respect to their use of this site and any linked sites and any material on these sites.</p>
-        <p>Links to other websites are inserted for convenience and do not constitute endorsement of material at those sites, or any associated organisation, product or service.</p>
-        <p>To the extent permitted by law, the Commonwealth makes no representation, gives no warranty and accepts no liability (direct or indirect and including negligence) whatsoever for any loss, disruption, interference with or damage to a user's computer system, software or data occurring in connection with or relating to this website, linked sites or their use. Users are encouraged to take appropriate precautions to ensure that whatever is selected from this site or a linked site is free of viruses or any other contaminations that may interfere with or damage the user's computer system, software or data.</p> 
-        <p>To the extent that any liability cannot be excluded by law but can be limited, the liability of the Commonwealth is limited to, at the Commonwealth’s discretion, in the case of goods any one or more of the following: (i) the replacement of the goods or the supply of equivalent goods; (ii) the repair of the goods; (iii) the payment of the cost of replacing the goods or of acquiring equivalent goods; (iv) the payment of the cost of having the goods repaired; or in the case of services: (i) the supplying of the services again; or (ii) the payment of the cost of having the services supplied again.</p>
+    <div class="tier tier--even">
+        <div class="container-fluid">
+            <h1>Disclaimer</h1>
+            <p>The Commonwealth recommends that users exercise their own skill and care with respect to their use of
+                this site and any linked sites and any material on these sites.</p>
+            <p>Links to other websites are inserted for convenience and do not constitute endorsement of material at
+                those sites, or any associated organisation, product or service.</p>
+            <p>To the extent permitted by law, the Commonwealth makes no representation, gives no warranty and accepts
+                no liability (direct or indirect and including negligence) whatsoever for any loss, disruption,
+                interference with or damage to a user's computer system, software or data occurring in connection with
+                or relating to this website, linked sites or their use. Users are encouraged to take appropriate
+                precautions to ensure that whatever is selected from this site or a linked site is free of viruses or
+                any other contaminations that may interfere with or damage the user's computer system, software or
+                data.</p>
+            <p>To the extent that any liability cannot be excluded by law but can be limited, the liability of the
+                Commonwealth is limited to, at the Commonwealth’s discretion, in the case of goods any one or more of
+                the following: (i) the replacement of the goods or the supply of equivalent goods; (ii) the repair of
+                the goods; (iii) the payment of the cost of replacing the goods or of acquiring equivalent goods; (iv)
+                the payment of the cost of having the goods repaired; or in the case of services: (i) the supplying of
+                the services again; or (ii) the payment of the cost of having the services supplied again.</p>
+        </div>
     </div>
-</div>
 
 
 </main>

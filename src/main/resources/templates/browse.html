@@ -8,18 +8,24 @@
 </head>
 <body class="au-body au-grid">
 
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing=false, current='definitions')"/>
 
 
 <main class="container">
     <h2 th:if="${domainName}" th:text="'Definitions from ' + ${domainName}"/>
-    <form th:if="${search} != null" action="#" th:action="@{${action}}" th:object="${search}" method="get">
-        <input th:if="${showResults} != null" type="text" id="query" name="query" th:value="${queryString}"
-               class="au-text-input main_search_bar"/>
-        <input th:if="${showResults} == null" type="text" th:field="*{query}" placeholder="search"
-               class="au-text-input main_search_bar"/>
-        <input type="submit" value="Search" class="au-btn main_search_button"/>
+    <form action="#" method="get" th:action="@{${action}}" th:if="${search} != null" th:object="${search}">
+        <input class="au-text-input main_search_bar" id="query" name="query" th:if="${showResults} != null" th:value="${queryString}"
+               type="text"/>
+        <input class="au-text-input main_search_bar" placeholder="search" th:field="*{query}" th:if="${showResults} == null"
+               type="text"/>
+        <input class="au-btn main_search_button" type="submit" value="Search"/>
 
         <label class="filterBox au-btn" for="_1">Filters</label>
         <input id="_1" type="checkbox"/>
@@ -28,8 +34,8 @@
             <ul class="filtercontentList">
                 <li>
                     <span>
-                        <label> <input type="checkbox" name="IgnoreSynonym" value="1"
-                                       th:checked="${filter.IgnoreSynonym} ? 'checked'"/>
+                        <label> <input name="IgnoreSynonym" th:checked="${filter.IgnoreSynonym} ? 'checked'" type="checkbox"
+                                       value="1"/>
                         <strong class="filterContentListNormal">Ignore synonyms</strong></label>
                     </span>
                 </li>
@@ -39,14 +45,14 @@
             <ul class="filterTagList" style="padding-top:10px;">
                 <li th:each="domain : ${filter.Domains}"><a style="" th:text="${domain.name}"/></li>
                 <li th:if="${filter.IgnoreSynonym}"><a style="text-decoration:none;">Ignore synonyms</a><label><input
-                        type="submit" name="removeTag" value="ignoreS"/><span>&nbsp;x</span></label></li>
+                        name="removeTag" type="submit" value="ignoreS"/><span>&nbsp;x</span></label></li>
             </ul>
         </div>
     </form>
 
     <div class="used_synonyms" th:if="${not #maps.isEmpty(usedSynonyms)}">
         <p>These <a th:href="@{/definitions/synonyms}">synonyms</a> were included in the search:</p>
-        <div th:remove="tag" th:each="synonym : ${usedSynonyms}">
+        <div th:each="synonym : ${usedSynonyms}" th:remove="tag">
             <strong th:text="${synonym.key}"/><span th:text="': ' + ${synonym.value}"/><br/>
             <!--dd th:each="synonymWord : ${synonym.value}" th:text="${synonymWord}"/-->
         </div>
@@ -64,8 +70,8 @@
         <tr>
             <th class="table_name">Name</th>
             <th class="table_definition">Definition</th>
-            <th th:if="!${domainName}" class="table_domain">Domain</th>
-            <th th:if="${domainName}" class="table_domain">Type</th>
+            <th class="table_domain" th:if="!${domainName}">Domain</th>
+            <th class="table_domain" th:if="${domainName}">Type</th>
             <th class="table_status">Status</th>
         </tr>
         </thead>
@@ -75,8 +81,8 @@
             <td class="table_name"><strong><a th:attr="href=@{'/definitions/definition/' +  ${defn.identifier}}"
                                               th:text="${defn.name}"/></strong></td>
             <td class="table_definition" th:text="${defn.definition}"/>
-            <td th:if="!${domainName}" class="table_domain" th:text="${defn.domain}"/>
-            <td th:if="${domainName}" class="table_domain" th:text="${defn.type}"/>
+            <td class="table_domain" th:if="!${domainName}" th:text="${defn.domain}"/>
+            <td class="table_domain" th:if="${domainName}" th:text="${defn.type}"/>
             <td class="table_status" th:text="${defn.status}"/>
         </tr>
 
@@ -96,10 +102,10 @@
     </div>
     <div>
         <ul class="pagination_controls">
-            <li th:if="${prevPage} != null"><a th:attr="href=${prevPage}" class="next_page">&lt;Previous</a></li>
+            <li th:if="${prevPage} != null"><a class="next_page" th:attr="href=${prevPage}">&lt;Previous</a></li>
 
             <li th:if="${firstPage} != null"><a th:attr="href=${firstPage}">1</a></li>
-            <li th:if="${firstPage} != null" class="more_pages"><span>...</span></li>
+            <li class="more_pages" th:if="${firstPage} != null"><span>...</span></li>
 
             <li th:if="${leftPage} != null"><a th:attr="href=${leftPage}" th:text="${leftPageNumber}"/></li>
 
@@ -107,11 +113,11 @@
 
             <li th:if="${rightPage} != null"><a th:attr="href=${rightPage}" th:text="${rightPageNumber}"/></li>
 
-            <li th:if="${lastPage} != null" class="more_pages"><span>...</span></li>
+            <li class="more_pages" th:if="${lastPage} != null"><span>...</span></li>
             <li th:if="${lastPage} != null"><a th:attr="href=${lastPage}" th:text="${lastPageNumber}"/></li>
 
 
-            <li th:if="${nextPage} != null"><a th:attr="href=${nextPage}" class="next_page">Next&gt;</a></li>
+            <li th:if="${nextPage} != null"><a class="next_page" th:attr="href=${nextPage}">Next&gt;</a></li>
         </ul>
     </div>
 

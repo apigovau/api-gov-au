@@ -1,111 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <div th:replace="fragments/layout :: meta" />
-  <title>api.gov.au</title>
-  <meta name="description" content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."/>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
+    <div th:replace="fragments/layout :: meta"/>
+    <title>api.gov.au</title>
+    <meta content="Making it easier to discover and implement APIs offered by the Australian state, territory and federal government."
+          name="description"/>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
+<section class="phase-banner">
+    <div class="wrapper au-grid container container-fluid">
+        This is an <a class="dss_stage_link"
+                      href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+            class="dss_stage_link" href="https://github.com/apigovau/api-gov-au-definitions/issues/new">let us know</a>
+    </div>
+</section>
 <div th:replace="fragments/layout :: header(landing = true, current = 'home')"/>
 
 
 <main class="container">
 
-<div class="tier tier--even">
+    <div class="tier tier--even">
 
 
-			<div class="au-body au-page-alerts au-page-alerts--info">
-			  <h3>We're making some changes</h3>
-			  <p>We're working out a new way to help you find the APIs you are interested in. While that's happening some of the content on this page won't work.</p>
-			  
-			  <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
-			</div>
+        <div class="au-body au-page-alerts au-page-alerts--info">
+            <h3>We're making some changes</h3>
+            <p>We're working out a new way to help you find the APIs you are interested in. While that's happening some
+                of the content on this page won't work.</p>
+
+            <a class="au-direction-link" href="/about">You can view the previous landing page here</a>
+        </div>
 
 
-			<section class="au-callout">
-				<h4 class="au-callout__heading" th:text="${numberOfServices + ' APIs'}" />
-				<a class="au-direction-link" href="/apis">View them all</a>
-			</section>
+        <section class="au-callout">
+            <h4 class="au-callout__heading" th:text="${numberOfServices + ' APIs'}"/>
+            <a class="au-direction-link" href="/apis">View them all</a>
+        </section>
 
 
-            <section class="highlighted-section au-body">
-                <div class="container-fluid">
+        <section class="highlighted-section au-body">
+            <div class="container-fluid">
 
                 <h3 class="section__head">Discover APIs by agency</h3>
 
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/ato"><h4 class="section__title">Australian Taxation Office</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="/space/super">Superannuation</a></li>
-                                <li class="section__topic"><a href="/space/abr">Business registration</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/afsa"><h4 class="section__title">Australian Financial Security Authority</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="/space/insolvency">Insolvency</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/abs"><h4 class="section__title">Australian Bureau of Statistics</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="/space/anzsic">ANZSIC codes</a></li>
-                            </ul>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="section__titleLink" href="/space/ato"><h4 class="section__title">Australian Taxation
+                            Office</h4></a>
+                        <ul class="section__topiclist">
+                            <li class="section__topic"><a href="/space/super">Superannuation</a></li>
+                            <li class="section__topic"><a href="/space/abr">Business registration</a></li>
+                        </ul>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <a class="section__titleLink" href="/space/wofg"><h4 class="section__title">Whole of Government</h4></a>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="/space/apigovau">api.gov.au</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-sm-4">
+                        <a class="section__titleLink" href="/space/afsa"><h4 class="section__title">Australian Financial
+                            Security Authority</h4></a>
+                        <ul class="section__topiclist">
+                            <li class="section__topic"><a href="/space/insolvency">Insolvency</a></li>
+                        </ul>
                     </div>
-
+                    <div class="col-sm-4">
+                        <a class="section__titleLink" href="/space/abs"><h4 class="section__title">Australian Bureau of
+                            Statistics</h4></a>
+                        <ul class="section__topiclist">
+                            <li class="section__topic"><a href="/space/anzsic">ANZSIC codes</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a class="section__titleLink" href="/space/wofg"><h4 class="section__title">Whole of
+                            Government</h4></a>
+                        <ul class="section__topiclist">
+                            <li class="section__topic"><a href="/space/apigovau">api.gov.au</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
 
-
-
-
-            <section class="highlighted-section au-body au-body--alt">
-                <div class="container-fluid">
+        <section class="highlighted-section au-body au-body--alt">
+            <div class="container-fluid">
                 <h3 class="section__head">Not looking for APIs?</h3>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4 class="section__title">I'm not a developer</h4>
-                            <ul class="section__topiclist">
-                                <li class="section__topic">Become a developer</li>
-                                <li class="section__topic">Looking for software</li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="section__title">I work in Government</h4>
-                            <ul class="section__topiclist">
-                                <li class="section__topic">About api.gov.au for Government</li>
-                                <li class="section__topic"><a href="https://github.com/apigovau">Get involved</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4 class="section__title">I need help</h4>
-                            <ul class="section__topiclist">
-                                <li class="section__topic"><a href="/community">Community help forum</a></li>
-                            </ul>
-                        </div>
-                    </div>  
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="section__title">I'm not a developer</h4>
+                        <ul class="section__topiclist">
+                            <li class="section__topic">Become a developer</li>
+                            <li class="section__topic">Looking for software</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4 class="section__title">I work in Government</h4>
+                        <ul class="section__topiclist">
+                            <li class="section__topic">About api.gov.au for Government</li>
+                            <li class="section__topic"><a href="https://github.com/apigovau">Get involved</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <h4 class="section__title">I need help</h4>
+                        <ul class="section__topiclist">
+                            <li class="section__topic"><a href="/community">Community help forum</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
 
-
-
-        </div>
-        </main>
-        <div th:replace="fragments/layout :: footer"/>
-    </body>
+    </div>
+</main>
+<div th:replace="fragments/layout :: footer"/>
+</body>
 </html>
