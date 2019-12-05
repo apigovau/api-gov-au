@@ -1561,6 +1561,10 @@ ul.conversation-list {
     min-height: 125px;
 }
 
+.community__nopad{
+    padding-top:0px !important;
+}
+
 /* Start - DTA Feedback implementation */
 .section{
     background-color:white;

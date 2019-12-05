@@ -11,6 +11,28 @@
 
 
 <main class="container">
+
+    <h1>API Catalogue</h1>
+    <p>Our catalogue is a collection of publicly listed APIs which have been shared by teams in government. Have a look around and see if there are any APIs that interest you.</p>
+    <p>If you would like any additional information about an API, you will need to contact the agency who owns it.</p>
+
+    <h5>Want to share an API?</h5>
+    <div class="intro">
+        <p/>
+        <p>If you work for a government agency and have an API you would like to publish, we'd be happy
+            to help.</p>
+        <p/>
+        <p>We're developing a variety of APIs and wizards to help you list and maintain your API's here,
+            but they're not ready just yet. For now, please email us at api@dta.gov.au, and we'll
+            get back to you.</p>
+        <p/>
+        <p>If you don't work in government and have questions about specific APIs, please contact the
+            agency who owns the API for more information on it's availablity, or having it listed on
+            api.gov.au</p>
+        <p class="intro__button"><a class="au-btn au-btn--secondary" href="mailto:api@dta.gov.au">Contact us</a></p>
+    </div>
+
+
     <p th:if="${#lists.size(services)==0}">There are no APIs here</p>
     <div th:if="${#lists.size(services)>0}">
         <div class="itemIndexRow" th:each="index: ${#numbers.sequence(0, #lists.size(services)-1, 2)}">

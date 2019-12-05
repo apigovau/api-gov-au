@@ -14,6 +14,11 @@
 
 <main class="container">
 
+    <h1>Data Definitions</h1>
+    <p>The definitions catalogue lists the metadata and descriptions of the data that government use on their APIs.</p>
+    <p>By reusing the definitions it's easier for government agencies to share data. It also makes it easier for government to ask for data consistently when it needs to be collected.</p>
+
+    <br/>
     <form action="#" method="get" th:action="@{/definitions}" th:object="${search}">
         <input class="au-text-input main_search_bar" id="query" name="query" th:if="${showResults} != null" th:value="${queryString}"
                type="text"/>
