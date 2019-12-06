@@ -7,7 +7,6 @@
     <div th:replace="fragments/layout :: css"/>
 </head>
 <body class="au-body au-grid">
-
 <div th:replace="fragments/layout :: header(landing=false, current='definitions')"/>
 
 
@@ -18,9 +17,11 @@
         <h3 class="au-display-1">Using search</h3>
         <p>Here are some examples of what you can search on</p>
         <ul>
-            <li>part of an item's name: <a th:href="@{/definitions/?query=address+details+overseas}">address details overseas</a>
+            <li>part of an item's name: <a th:href="@{/definitions/?query=address+details+overseas}">address details
+                overseas</a>
             </li>
-            <li>part of a item's definition: <a th:href="@{/definitions/?query=code+that+is+assigned}">code that is assigned</a>
+            <li>part of a item's definition: <a th:href="@{/definitions/?query=code+that+is+assigned}">code that is
+                assigned</a>
             </li>
             <li>the identifier of a definition: <a th:href="@{/definitions/?query=de55}">DE55</a></li>
         </ul>
@@ -29,10 +30,12 @@
     <div class="au-page-alerts" role="alert">
         <h3 class="au-display-1">Advanced searching</h3>
         <ul>
-            <li>&quot; &quot; will find exact matches: <a th:href="@{/definitions/?query=&quot;address+details+state&quot;}">&quot;address
+            <li>&quot; &quot; will find exact matches: <a
+                    th:href="@{/definitions/?query=&quot;address+details+state&quot;}">&quot;address
                 details state&quot;</a></li>
             <li>* is a wildcard: <a th:href="@{/definitions/?query=add*}">add*</a></li>
-            <li>+ makes something important: <a th:href="@{/definitions/?query=address +geocode}">address +geocode</a></li>
+            <li>+ makes something important: <a th:href="@{/definitions/?query=address +geocode}">address +geocode</a>
+            </li>
             <li>- excludes things: <a th:href="@{/definitions/?query=add* -address}">add* -address</a></li>
         </ul>
     </div>
@@ -45,7 +48,8 @@
         <ul>
             <li>search for definitions: <a th:href="@{/definitions/api/search?query=government}">/api/search?query=government</a>
             </li>
-            <li>search for defintions from one domain: <a th:href="@{/definitions/api/search?query=government&amp;domain=fs}">/api/search?query=government&amp;domain=fs</a>
+            <li>search for defintions from one domain: <a
+                    th:href="@{/definitions/api/search?query=government&amp;domain=fs}">/api/search?query=government&amp;domain=fs</a>
             </li>
             <li>browse definitions: <a th:href="@{/definitions/api/browse}">/api/browse</a></li>
             <li>get the details of a specific definition: <a th:href="@{/definitions/api/definition/trc/de55}">/api/definition/trc/de55</a>

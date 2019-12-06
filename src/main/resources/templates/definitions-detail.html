@@ -15,10 +15,10 @@
         max-height:100vh;
     }
 
+
     </style>
 </head>
 <body class="au-body au-grid">
-
 <div th:replace="fragments/layout :: header(landing=false, current='definitions')"/>
 
 <main class="container">
@@ -38,39 +38,39 @@
         <dt>Unique identifier</dt>
         <dd><a th:attr="href=@{${href}}" th:text="${identifier}"/></dd>
 
-        <div th:remove="tag" th:if="${source}">
+        <div th:if="${source}" th:remove="tag">
             <dt>Source</dt>
             <dd><a th:attr="href=${source}" th:text="${source}"/></dd>
         </div>
 
         <dt th:if="${not #lists.isEmpty(usage)}">Used by</dt>
-        <div th:remove="tag" th:each="use : ${usage}">
+        <div th:each="use : ${usage}" th:remove="tag">
             <dd th:text="${use}"/>
         </div>
 
-        <div th:remove="tag" th:if="${type}">
+        <div th:if="${type}" th:remove="tag">
             <dt>Type</dt>
             <dd th:text="${type}"/>
         </div>
 
         <dt th:if="${not #lists.isEmpty(typeValues)}">Suggested enumerations</dt>
-        <div th:remove="tag" th:each="value : ${typeValues}">
+        <div th:each="value : ${typeValues}" th:remove="tag">
             <dd th:text="${value}"/>
         </div>
 
         <dt th:if="${not #maps.isEmpty(typeFacets)}">Suggested restrictions</dt>
-        <div th:remove="tag" th:each="value : ${typeFacets}">
+        <div th:each="value : ${typeFacets}" th:remove="tag">
             <dd><strong th:text="${value.key}"/>
                 <div th:remove="tag" th:text="': ' + ${value.value}"/>
             </dd>
         </div>
 
-        <div th:remove="tag" th:if="${syntaxes}">
+        <div th:if="${syntaxes}" th:remove="tag">
             <dt>Syntax specifics</dt>
             <dl>
-                <div th:remove="tag" th:each="syntaxName : ${syntaxes}">
+                <div th:each="syntaxName : ${syntaxes}" th:remove="tag">
                     <dt><strong th:text="${syntaxName.key}"/></dt>
-                    <div th:remove="tag" th:each="syntaxValue : ${syntaxName.value}">
+                    <div th:each="syntaxValue : ${syntaxName.value}" th:remove="tag">
                         <dd><strong th:text="${syntaxValue.key}"/>
                             <div th:remove="tag" th:text="': ' + ${syntaxValue.value}"/>
                         </dd>
@@ -83,14 +83,14 @@
         <dt>API url</dt>
         <dd><a th:attr="href=@{${api}}" th:text="'https://api.gov.au' + ${api}"/></dd>
 
-        <div th:remove="tag" th:if="${relationships}">
+        <div th:if="${relationships}" th:remove="tag">
             <dt>Related definitions</dt>
 
 
             <dl>
-                <div th:remove="tag" th:each="relationshipName : ${relationships}">
+                <div th:each="relationshipName : ${relationships}" th:remove="tag">
                     <dt><strong th:text="${relationshipName.key}"/></dt>
-                    <div th:remove="tag" th:each="relationshipValue : ${relationshipName.value}">
+                    <div th:each="relationshipValue : ${relationshipName.value}" th:remove="tag">
                         <dd><span
                                 th:text="${relationshipValue.relationship.meta.verbs[relationshipValue.relationship.direction]} + ' '"/><a
                                 th:attr="href=@{${'/definitions/' + relationshipValue.relationship.to}}"
@@ -103,7 +103,8 @@
                 <use th:attr="'xlink:href'='/definitions/api/imgRedirect.svg?url=https://api.gov.au/graph/relations.svg?url=https://api.gov.au' + ${relationShipImageUrl}  + '#graph00'"></use>
             </svg>
             <!--<![endif]-->
-            <!--[if IE]><img th:attr="src='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">
+            <!--[if IE]><img
+                th:attr="src='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">
             <![endif]-->
             <a th:attr="href='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">Click
                 here for a bigger version</a>

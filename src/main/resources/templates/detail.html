@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <div th:replace="fragments/layout :: meta" />
-  <title th:text="${model.name} + ' | api.gov.au'"></title>
-  <div th:replace="fragments/layout :: favicon"/>
-  <div th:replace="fragments/layout :: css"/>
-  <div th:replace="fragments/layout :: highlight"/>
-  <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
-      <div  th:replace="fragments/collaborate :: style-sheet"/>
-  </div>
+    <div th:replace="fragments/layout :: meta"/>
+    <title th:text="${model.name} + ' | api.gov.au'"></title>
+    <div th:replace="fragments/layout :: favicon"/>
+    <div th:replace="fragments/layout :: css"/>
+    <div th:replace="fragments/layout :: highlight"/>
+    <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
+        <div th:replace="fragments/collaborate :: style-sheet"/>
+    </div>
 </head>
 <body class="au-body au-grid">
-
 <div th:replace="fragments/layout :: header(landing = false, current='apis')"/>
 
 <main class="container">
@@ -20,35 +19,43 @@
 
     <div class="col-sm-3 api_nav">
         <div th:each="page : ${pageList}" th:remove="tag">
-            <p th:if="${currentPage} == ${page.key}" class="current_page" ><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
-            <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}" /></p>
-            <ul th:each="subpage : ${page.value}" class="au-link-list">
-                <li><a th:attr="href='/service/' + ${id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}" th:text="${subpage}"/></li>
+            <p class="current_page" th:if="${currentPage} == ${page.key}"><a
+                    th:attr="href='/service/' + ${id} + '/' + ${page.key}" th:text="${page.key}"/></p>
+            <p th:if="${currentPage} != ${page.key}"><a th:attr="href='/service/' + ${id} + '/' + ${page.key}"
+                                                        th:text="${page.key}"/></p>
+            <ul class="au-link-list" th:each="subpage : ${page.value}">
+                <li>
+                    <a th:attr="href='/service/' + ${id} + '/' + ${page.key} + '#' + ${subpage.toLowerCase().replace(' ','-')}"
+                       th:text="${subpage}"/></li>
             </ul>
 
         </div>
     </div>
     <div class="col-sm-8 api_data">
 
-        <div th:remove="tag" th:utext="${content}" />
+        <div th:remove="tag" th:utext="${content}"/>
         <div th:if="${currentPage} == 'Collaborate'" th:remove="tag">
-            <div  th:replace="fragments/collaborate :: conversations" />
+            <div th:replace="fragments/collaborate :: conversations"/>
         </div>
         <br/>
         <br/>
 
-        <div class="last_edit" th:text="${lastEdit}" />
-        <div th:if="${nextPage} or ${prevPage}" class="detail_pagination">
-            <div th:if="${nextPage}" class="next_detail_page">
+        <div class="last_edit" th:text="${lastEdit}"/>
+        <div class="detail_pagination" th:if="${nextPage} or ${prevPage}">
+            <div class="next_detail_page" th:if="${nextPage}">
                 <a th:attr="href='/service/' + ${id} + '/' + ${nextPage.title}">
                     <div class="page_nav_label">Next</div>
-                    <div class="page_nav_title"><div th:text="${nextPage.title}"/></div>
+                    <div class="page_nav_title">
+                        <div th:text="${nextPage.title}"/>
+                    </div>
                 </a>
             </div>
-            <div th:if="${prevPage}" class="prev_detail_page">
+            <div class="prev_detail_page" th:if="${prevPage}">
                 <a th:attr="href='/service/' + ${id} + '/' + ${prevPage.title}">
                     <div class="page_nav_label">Back</div>
-                    <div class="page_nav_title"><div th:text="${prevPage.title}"/></div>
+                    <div class="page_nav_title">
+                        <div th:text="${prevPage.title}"/>
+                    </div>
                 </a>
             </div>
         </div>

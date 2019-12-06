@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <title>Definitions Catalogue</title>
@@ -13,19 +13,22 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'UA-61222473-22');
+
         </script>
 
 
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
     </div>
 
 
+
+
     <div th:fragment="favicon" th:remove="tag">
-        <link rel="icon" type="image/png" href="/img/favicon-196x196.png" sizes="196x196" />
-        <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16" />
-        <link rel="icon" type="image/png" href="/img/favicon-128.png" sizes="128x128" />
+        <link href="/img/favicon-196x196.png" rel="icon" sizes="196x196" type="image/png"/>
+        <link href="/img/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+        <link href="/img/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+        <link href="/img/favicon-128.png" rel="icon" sizes="128x128" type="image/png"/>
     </div>
 
     <div th:fragment="fonts" th:remove="tag">
@@ -33,26 +36,28 @@
     </div>
 
     <div th:fragment="css" th:remove="tag">
-        <link rel="stylesheet" href="/css/designsystem.min.css" />
-        <link rel="stylesheet" href="/css/custom.css" />
+        <link href="/css/designsystem.min.css" rel="stylesheet"/>
+        <link href="/css/custom.css" rel="stylesheet"/>
     </div>
 
     <div th:fragment="highlight" th:remove="tag">
 
         <!--[if IE 9]>
-        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-light.css" />
+        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-light.css"/>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <![endif]-->
         <!--[if !IE]><!-->
-        <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-light.css" />
+        <link href="https://highlightjs.org/static/demo/styles/atom-one-light.css" rel="stylesheet"/>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <!--<![endif]-->
 
     </div>
 
     <div th:fragment="start_highlight" th:remove="tag">
-        <!--[if IE 9]><script>hljs.initHighlightingOnLoad();</script><![endif]-->
-        <!--[if !IE]><!--><script>hljs.initHighlightingOnLoad();</script><!--<![endif]-->
+        <!--[if IE 9]>
+        <script>hljs.initHighlightingOnLoad();</script><![endif]-->
+        <!--[if !IE]><!-->
+        <script>hljs.initHighlightingOnLoad();</script><!--<![endif]-->
     </div>
 
 </head>
@@ -61,60 +66,70 @@
 
 
 <div th:fragment="header(landing, current)" th:remove="tag">
+        <section class="phase-banner">
+            <div class="wrapper au-grid container container-fluid">
+                This is in <a class="dss_stage_link"
+                              href="https://www.dta.gov.au/standard/service-design-and-delivery-process/">beta</a>. If you find something wrong, <a
+                    class="dss_stage_link" href="https://github.com/apigovau/api-gov-au/issues/new">let us know</a>
+            </div>
+        </section>
+        
     <header class="au-grid au-header au-header--hero au-header--dark hero_header" role="banner">
-            <div class="container" th:classappend="${!landing} ? main_header">
+        <div class="container" th:classappend="${!landing} ? main_header">
 
-                <div th:if="${landing}" th:remove="tag">
-                        <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
-                        <h1 class="au-header-heading">
-                            api.gov.au
-                            <div class="au-header__subline">
-                                    <p>Building government services into your product.</p>
+            <div th:if="${landing}" th:remove="tag">
+                <img alt="Australian Government logo" class="hero_logo au-responsive-media-img"
+                     src="/img/header-logo-agov.png"/>
+                <h1 class="au-header-heading">
+                    api.gov.au
+                    <span class="badge">BETA</span>
+                    <div class="au-header__subline">
+                        <p>Helping you find and use Government APIs and other machine-to-machine services</p>
+                    </div>
+                </h1>
+            </div>
+            <div th:if="${!landing}" th:remove="tag">
+                <h1 class="au-header-heading">
+                    <img alt="Australian Government logo" class="hero_logo au-responsive-media-img"
+                         src="/img/header-logo-agov.png"/>
+                    <a href="/">api.gov.au</a>
+                    <span class="badge">BETA</span>
+                </h1>
+            </div>
+        </div>
+
+        <nav aria-label="main navigation" class="au-main-nav">
+            <input id="menu" type="checkbox">
+            <label for="menu">☰ Menu</label>
+            </input>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="au-main-nav__content" id="main-nav-default">
+                            <div class="au-main-nav__menu">
+                                <div class="au-main-nav__menu-inner">
+                                    <div class="au-main-nav__focus-trap-top"></div>
+                                    <ul class="au-link-list">
+                                        <li th:classappend="${current == 'about'} ? active"><a href="/">About Us</a></li>
+                                        <li th:classappend="${current == 'apis'} ? active"><a href="/apis">API Catalogue</a></li>
+                                        <li th:classappend="${current == 'definitions'} ? active"><a href="/definitions">Data Definitions</a></li>
+                                        <li><a href="/standards">Standards</a></li>
+                                        <li><a href="/playbook">Playbook</a></li>
+                                        <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
+                                        <li class="githubLink"><a href="https://github.com/apigovau/api-gov-au" target="_blank">Github</a></li>
+                                    </ul>
+                                    <div class="au-main-nav__focus-trap-bottom"></div>
+                                </div>
                             </div>
-                        </h1>
-                </div>
-                <div th:if="${!landing}" th:remove="tag">
-                        <h1 class="au-header-heading">
-                            <img class="hero_logo au-responsive-media-img" src="/img/header-logo-agov.png" alt="Australian Government logo"/>
-                            <a href="/">api.gov.au</a>
-                        </h1>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <nav class="au-main-nav" aria-label="main navigation">
-                <input type="checkbox" id="menu">
-                    <label for="menu">☰ Menu</label>
-                </input>
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div id="main-nav-default" class="au-main-nav__content">
-                           <div class="au-main-nav__menu">
-                              <div class="au-main-nav__menu-inner">
-                                 <div class="au-main-nav__focus-trap-top"></div>
-                                 <ul class="au-link-list">
-                                    <li th:classappend="${current == 'about'} ? active"><a href="/">About Us</a></li>
-                                    <li th:classappend="${current == 'apis'} ? active"><a href="/apis">Discover APIs</a></li>
-                                    <li th:classappend="${current == 'share'} ? active"><a href="/share">Share an API</a></li>
-                                    <li th:classappend="${current == 'definitions'} ? active"><a href="/definitions">Data Definitions</a></li>
-                                    <li><a href="/playbook">Playbook</a></li>
-                                    <li th:classappend="${current == 'community'} ? active"><a href="/community/">Community</a></li>
-                                    <li class="githubLink"><a target="_blank" href="https://github.com/apigovau/api-gov-au">Github</a></li>
-                                 </ul>
-                                 <div class="au-main-nav__focus-trap-bottom"></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </nav>
+        </nav>
 
 
-        </header>
+    </header>
 </div>
-
-
 
 
 <div th:fragment="footer" th:remove="tag">
@@ -129,17 +144,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 ie_footer_hook">
-                    <img class="au-responsive-media-img coat-of-arms" src="/img/hero_logo.png" alt="api.gov.au logo" />
+                    <img alt="api.gov.au logo" class="au-responsive-media-img coat-of-arms" src="/img/hero_logo.png"/>
                     <div class="joint-initiative">
-                        A joint initiative of the <a href="https://dta.gov.au">Digital&nbsp;Transformation&nbsp;Agency</a> and <a href="https://sbr.gov.au">Standard&nbsp;Business&nbsp;Reporting</a>
+                        A joint initiative of the <a
+                            href="https://dta.gov.au">Digital&nbsp;Transformation&nbsp;Agency</a> and <a
+                            href="https://sbr.gov.au">Standard&nbsp;Business&nbsp;Reporting</a>
                     </div>
                 </div>
-                    <div class="col-sm-8 ie_footer_hook footer-phrase">
-                        <ul class="footer-links">
-                            <li><a href="/about">About api.gov.au</a></li>
-                            <li><a href="/disclaimer">Disclaimer</a></li>
-                        </ul>
-                        <p class="copyright">© Commonwealth of Australia. With the exception of the Commonwealth Coat of Arms and where otherwise noted, this work is licensed under the <a href="https://github.com/apigovau/api-gov-au">MIT license</a></p>
+                <div class="col-sm-8 ie_footer_hook footer-phrase">
+                    <ul class="footer-links">
+                        <li><a href="/about">About api.gov.au</a></li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
+                    </ul>
+                    <p class="copyright">© Commonwealth of Australia. With the exception of the Commonwealth Coat of
+                        Arms and where otherwise noted, this work is licensed under the <a
+                                href="https://github.com/apigovau/api-gov-au">MIT license</a></p>
                 </div>
             </div>
         </div>
@@ -147,48 +166,50 @@
 </div>
 
 
-
-
-
-                <div th:fragment="indexItemContainer(service)" class="indexItemContainer">
-                    <div class="indexItemContainerBody">
-                        <strong><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
-                        <img th:src="*{__${service}__.logoURI}" alt="API Logo"/>
-                        <div class="indexItemContainerBodyTextContainer"><div class="indexItemContainerBodyText" th:text="*{__${service}__.definition}"/></div>
-                    </div>
-                    <div class="indexItemBottomBar">
-                        <ul>
-                            <li th:if='*{__${service}__.domain != ""}'>
-                                <img src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;" alt="Category"/>
-                                <div th:text="' '+*{__${service}__.domain}"/>
-                            </li>
-                            <li th:if='*{__${service}__.status != ""}'>
-                                <img src="/img/iconStatus25.png" style="width:10px;height:10px;display:inline-block;" alt="Status"/>
-                                <div th:text="' '+*{__${service}__.status}"/>
-                            </li>
-                            <li th:if='*{__${service}__.agency != ""}'>
-                                <img src="/img/iconAgency25.png" style="width:10px;height:10px;display:inline-block;" alt="Agency"/>
-                                <div th:text="' '+*{__${service}__.agency}"/>
-                            </li>
-                            <li th:if='*{__${service}__.security!= ""}'>
-                                <img src="/img/iconSecurity25.png" style="width:10px;height:10px;display:inline-block;" alt="Security"/>
-                                <div th:text="' '+*{__${service}__.security}"/>
-                            </li>
-                            <li th:if='*{__${service}__.technology!= ""}'>
-                                <img src="/img/iconTech25.png" style="width:10px;height:10px;display:inline-block;" alt="Technology"/>
-                                <div th:text="' '+*{__${service}__.technology}"/>
-                            </li>
-                            <li th:if='*{__${service}__.openAPISpec!= ""}'>
-                                <img src="/img/iconDoco25.png" style="width:10px;height:10px;display:inline-block;" alt="Interactive documentation"/>
-                                <div th:text="' '+*{__${service}__.openAPISpec}"/>
-                            </li>
-                            <div th:remove="tag" th:if="${not #lists.isEmpty(__${service}__.tags)}">
-                            <li><img src="/img/iconTags25.png" style="width:10px;height:10px;display:inline-block;" alt="Tags"/></li>
-                            <li th:if="${not #lists.isEmpty(__${service}__.tags)}" th:each="tag : *{__${service}__.tags}" th:text="' #'+${tag}"/>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
+<div class="indexItemContainer" th:fragment="indexItemContainer(service)">
+    <div class="indexItemContainerBody">
+        <strong><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
+        <img alt="API Logo" th:src="*{__${service}__.logoURI}"/>
+        <div class="indexItemContainerBodyTextContainer">
+            <div class="indexItemContainerBodyText" th:text="*{__${service}__.definition}"/>
+        </div>
+    </div>
+    <div class="indexItemBottomBar">
+        <ul>
+            <li th:if='*{__${service}__.domain != ""}'>
+                <img alt="Category" src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.domain}"/>
+            </li>
+            <li th:if='*{__${service}__.status != ""}'>
+                <img alt="Status" src="/img/iconStatus25.png" style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.status}"/>
+            </li>
+            <li th:if='*{__${service}__.agency != ""}'>
+                <img alt="Agency" src="/img/iconAgency25.png" style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.agency}"/>
+            </li>
+            <li th:if='*{__${service}__.security!= ""}'>
+                <img alt="Security" src="/img/iconSecurity25.png" style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.security}"/>
+            </li>
+            <li th:if='*{__${service}__.technology!= ""}'>
+                <img alt="Technology" src="/img/iconTech25.png" style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.technology}"/>
+            </li>
+            <li th:if='*{__${service}__.openAPISpec!= ""}'>
+                <img alt="Interactive documentation" src="/img/iconDoco25.png"
+                     style="width:10px;height:10px;display:inline-block;"/>
+                <div th:text="' '+*{__${service}__.openAPISpec}"/>
+            </li>
+            <div th:if="${not #lists.isEmpty(__${service}__.tags)}" th:remove="tag">
+                <li><img alt="Tags" src="/img/iconTags25.png" style="width:10px;height:10px;display:inline-block;"/>
+                </li>
+                <li th:each="tag : *{__${service}__.tags}" th:if="${not #lists.isEmpty(__${service}__.tags)}"
+                    th:text="' #'+${tag}"/>
+            </div>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>
