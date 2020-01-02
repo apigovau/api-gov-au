@@ -1,11 +1,10 @@
 package au.gov.api.services.test
 
-import au.gov.api.models.Event
 import au.gov.api.repositories.dto.ServiceDescriptionDTO
 import au.gov.api.repositories.mock.MockEventRepository
+import au.gov.api.repositories.mock.MockServiceDescriptionRepository
 import au.gov.api.repositories.processors.PageProcessor
 import au.gov.api.services.ServiceDescriptionService
-import au.gov.api.repositories.mock.MockServiceDescriptionRepository
 import au.gov.api.web.mock.MockURIFetcher
 import com.beust.klaxon.Klaxon
 import org.junit.Assert
@@ -29,21 +28,21 @@ some content
 """
 
     @Test
-    fun test_get_heading(){
+    fun test_get_heading() {
         val page = PageProcessor.processPage(pageText)
 
         Assert.assertEquals("Page Heading", page.title)
     }
 
     @Test
-    fun test_get_subheadings(){
+    fun test_get_subheadings() {
         val page = PageProcessor.processPage(pageText)
 
         Assert.assertEquals(listOf("SubHead 1", "SubHead 2"), page.subHeadings)
     }
 
     @Test
-    fun test_markdown(){
+    fun test_markdown() {
         val fetcher = MockURIFetcher()
 
         val page = PageProcessor.processPage("This is **Sparta**")
@@ -51,7 +50,7 @@ some content
     }
 
     @Test
-    fun will_replace_defcat(){
+    fun will_replace_defcat() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
@@ -70,7 +69,7 @@ some content
     }
 
     @Test
-    fun will_replace_defcat_attribute_specified(){
+    fun will_replace_defcat_attribute_specified() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
@@ -89,7 +88,7 @@ some content
     }
 
     @Test
-    fun will_replace_defcat_attribute_specified_link(){
+    fun will_replace_defcat_attribute_specified_link() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
@@ -108,7 +107,7 @@ some content
     }
 
     @Test
-    fun wont_replace_defcat_if_resolution_fails(){
+    fun wont_replace_defcat_if_resolution_fails() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
@@ -127,7 +126,7 @@ some content
     }
 
     @Test
-    fun can_get_deserialised_object_from_cache(){
+    fun can_get_deserialised_object_from_cache() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
@@ -146,18 +145,18 @@ some content
     }
 
     @Test
-    fun test_nav(){
+    fun test_nav() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name","", listOf(
-"""
+        val testDTO = ServiceDescriptionDTO("name", "", listOf(
+                """
 # p1h11
 ## p1h21
 ## p1h22
 """
-,
-"""
+                ,
+                """
 # p2h11
 ## p2h11
 """
@@ -173,17 +172,17 @@ some content
 
         Assert.assertEquals(2, fetchedDTO.navigation.size)
         Assert.assertEquals("p1h11", fetchedDTO.navigation.keys.first())
-        Assert.assertEquals(listOf("p1h21","p1h22"), fetchedDTO.navigation["p1h11"])
+        Assert.assertEquals(listOf("p1h21", "p1h22"), fetchedDTO.navigation["p1h11"])
         Assert.assertEquals("p2h11", fetchedDTO.navigation.keys.last())
         Assert.assertEquals(listOf("p2h11"), fetchedDTO.navigation["p2h11"])
     }
 
     @Test
-    fun prev_and_next_pages(){
+    fun prev_and_next_pages() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name","",listOf("# p1","# p2","# p3"))
+        val testDTO = ServiceDescriptionDTO("name", "", listOf("# p1", "# p2", "# p3"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
@@ -211,30 +210,7 @@ some content
     }
 
     @Test
-    fun test_last_edited_with_valid_event(){
-        val baseRepoUri = "test/"
-        val fetcher = MockURIFetcher()
-
-        val testServiceDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
-        val testServiceDTOString = Klaxon().toJsonString(testServiceDTO)
-
-        fetcher.map["${baseRepoUri}service/${testServiceDTO.name}"] = testServiceDTOString
-
-        val testEvent = Event("Thu Jan 03 15:08:48 AEDT 2019","abc","Updated","Service","name", "testing")
-        val testEventDTOString = Klaxon().toJsonString(listOf(testEvent))
-
-        fetcher.map[testServiceDTO.name] = testEventDTOString
-
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
-
-        val expectedLastEdited = "Last edited: Thu Jan 03 15:08:48 AEDT 2019"
-        val fetchedLastEdited = serviceDescriptionService.getLastEdited(testServiceDTO.name)
-
-        Assert.assertEquals(expectedLastEdited, fetchedLastEdited)
-    }
-
-    @Test
-    fun test_last_edited_with_invalid_event(){
+    fun test_last_edited_with_invalid_event() {
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
