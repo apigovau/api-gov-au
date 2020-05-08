@@ -216,15 +216,17 @@
 </div>
 
 
-<div class="indexItemContainer" th:fragment="indexItemContainer(service)">
+<div class="indexItemContainer" th:fragment="indexItemContainer(service)" th:remove="tag">
+<div class="indexItemContainer"  th:classappend="*{__${service}__.status == 'Beta'} ? 'betaService ribbon_parent'">
     <div class="indexItemContainerBody">
+        <div th:if="*{__${service}__.status == 'Beta'}" class="ribbon">&nbsp;&nbsp;Beta&nbsp;&nbsp;</div>
         <strong><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
         <img alt="API Logo" th:src="*{__${service}__.logoURI}"/>
         <div class="indexItemContainerBodyTextContainer">
             <div class="indexItemContainerBodyText" th:text="*{__${service}__.definition}"/>
         </div>
     </div>
-    <div class="indexItemBottomBar">
+    <div class="indexItemBottomBar" th:classappend="*{__${service}__.status == 'Beta'} ? 'betaService'">
         <ul>
             <li th:if='*{__${service}__.domain != ""}'>
                 <img alt="Category" src="/img/iconCat25.png" style="width:10px;height:10px;display:inline-block;"/>
@@ -257,7 +259,8 @@
                 <li th:each="tag : *{__${service}__.tags}" th:if="${not #lists.isEmpty(__${service}__.tags)}"
                     th:text="' #'+${tag}"/>
             </div>
-        </ul>
+            </ul>
+        </div>
     </div>
 </div>
 

@@ -102,6 +102,7 @@ class CoreController {
         model.put("content", page.html())
         model.put("lastEdit", lastedit)
         model.put("conversations", conversations)
+        model.put("serviceStatus", serviceDescriptionService.list().first{sd -> sd.path == id}.status)
 
         if (title == "Collaborate") model.put("convoPage", convoPage)
 
