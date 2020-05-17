@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
+import khttp.get
+
 @RestController
 class CoreRestController {
 
@@ -37,4 +39,9 @@ class CoreRestController {
     @GetMapping("/api/flush/{id}")
     fun flushServiceCache(@PathVariable id:String) = serviceDescriptionService.flush(id)
 
+    @GetMapping("/github")
+    fun fromGitHub(@RequestParam path:String): String{
+        val rsp = khttp.get("https://raw.githubusercontent.com/apigovau/api-descriptions/master/" + path.replace("~","/"), mapOf())
+        return rsp.text
+    }
 }
