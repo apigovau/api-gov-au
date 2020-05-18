@@ -991,7 +991,6 @@ ul.pagination_controls li {
   overflow: hidden; /* required */
   min
   width: 50%; /* for demo only */
-  height: 250px /* some non-zero number */;
   margin: 25px auto; /* for demo only */
   position: relative; /* required  for demo*/
 }
