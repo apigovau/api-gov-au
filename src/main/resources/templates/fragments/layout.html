@@ -220,7 +220,8 @@
 <div class="indexItemContainer"  th:classappend="*{__${service}__.status == 'Beta'} ? 'betaService ribbon_parent'">
     <div class="indexItemContainerBody">
         <div th:if="*{__${service}__.status == 'Beta'}" class="ribbon">&nbsp;&nbsp;Beta&nbsp;&nbsp;</div>
-        <strong><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
+        <strong th:if="*{__${service}__.metadata.externalLocation == ''}"><a th:attr="href='/service/' + *{__${service}__.path}" th:text="*{__${service}__.name}"/></strong>
+        <strong th:if="*{__${service}__.metadata.externalLocation != ''}"><a th:attr="href=*{__${service}__.metadata.externalLocation}" th:text="*{__${service}__.name}"/></strong>
         <img alt="API Logo" th:src="*{__${service}__.logoURI}"/>
         <div class="indexItemContainerBodyTextContainer">
             <div class="indexItemContainerBodyText" th:text="*{__${service}__.definition}"/>
