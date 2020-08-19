@@ -1,11 +1,8 @@
 package au.gov.api.repositories.processors.mock
 
 import au.gov.api.models.Definition
-import au.gov.api.models.Page
-import au.gov.api.repositories.dto.DefinitionDTO
+import au.gov.api.repositories.dao.DefinitionDAO
 import au.gov.api.repositories.processors.IPageProcessor
-import au.gov.api.repositories.processors.PageProcessor
-import au.gov.api.web.NaiveAPICaller
 import au.gov.api.web.ResourceCache
 import au.gov.api.web.mock.MockURIFetcher
 import com.beust.klaxon.Klaxon
@@ -17,9 +14,9 @@ object MockPageProcessor : IPageProcessor {
     override val definitionCache = {
         val fetcher = MockURIFetcher()
         val testDefinition = Definition(name = "Course Code", status = "Standard")
-        val testDefinitionString = Klaxon().toJsonString(DefinitionDTO(testDefinition))
+        val testDefinitionString = Klaxon().toJsonString(DefinitionDAO(testDefinition))
         fetcher.map["https://api.gov.au/api/definition/edu/edu307"] = testDefinitionString
 
-        ResourceCache(fetcher, 60, convert = { serial -> Klaxon().parse<DefinitionDTO>(serial)!! })
+        ResourceCache(fetcher, 60, convert = { serial -> Klaxon().parse<DefinitionDAO>(serial)!! })
     }.invoke()
 }

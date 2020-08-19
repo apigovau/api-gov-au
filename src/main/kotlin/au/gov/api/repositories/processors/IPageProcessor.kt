@@ -2,14 +2,14 @@ package au.gov.api.repositories.processors
 
 import au.gov.api.models.Definition
 import au.gov.api.models.Page
-import au.gov.api.repositories.dto.DefinitionDTO
+import au.gov.api.repositories.dao.DefinitionDAO
 import au.gov.api.web.ResourceCache
 import org.slf4j.Logger
 
 interface IPageProcessor {
 
     val log: Logger
-    val definitionCache : ResourceCache<DefinitionDTO>
+    val definitionCache : ResourceCache<DefinitionDAO>
 
     fun processPage(markdown: String): Page {
         val title = processPageTitle(markdown)
