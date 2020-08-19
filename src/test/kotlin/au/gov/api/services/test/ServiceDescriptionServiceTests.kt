@@ -1,7 +1,8 @@
 package au.gov.api.services.test
 
-import au.gov.api.repositories.dto.ServiceDescriptionDTO
+import au.gov.api.repositories.dao.ServiceDescriptionDAO
 import au.gov.api.repositories.mock.MockEventRepository
+import au.gov.api.repositories.mock.MockExternalServiceDescriptionRepository
 import au.gov.api.repositories.mock.MockServiceDescriptionRepository
 import au.gov.api.repositories.processors.PageProcessor
 import au.gov.api.services.ServiceDescriptionService
@@ -54,12 +55,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "description", listOf("Use element defcat```edu/edu307``` here"))
+        val testDTO = ServiceDescriptionDAO("name", "description", listOf("Use element defcat```edu/edu307``` here"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val preProcessed = "Use element Course Code here"
 
@@ -73,12 +74,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "description", listOf("The status of the element is: defcat```edu/edu307[status]```"))
+        val testDTO = ServiceDescriptionDAO("name", "description", listOf("The status of the element is: defcat```edu/edu307[status]```"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(),  MockEventRepository(fetcher))
 
         val preProcessed = "The status of the element is: Standard"
 
@@ -92,12 +93,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "description", listOf("Use element defcat```edu/edu307[name;1]``` here"))
+        val testDTO = ServiceDescriptionDAO("name", "description", listOf("Use element defcat```edu/edu307[name;1]``` here"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val preProcessed = "Use element [Course Code](https://api.gov.au/definition/edu/edu307) here"
 
@@ -111,12 +112,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "description", listOf("Use element defcat```edu/edu309``` here"))
+        val testDTO = ServiceDescriptionDAO("name", "description", listOf("Use element defcat```edu/edu309``` here"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val preProcessed = "Use element ```edu/edu309``` here"
 
@@ -130,12 +131,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
+        val testDTO = ServiceDescriptionDAO("name", "description", listOf("a", "b"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val fetchedDTO = serviceDescriptionService.get(testDTO.name)!!
 
@@ -149,7 +150,7 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "", listOf(
+        val testDTO = ServiceDescriptionDAO("name", "", listOf(
                 """
 # p1h11
 ## p1h21
@@ -166,7 +167,7 @@ some content
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val fetchedDTO = serviceDescriptionService.get("name")!!
 
@@ -182,12 +183,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testDTO = ServiceDescriptionDTO("name", "", listOf("# p1", "# p2", "# p3"))
+        val testDTO = ServiceDescriptionDAO("name", "", listOf("# p1", "# p2", "# p3"))
         val testDTOString = Klaxon().toJsonString(testDTO)
 
         fetcher.map["${baseRepoUri}service/${testDTO.name}"] = testDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val fetchedDTO = serviceDescriptionService.get("name")!!
 
@@ -214,12 +215,12 @@ some content
         val baseRepoUri = "test/"
         val fetcher = MockURIFetcher()
 
-        val testServiceDTO = ServiceDescriptionDTO("name", "description", listOf("a", "b"))
+        val testServiceDTO = ServiceDescriptionDAO("name", "description", listOf("a", "b"))
         val testServiceDTOString = Klaxon().toJsonString(testServiceDTO)
 
         fetcher.map["${baseRepoUri}service/${testServiceDTO.name}"] = testServiceDTOString
 
-        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockEventRepository(fetcher))
+        val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
         val expectedLastEdited = ""
         val fetchedLastEdited = serviceDescriptionService.getLastEdited(testServiceDTO.name)

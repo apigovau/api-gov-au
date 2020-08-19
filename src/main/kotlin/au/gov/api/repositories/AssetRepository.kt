@@ -3,7 +3,7 @@ package au.gov.api.repositories
 import au.gov.api.models.Article
 import au.gov.api.models.ArticleMetadata
 import au.gov.api.models.Space
-import au.gov.api.repositories.dto.ArticleDTO
+import au.gov.api.repositories.dao.ArticleDAO
 import au.gov.api.repositories.processors.PageProcessor
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class AssetRepository : IAssetRepository {
 
     private val spaces:MutableList<Space> = mutableListOf()
-    private val articles:MutableList<ArticleDTO> = mutableListOf()
+    private val articles:MutableList<ArticleDAO> = mutableListOf()
 
     //TODO Check still works after making private
     @EventListener(ApplicationReadyEvent::class)
@@ -144,9 +144,9 @@ A transition period has been established for DSPs who are already using our digi
 
     override fun parentsOfSpace(space:String):List<String> = spaces.filter { it.childSpaces.contains(space) }.map{ it.tag }
 
-    private fun convertToArticle(dto: ArticleDTO): Article = Article(ArticleMetadata(dto.id, dto.tags), dto.title, dto.date, dto.summary, dto.markdown, if (dto.markdown.isNotEmpty()) PageProcessor.processPage(dto.markdown) else null)
+    private fun convertToArticle(dao: ArticleDAO): Article = Article(ArticleMetadata(dao.id, dao.tags), dao.title, dao.date, dao.summary, dao.markdown, if (dao.markdown.isNotEmpty()) PageProcessor.processPage(dao.markdown) else null)
 
-    private fun convertFromArticle(article: Article): ArticleDTO = ArticleDTO(article.articleMetadata.id, article.articleMetadata.tags, article.title, article.date, article.markdown)
+    private fun convertFromArticle(article: Article): ArticleDAO = ArticleDAO(article.articleMetadata.id, article.articleMetadata.tags, article.title, article.date, article.markdown)
 
     private fun matchesTags(tags:List<String>, otherTags:List<String>) = tags.intersect(otherTags).isNotEmpty()
 }
