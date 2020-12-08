@@ -157,7 +157,7 @@ function callCodeGen(){
       'Content-Type': 'application/json'
   },
   type: 'POST',
-  data: JSON.stringify({ "swaggerUrl": gup('url', window.location)}),
+  data: JSON.stringify({ "swaggerUrl": gup('url', window.location).replace("%3d","=")}),
   success: function( data ) {
     doDownload(data)
   },

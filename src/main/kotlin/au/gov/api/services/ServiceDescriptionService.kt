@@ -6,6 +6,7 @@ import au.gov.api.models.ServiceDescription
 import au.gov.api.models.ServiceDescriptionListItem
 import au.gov.api.models.ServiceRevisionListItem
 import au.gov.api.repositories.IEventRepository
+import au.gov.api.repositories.IExternalServiceDescriptionRepository
 import au.gov.api.repositories.IServiceDescriptionRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +16,11 @@ import java.time.format.DateTimeFormatter
 
 
 @Service
-class ServiceDescriptionService @Autowired constructor(private val serviceRepo: IServiceDescriptionRepository, private val eventRepo: IEventRepository) {
+class ServiceDescriptionService @Autowired constructor(
+        private val serviceRepo: IServiceDescriptionRepository,
+        private val externalServiceRepo: IExternalServiceDescriptionRepository,
+        private val eventRepo: IEventRepository
+) {
 
     fun get(id: String): ServiceDescription? {
         return serviceRepo.get(id)
@@ -24,9 +29,9 @@ class ServiceDescriptionService @Autowired constructor(private val serviceRepo: 
     fun getLastEdited(id: String): String {
         return try {
 
-            var revUri = "${Config.get("BaseRepoURI")}service/$id/revisions"
-            var res = khttp.get(revUri)
-            var result = mutableListOf<ServiceRevisionListItem>()
+            val revUri = "${Config.get("BaseRepoURI")}service/$id/revisions"
+            val res = khttp.get(revUri)
+            val result = mutableListOf<ServiceRevisionListItem>()
 
             ObjectMapper().readValue(res.text, List::class.java).forEach {
                 val lhm = it as LinkedHashMap<String, String>
@@ -41,7 +46,10 @@ class ServiceDescriptionService @Autowired constructor(private val serviceRepo: 
         }
     }
 
-    fun list(): List<ServiceDescriptionListItem> = serviceRepo.list()
+    fun list(): List<ServiceDescriptionListItem> = listOf(
+            serviceRepo.list(),
+            externalServiceRepo.list()
+    ).flatten()
 
     fun count(): Int = serviceRepo.list().size
 

@@ -3,17 +3,17 @@ package au.gov.api.repositories
 import au.gov.api.models.Page
 import au.gov.api.models.ServiceDescription
 import au.gov.api.models.ServiceDescriptionListItem
-import au.gov.api.repositories.dto.IndexDTO
-import au.gov.api.repositories.dto.IndexServiceDTO
-import au.gov.api.repositories.dto.ServiceDescriptionDTO
+import au.gov.api.repositories.dao.IndexDAO
+import au.gov.api.repositories.dao.IndexServiceDAO
+import au.gov.api.repositories.dao.ServiceDescriptionDAO
 import au.gov.api.repositories.processors.IPageProcessor
 import au.gov.api.web.ResourceCache
 
 interface IServiceDescriptionRepository {
 
     val baseRepoUri : String
-    val descriptionCache : ResourceCache<ServiceDescriptionDTO>
-    val indexCache : ResourceCache<IndexDTO>
+    val descriptionCache : ResourceCache<ServiceDescriptionDAO>
+    val indexCache : ResourceCache<IndexDAO>
     val pageProcessor : IPageProcessor
 
     fun get(id:String) : ServiceDescription
@@ -39,13 +39,13 @@ interface IServiceDescriptionRepository {
         return processIndexList(index)
     }
 
-    private fun processIndexList(inList: IndexDTO):List<ServiceDescriptionListItem>{
+    private fun processIndexList(inList: IndexDAO):List<ServiceDescriptionListItem>{
         val output:MutableList<ServiceDescriptionListItem> = mutableListOf()
         inList.content.forEach{output.add(processIndexItem(it))}
         return output
     }
 
-    private fun processIndexItem(inItem: IndexServiceDTO):ServiceDescriptionListItem{
+    private fun processIndexItem(inItem: IndexServiceDAO):ServiceDescriptionListItem{
         val tagsCopy = inItem.tags.toMutableList()
         val name = inItem.name
         val description = inItem.description
