@@ -34,10 +34,10 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: gradle clean assemble jar
+      - run: ./gradlew clean assemble jar
 
       # run tests!
-      - run: gradle test
+      - run: ./gradlew test
 
       # get the build scripts
       - run:

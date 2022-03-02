@@ -49,8 +49,8 @@ dependencies {
         exclude group: 'nz.net.ultraq.thymeleaf', module: 'thymeleaf-layout-dialect'
     }
 
-	compile 'org.springframework.data:spring-data-commons'
-	compile 'org.springframework:spring-jdbc'
+    compile 'org.springframework.data:spring-data-commons'
+    compile 'org.springframework:spring-jdbc'
 
     compile 'com.beust:klaxon:3.0.1'
     testCompile "junit:junit"
