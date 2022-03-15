@@ -91,7 +91,7 @@
 
 
         <dt>API url</dt>
-        <dd><a th:attr="href=@{${api}}" th:text="'https://api.gov.au' + ${api}"/></dd>
+        <dd><a th:attr="href=@{${api}}" th:text="'https://legacy.api.gov.au' + ${api}"/></dd>
 
         <div th:if="${relationships}" th:remove="tag">
             <dt>Related definitions</dt>
@@ -110,13 +110,13 @@
             </dl>
             <!--[if !IE]><!-->
             <svg viewBox="0 0 2000 1400" width="100%">
-                <use th:attr="'xlink:href'='/definitions/api/imgRedirect.svg?url=https://api.gov.au/graph/relations.svg?url=https://api.gov.au' + ${relationShipImageUrl}  + '#graph00'"></use>
+                <use th:attr="'xlink:href'='/definitions/api/imgRedirect.svg?url=https://legacy.api.gov.au/graph/relations.svg?url=https://legacy.api.gov.au' + ${relationShipImageUrl}  + '#graph00'"></use>
             </svg>
             <!--<![endif]-->
             <!--[if IE]><img
-                th:attr="src='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">
+                th:attr="src='https://legacy.api.gov.au/graph/relations.png?url=https://legacy.api.gov.au' + ${relationShipImageUrl}">
             <![endif]-->
-            <a th:attr="href='https://api.gov.au/graph/relations.png?url=https://api.gov.au' + ${relationShipImageUrl}">Click
+            <a th:attr="href='https://legacy.api.gov.au/graph/relations.png?url=https://legacy.api.gov.au' + ${relationShipImageUrl}">Click
                 here for a bigger version</a>
 
         </div>
