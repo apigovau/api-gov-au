@@ -6,7 +6,7 @@ applications:
     buildpack: java_buildpack
     env:
       SPRING_PROFILES_ACTIVE: prod
-      config_environment: legacy.api.gov.au
+      config_environment: api.gov.au
       JAVA_OPTS: -Duser.timezone=Australia/Canberra
     path: build/libs/service-catalogue-1.0.jar
     services:
