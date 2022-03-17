@@ -15,7 +15,7 @@ object MockPageProcessor : IPageProcessor {
         val fetcher = MockURIFetcher()
         val testDefinition = Definition(name = "Course Code", status = "Standard")
         val testDefinitionString = Klaxon().toJsonString(DefinitionDAO(testDefinition))
-        fetcher.map["https://legacy.api.gov.au/api/definition/edu/edu307"] = testDefinitionString
+        fetcher.map["https://api.gov.au/api/definition/edu/edu307"] = testDefinitionString
 
         ResourceCache(fetcher, 60, convert = { serial -> Klaxon().parse<DefinitionDAO>(serial)!! })
     }.invoke()

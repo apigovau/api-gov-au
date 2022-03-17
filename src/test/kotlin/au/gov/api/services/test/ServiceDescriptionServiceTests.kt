@@ -100,7 +100,7 @@ some content
 
         val serviceDescriptionService = ServiceDescriptionService(MockServiceDescriptionRepository(baseRepoUri, fetcher), MockExternalServiceDescriptionRepository(), MockEventRepository(fetcher))
 
-        val preProcessed = "Use element [Course Code](https://legacy.api.gov.au/definition/edu/edu307) here"
+        val preProcessed = "Use element [Course Code](https://api.gov.au/definition/edu/edu307) here"
 
         val page = serviceDescriptionService.get("name")!!.pages.single()
 

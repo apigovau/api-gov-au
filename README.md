@@ -4,7 +4,7 @@ Makes it easier to discover electronic government services
 
 ## Current Status
 
-api.gov.au is under development. It is currently at the beta stage, a live version can be viewed at [https://legacy.api.gov.au/](https://legacy.api.gov.au/)
+api.gov.au is under development. It is currently at the beta stage, a live version can be viewed at [https://api.gov.au/](https://api.gov.au/)
 
 
 ## Technology

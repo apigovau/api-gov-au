@@ -12,5 +12,5 @@ applications:
     services:
       - api-gov-au-feedback
     routes:
-      - route: legacy.api.gov.au
+      - route: api.gov.au
 

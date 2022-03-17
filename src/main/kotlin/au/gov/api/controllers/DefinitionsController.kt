@@ -152,7 +152,7 @@ class DefinitionsController {
 
         val viewDefns = mutableListOf<ViewDefinition>()
         for (definition in definitions) {
-            //val localHref = definition.identifier.replace("http://legacy.api.gov.au", "")
+            //val localHref = definition.identifier.replace("http://api.gov.au", "")
             val localHref = definition.identifier.split("/").takeLast(2).joinToString("/")
             var shortDef = definition.definition
             if (shortDef.length > maxLength) {
@@ -179,7 +179,7 @@ class DefinitionsController {
     @RequestMapping("/definitions/definition/{domain}/{id}")
     internal fun detail(model: MutableMap<String, Any>, @PathVariable domain: String, @PathVariable id: String): String {
 
-        val identifier = """http://legacy.api.gov.au/definition/$domain/$id"""
+        val identifier = """http://api.gov.au/definition/$domain/$id"""
         val definition = definitionService.getDefinition(identifier)
 
         model["name"] = definition.name
@@ -196,9 +196,9 @@ class DefinitionsController {
                 .replace("  ", "&nbsp;&nbsp;")
 
         model["identifier"] = definition.identifier
-        model["href"] = definition.identifier.replace("http://legacy.api.gov.au", "/definitions")
+        model["href"] = definition.identifier.replace("http://api.gov.au", "/definitions")
         model["usage"] = definition.usage
-        model["api"] = definition.identifier.replace("http://legacy.api.gov.au/definition", "/definitions/api/definition")
+        model["api"] = definition.identifier.replace("http://api.gov.au/definition", "/definitions/api/definition")
         if (definition.type != "") model["type"] = definition.type
         if (definition.sourceURL != "") model["source"] = definition.sourceURL
         model["typeValues"] = definition.values

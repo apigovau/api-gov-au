@@ -64,7 +64,7 @@ class DefinitionsRestController {
                 "${request?.serverName}" +
                 if (request?.serverPort != 80 && request?.serverPort != 443) ":${request?.serverPort}" else ""
 
-        val identifier = "http://legacy.api.gov.au/definition/$domain/$id"
+        val identifier = "http://api.gov.au/definition/$domain/$id"
         val definition = definitionService.getDefinition(identifier)
 
         return HateosResult(
@@ -86,7 +86,7 @@ class DefinitionsRestController {
 
         val definitions = definitionService.getDefinitions(page, size)
         val definitionsHateos =  definitions.map {
-            val domainAndNumber = it.identifier.replace("http://legacy.api.gov.au/definition/", "")
+            val domainAndNumber = it.identifier.replace("http://api.gov.au/definition/", "")
 
             HateosResult(
                 content = it,
@@ -121,7 +121,7 @@ class DefinitionsRestController {
     @CrossOrigin
     @GetMapping("/definitions/api/syntax/{domain}/{id}")
     fun specificDefinitionSyntax(@PathVariable domain: String, @PathVariable id: String): Syntax? {
-        val identifier = "http://legacy.api.gov.au/definition/$domain/$id"
+        val identifier = "http://api.gov.au/definition/$domain/$id"
         return syntaxService.getSyntax(identifier)
     }
 
@@ -129,7 +129,7 @@ class DefinitionsRestController {
     @CrossOrigin
     @GetMapping("/definitions/api/relations/{domain}/{id}")
     fun relations(@PathVariable domain: String, @PathVariable id: String): Map<String, List<Relationship>> {
-        val identifier = "http://legacy.api.gov.au/definition/$domain/$id"
+        val identifier = "http://api.gov.au/definition/$domain/$id"
         val relations = relationshipService.getRelationships(identifier)
         for (relation in relations.keys) {
             for (result in relations[relation]!!) {

@@ -51,8 +51,8 @@ interface IPageProcessor {
 
             val attribute = if (foundAttribute.count() > 0) foundAttribute.first().value else ""
             val definitionPath = item.value.split("```")[1].replace(attribute, "")
-            val apiLinkEndpoint = "https://legacy.api.gov.au/api/definition/$definitionPath"
-            val webEndpoint = "https://legacy.api.gov.au/definition/$definitionPath"
+            val apiLinkEndpoint = "https://api.gov.au/api/definition/$definitionPath"
+            val webEndpoint = "https://api.gov.au/definition/$definitionPath"
 
             output = try {
                 val definitionVal = getAttribute(definitionCache.get(apiLinkEndpoint).content, attribute)
